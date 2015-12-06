@@ -17,7 +17,7 @@ public class Start {
 		
 		//System.out.println(Start.class.getProtectionDomain().getCodeSource().getLocation().getPath());
 		
-		f.getPanel().getInfo().mockup(Start.class.getProtectionDomain().getCodeSource().getLocation().getPath());
+		//f.getPanel().getInfo().mockup(Start.class.getProtectionDomain().getCodeSource().getLocation().getPath());
 		
 	}
 
