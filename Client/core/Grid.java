@@ -1,5 +1,8 @@
 package core;
 
+import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
+
 
 /**
  * 
@@ -9,7 +12,8 @@ package core;
  * @author Synesthesy
  *
  */
-public class Grid {
+public class Grid
+{
 	
 	public static final int DIMENSION=100;
 	public static final int MAX_COORDINATE=10;
@@ -18,7 +22,8 @@ public class Grid {
 	/**
 	 * costruttore standard che inizializza una griglia vuota di dimensione <i>DIMENSION</i>
 	 */
-	public Grid() {
+	public Grid()
+	{
 		
 		grid=new boolean[DIMENSION];
 		for(int i=0; i<DIMENSION; i++) {

@@ -50,7 +50,7 @@ public class Game extends JPanel {
 		setLayout(new BorderLayout());
 		
 		JLabel ab = new JLabel();
-		ImageIcon icon = new ImageIcon(".//image//logo1.png");
+		ImageIcon icon = new ImageIcon(".//bin//logo1.png");
 		ab.setIcon(icon);
 		
 		add(ab, BorderLayout.NORTH);

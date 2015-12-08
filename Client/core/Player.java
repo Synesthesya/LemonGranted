@@ -1,21 +1,32 @@
 package core;
 
+import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
+
 //import javafx.scene.media.*;
 
-public class Player {
+public class Player extends UnicastRemoteObject implements PlayerI
+{
+    /**
+     * Identificativo Player
+     */
+	public int ID;
 	
 	/**
 	 * il numero di navi per flotta
 	 */
 	public static int FLEETNUMBER=5;
+	
 	/**
 	 * la griglia contenente le navi
 	 */
 	private Grid grid;
+	
 	/**
 	 * l'elenco delle navi del giocatore
 	 */
 	private Ship[] fleet;
+	
 	/**
 	 * il numero di navi ancora vive
 	 */
@@ -24,8 +35,9 @@ public class Player {
 	/**
 	 * costruttore standard
 	 */
-	public Player() {
-		
+	public Player(int ID) throws RemoteException
+	{
+	    this.ID=ID;
 		grid=new Grid();
 		fleet=new Ship[FLEETNUMBER];
 		alive=0;		
