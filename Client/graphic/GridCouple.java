@@ -1,8 +1,9 @@
 package graphic;
 
+import interfaces.Controller;
+
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import control.Controller;
 
 /**
  * <p>
@@ -32,9 +33,9 @@ public class GridCouple extends JPanel {
 	 * @param l il MyShipController
 	 * @param r il OpponentController
 	 */
-	public GridCouple(Controller l, Controller r) {
-		left=new Grid(l);
-		right=new Grid(r);
+	public GridCouple(int ID,Controller c) {
+		left=new Grid(ID,c,"left");
+		right=new Grid(ID,c,"right");
 		add(left);
 		// PROGRAMMAZIONE
 		add(a);

@@ -1,5 +1,7 @@
 package graphic;
 
+import interfaces.Controller;
+
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.FlowLayout;
@@ -11,7 +13,6 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import control.Controller;
 
 public class Information extends JPanel {
 
@@ -70,12 +71,12 @@ public class Information extends JPanel {
 	 * costruttore standard 
 	 * @param c
 	 */
-	public Information(Controller c) {
+	public Information(int ID,Controller c) {
 		
 		super();
 		control=c;
 		player=new JLabel();
-		ImageIcon icon = new ImageIcon(".//image//lightsaber.png");
+		ImageIcon icon = new ImageIcon(".//bin//lightsaber.png");
 		player.setIcon(icon);
 		player.setText("Giocatore 1");
 		player.setHorizontalTextPosition(JLabel.CENTER);
@@ -88,8 +89,8 @@ public class Information extends JPanel {
 		myShip3 = new JLabel();
 		myShip4 = new JLabel();
 		myShip5 = new JLabel();
-		ImageIcon myShipIcon = new ImageIcon(".//image//TF.png");
-		ImageIcon empireLogoIcon = new ImageIcon(".//image//empireLogo.png");
+		ImageIcon myShipIcon = (ID==1) ? new ImageIcon(".//bin//TF.png") : new ImageIcon(".//bin//XW_Square.png");
+		ImageIcon empireLogoIcon = new ImageIcon(".//bin//empireLogo.png");
 		empireLogo.setIcon(empireLogoIcon);
 		myShip1.setIcon(myShipIcon);
 		myShip2.setIcon(myShipIcon);
@@ -114,8 +115,8 @@ public class Information extends JPanel {
 		enemyShip3=new JLabel();
 		enemyShip4=new JLabel();
 		enemyShip5=new JLabel();
-		ImageIcon enemyIcon = new ImageIcon(".//image//XW_Square.png");
-		ImageIcon rebelsLogoIcon = new ImageIcon(".//image//rebelsLogo.png");
+		ImageIcon enemyIcon = (ID==1) ? new ImageIcon(".//bin//XW_Square.png") : new ImageIcon(".//bin//TF.png");
+		ImageIcon rebelsLogoIcon = new ImageIcon(".//bin//rebelsLogo.png");
 		rebelsLogo.setIcon(rebelsLogoIcon);
 		enemyShip1.setIcon(enemyIcon);
 		enemyShip2.setIcon(enemyIcon);

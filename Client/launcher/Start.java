@@ -1,11 +1,11 @@
 package launcher;
 
+import interfaces.Controller;
 import interfaces.ServerI;
 
 import java.rmi.Naming;
 
 import graphic.Frame;
-import control.Controller;
 import control.MyShipController;
 import core.Player;
 /**
@@ -29,8 +29,10 @@ public class Start {
 		  Integer ID=s.getID();
 		  Player p=new Player(ID);
 	      Naming.bind("rmi://127.0.0.1:1677/player"+ ID.toString(), p);
-	      Controller c=new MyShipController(p);
-	      Frame f=new Frame(c, null, null);
+	      Controller c=new MyShipController(p,s);
+	      p.setController(c);
+	      Frame f=new Frame(ID,c, null);
+	      c.setGrids(f);
 	      s.caricaPlayer();
 		}
 		catch(Exception e)

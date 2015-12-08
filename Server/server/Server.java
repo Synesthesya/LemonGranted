@@ -7,6 +7,8 @@ import java.rmi.Naming;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 
+import core.Coordinate;
+
 /**
  * Classe server per gestire i turni e le modifiche del gioco
  * Il server si lancia da /LemonGranted con: 
@@ -18,12 +20,12 @@ public class Server extends UnicastRemoteObject implements ServerI
 {
   public static final int NUMERO_GIOCATORI = 2;
   
-  static private boolean ready1=false;
-  static private boolean ready2=false;
+  
   private PlayerI player1;
   private PlayerI player2;
-  
-  public int giocatori=0;
+  private boolean turno=false;
+  private int giocatori=0;
+
   
   /**
    * Istanzia la classe e rimane in ascolto per i client
@@ -50,13 +52,16 @@ public class Server extends UnicastRemoteObject implements ServerI
   }
   
   /**
-   * Chiamato da un metodo del server per chiudere il gioco
+   * chiude il gioco
    */
   private void exit()
   {
     System.exit(0);
   }
   
+  /**
+   * restituise l'id del giocatore (1,2) da usare solo al momento della registrazione del giocatore
+   */
   public int getID()
   {
     return giocatori;
@@ -94,18 +99,46 @@ public class Server extends UnicastRemoteObject implements ServerI
   /**
    * Chiamato dai client che richiedere l'elaborazione di uno sparo
    */
-  public void elabora()
+  public void shot(int ID, Coordinate c)
   {
-    
+    try
+    {
+      if(ID==1 && player2.hit(c))
+      {
+          player2.callHit(true, c);
+          player1.callHit(false, c);
+      }
+      else if(player1.hit(c))
+      {
+        player1.callHit(true, c);
+        player2.callHit(false, c);
+      }
+    }
+    catch(Exception e)
+    {
+      System.err.println(e.getMessage());
+    }
   }
   
   /**
    * Controlla che entrambi i client siano pronti
-   * @return
+   * @return true se entrambi i giocatori hanno finitodi schierare, false altrimenti
    */
-  private static boolean isReady()
+  public void isReady()
   {
-    return (ready1 && ready2);
+    try
+    {
+      if(player1.getDeployed() && player2.getDeployed())
+      {
+        player1.setPhase(Phase.COMBAT);
+        player2.setPhase(Phase.COMBAT);
+        //System.out.println("uscita fase di schieramento");
+      }
+    }
+    catch(Exception e)
+    {
+      System.err.println(e.getMessage());
+    }
   }
   
   /**
@@ -114,9 +147,11 @@ public class Server extends UnicastRemoteObject implements ServerI
    */
   public static void main (String[] args)
   {
+    Server s=null;
     try
     {
-      Server s=new Server();
+      s=new Server();
+      
     }
     catch(Exception e)
     {

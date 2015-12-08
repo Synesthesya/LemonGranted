@@ -1,11 +1,14 @@
 package graphic;
 
+import interfaces.Controller;
+
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.awt.event.MouseAdapter;
+
 import javax.swing.JPanel;
+
 import core.Coordinate;
-import control.Controller;
 
 
 /**
@@ -29,9 +32,11 @@ public class Grid extends JPanel {
 	
 	private final Slot[] grid;
 	private Controller c;
+	private String name;
 	
-	public Grid(Controller c) {
+	public Grid(int ID,Controller c, String s) {
 		
+	    name=s;
 		int size=Coordinate.SIZE;
 		this.c=c;
 		
@@ -50,6 +55,11 @@ public class Grid extends JPanel {
 	public Slot getSlot(Coordinate c) {
 		
 		return grid[c.toInteger()];		
+	}
+	
+	public String getName()
+	{
+	  return name;
 	}
 }
 

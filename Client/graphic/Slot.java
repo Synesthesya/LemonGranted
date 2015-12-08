@@ -10,7 +10,7 @@ import core.Coordinate;
  * 
  * classe casella 
  * 
- * la casella puï¿½ contenere o meno una nave (o una parte di una nave)
+ * la casella può contenere o meno una nave (o una parte di una nave)
  * 
  * @author Alex
  *
@@ -20,7 +20,7 @@ public class Slot extends JLabel {
 	/**
 	 * percorso della cartella che contiene le immagini
 	 */
-	public static final String PATH = ".//image//";
+	public static final String PATH = ".//bin//";
 	
 	/**
 	 * formato delle immagini
@@ -35,7 +35,7 @@ public class Slot extends JLabel {
 	/**
 	 * percorso dell'immagine vuota
 	 */
-	public static final String WATER = ".//image//WATER.png";
+	public static final String WATER = ".//bin//WATER.png";
 	
 	/**
 	 * immagine del Pannello
@@ -44,7 +44,7 @@ public class Slot extends JLabel {
 	
 	
 	/**
-	 * variabile che dice se il pannello Ã¨ cliccabile o meno
+	 * variabile che dice se il pannello è cliccabile o meno
 	 */
 	private boolean cliccabile;
 	
@@ -73,9 +73,9 @@ public class Slot extends JLabel {
 	
 	/**
 	 * 
-	 * metodo che dice se il pulsante ï¿½ cliccabile o meno
+	 * metodo che dice se il pulsante è cliccabile o meno
 	 * 
-	 * @return <b>true</b> se ï¿½ cliccabile, <b>false</b> altrimenti
+	 * @return <b>true</b> se è cliccabile, <b>false</b> altrimenti
 	 */
 	public boolean isCliccable() {
 		return cliccabile;

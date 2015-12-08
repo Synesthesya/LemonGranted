@@ -1,7 +1,13 @@
 package core;
 
+import graphic.Frame;
+import interfaces.Controller;
+import interfaces.PlayerI;
+
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
+
+import server.Phase;
 
 //import javafx.scene.media.*;
 
@@ -10,7 +16,7 @@ public class Player extends UnicastRemoteObject implements PlayerI
     /**
      * Identificativo Player
      */
-	public int ID;
+	private int ID;
 	
 	/**
 	 * il numero di navi per flotta
@@ -20,7 +26,9 @@ public class Player extends UnicastRemoteObject implements PlayerI
 	/**
 	 * la griglia contenente le navi
 	 */
-	private Grid grid;
+	private GridCore myShip;
+	
+	private GridCore enemyShip;
 	
 	/**
 	 * l'elenco delle navi del giocatore
@@ -33,18 +41,35 @@ public class Player extends UnicastRemoteObject implements PlayerI
 	private int alive;
 	
 	/**
+	 * flag per determinare se lo schieramento è terminato
+	 */
+	private boolean deployed=false;
+	
+	/**
+	 * riferimento al Controller
+	 */
+	private Controller controller;
+	
+	private Phase fase = Phase.DEPLOYMENT;
+	/**
 	 * costruttore standard
 	 */
 	public Player(int ID) throws RemoteException
 	{
 	    this.ID=ID;
-		grid=new Grid();
+		myShip=new GridCore();
+		enemyShip=new GridCore();
 		fleet=new Ship[FLEETNUMBER];
 		alive=0;		
 	}
 	
-	public Grid getGrid() {
-		return grid;
+	public GridCore getMyShip() {
+		return myShip;
+	}
+	
+	public GridCore getEnemyShip()
+	{
+	  return enemyShip;
 	}
 	
 	public int getAlive() {
@@ -62,9 +87,9 @@ public class Player extends UnicastRemoteObject implements PlayerI
 	 * @param c la coordinata colpita
 	 * @return <b>true</b> se è stata colpita una nave, <b>false</b> altrimenti
 	 */
-	public boolean hit(Coordinate c) {
+	/*public boolean hit(Coordinate c) {
 		
-		if(grid.getStatus(c)) {
+		if(gridcore.getStatus(c)) {
 			for(int i=0; i<alive; i++) {
 				if(fleet[i].isInside(c)) {
 					fleet[i].hit();
@@ -80,20 +105,78 @@ public class Player extends UnicastRemoteObject implements PlayerI
 			return true;
 		}
 		else return false;		
+	}*/
+	/**
+	 * Controlla se a quelle coordinate c'è una nave
+	 */
+	public boolean hit(Coordinate c)
+	{
+	  return myShip.getStatus(c);
+	}
+	
+	public void callHit(boolean b, Coordinate c)
+	{
+	  if(b)
+	  {
+	    myShip.hit(c);
+	    controller.setImage(b,c);
+	  }
 	}
 	
 	/**
-	 * metodo di mockup, serivirà un metodo (Ship s)
+	 * aggiorna la struttura dati della griglia per aggiungere o meno una nave
+	 * se il numero massimo di navi è stato raggiunto, avverte il server che si è finita la fase di schieramento 
 	 * @param c
 	 * @return 
 	 */
 	public boolean deploy(Coordinate c) {
-		
-		if(alive<FLEETNUMBER && !grid.getStatus(c)) {
-			alive++;
-			grid.deploy(c);
-			return true;
-		}
-		else return false;
+  		if(alive<FLEETNUMBER && !myShip.getStatus(c)) 
+  		{
+  		  alive++;
+  		  myShip.deploy(c);
+  		  if(alive==FLEETNUMBER)
+  		  {
+  		    deployed=true;
+  		    controller.checkDeployment();
+  		  }
+  		  return true;
+  		}
+		return false;
+	}
+	
+	/**
+	 * restituisce la flag legata allo schieramento
+	 */
+	public boolean getDeployed()
+	{
+	  return deployed;
+	}
+	
+	/**
+	 * aggiunge un riferimento al controller
+	 * @param c
+	 */
+	public void setController(Controller c)
+	{
+	  controller=c;
+	}
+	
+	/**
+	 * restituisce l'ID
+	 * @return
+	 */
+	public int getID()
+	{
+	  return ID;
+	}
+	
+	public void setPhase(Phase fase)
+	{
+	  this.fase=fase;
+	}
+	
+	public Phase getPhase()
+	{
+	  return fase;
 	}
 }

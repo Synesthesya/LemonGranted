@@ -1,6 +1,8 @@
 package graphic;
 
 //
+import interfaces.Controller;
+
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.awt.Graphics;
@@ -8,6 +10,7 @@ import java.awt.Graphics2D;
 
 import javax.imageio.ImageIO;
 //
+
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -17,19 +20,18 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import control.Controller;
 
 public class Game extends JPanel {
 	
 	private final GridCouple grid;
 	private final Information info;
 	
-	public Game(Controller l, Controller r, Controller i) {
+	public Game(int ID, Controller c, Controller i) {
 		
 		super();
-		grid=new GridCouple(l,r);
+		grid=new GridCouple(ID,c);
 		grid.setBackground(Color.black); // colore di prova
-		info=new Information(i);
+		info=new Information(ID,i);
 		info.setBackground(Color.black); // colore di prova
 		
 		/*
