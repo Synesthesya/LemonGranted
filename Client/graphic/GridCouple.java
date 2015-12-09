@@ -20,8 +20,19 @@ public class GridCouple extends JPanel {
 	
 	
 	private static final long serialVersionUID = 1L;
+	
+	/**
+	 * griglia rappresentante le navi del giocatore
+	 */
 	private final Grid left;
+	/**
+	 * griglia usata dal giocatore per colpire l'avversario
+	 */
 	private final Grid right;
+	
+	/**
+	 * mockpup per ottenere maggiore spazio
+	 */
 	private JLabel a = new JLabel("                     ");	
 	
 	/**
@@ -29,9 +40,8 @@ public class GridCouple extends JPanel {
 	 * costruttore standard: le due griglie appariranno affiancate
 	 * </p>
 	 * 
-	 * 
-	 * @param l il MyShipController
-	 * @param r il OpponentController
+	 * @param ID l'id del giocatore
+	 * @param c il controllore
 	 */
 	public GridCouple(int ID,Controller c) {
 		left=new Grid(ID,c,"left");

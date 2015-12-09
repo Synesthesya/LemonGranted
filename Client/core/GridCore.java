@@ -1,9 +1,5 @@
 package core;
 
-import java.rmi.RemoteException;
-import java.rmi.server.UnicastRemoteObject;
-
-
 /**
  * 
  * la classe Grid rappresenta la griglia di gioco, 10x10, in cui avviene lo scontro.
@@ -15,12 +11,22 @@ import java.rmi.server.UnicastRemoteObject;
 public class GridCore
 {
 	
+	/**
+	 * dimensione della griglia
+	 */
 	public static final int DIMENSION=100;
+	/**
+	 * valore della coordinata massima: si assume che la griglia sia quadrata
+	 */
 	public static final int MAX_COORDINATE=10;
+	/**
+	 * la griglia vera e propria. Ogni casella contiene un valore booleano
+	 */
 	private boolean[] grid;
 
 	/**
 	 * costruttore standard che inizializza una griglia vuota di dimensione <i>DIMENSION</i>
+	 * il valore vuoto è <b>false</b> per ogni casella
 	 */
 	public GridCore()
 	{
@@ -94,7 +100,11 @@ public class GridCore
 	  grid[c.toInteger()]=true;
 	}
 	
-	
+	/**
+	 * metodo che ritorna il valore di una casella
+	 * @param d la coordinata (in integer)
+	 * @return il valore booleano della casella
+	 */
 	public boolean getStatus(int d) {
 		return grid[d];
 	}
@@ -121,7 +131,4 @@ public class GridCore
 		}
 		return s;		
 	}
-	
-	
-
 }

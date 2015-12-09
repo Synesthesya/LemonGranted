@@ -14,10 +14,22 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+/*
+ * WARNING: non è il massimo dell'estetica (il codice, non la grafica)
+ */
+
+/**
+ * 
+ * classe che rappresenta il gruppo di informazioni necessarie durante il gioco
+ * 
+ * @author Alex
+ * @author Giorgio
+ *
+ */
 public class Information extends JPanel {
 
 	/**
-	 * #crescile(R)
+	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 	
@@ -69,7 +81,8 @@ public class Information extends JPanel {
 	
 	/**
 	 * costruttore standard 
-	 * @param c
+	 * @param ID l'id del giocatore
+	 * @param c il controllore
 	 */
 	public Information(int ID,Controller c) {
 		

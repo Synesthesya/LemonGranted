@@ -4,9 +4,12 @@ package core;
  * 
  * oggetto che rappresenta una nave all'interno della griglia
  * 
+ * ATTUALMENTE NON USATO: serve per le navi maggiori di uno
+ * 
  * @author Synesthesy
  *
  */
+@Deprecated
 public class Ship {
 	
 	public static final String[] DIRECTIONS = {"UP","LEFT"};
