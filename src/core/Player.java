@@ -1,6 +1,6 @@
 package core;
 
-import javafx.scene.media.*;
+import javafx.scene.media.Media;
 
 public class Player {
 	
