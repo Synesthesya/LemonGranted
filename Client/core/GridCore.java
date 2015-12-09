@@ -1,5 +1,8 @@
 package core;
 
+import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
+
 
 /**
  * 
@@ -9,7 +12,8 @@ package core;
  * @author Synesthesy
  *
  */
-public class Grid {
+public class GridCore
+{
 	
 	public static final int DIMENSION=100;
 	public static final int MAX_COORDINATE=10;
@@ -18,7 +22,8 @@ public class Grid {
 	/**
 	 * costruttore standard che inizializza una griglia vuota di dimensione <i>DIMENSION</i>
 	 */
-	public Grid() {
+	public GridCore()
+	{
 		
 		grid=new boolean[DIMENSION];
 		for(int i=0; i<DIMENSION; i++) {
@@ -38,8 +43,10 @@ public class Grid {
 	 * metodo per settare una casella come usata
 	 * @param c la coordinata della casella
 	 */
-	public void deploy(Coordinate c) {
-		deploy(c.toInteger());
+	public void deploy(Coordinate c) 
+	{
+	  grid[c.toInteger()]=true;
+		//deploy(c.toInteger());
 	}
 	
 	/**
@@ -75,7 +82,7 @@ public class Grid {
 	 * @param d la coordinata della casella
 	 */
 	public void hit(int d) {
-		grid[d]=false;
+		grid[d]=true;
 	}
 	
 	/**
@@ -83,7 +90,8 @@ public class Grid {
 	 * @param c la coordinata della casella
 	 */
 	public void hit(Coordinate c) {
-		hit(c.toInteger());
+		//hit(c.toInteger());
+	  grid[c.toInteger()]=true;
 	}
 	
 	
@@ -97,7 +105,7 @@ public class Grid {
 	 * @return lo stato della casella
 	 */
 	public boolean getStatus(Coordinate c) {
-		return getStatus(c.toInteger());
+		return grid[c.toInteger()];
 	}
 	
 	@Override
