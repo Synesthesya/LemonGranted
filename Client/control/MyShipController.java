@@ -14,7 +14,7 @@ import server.Phase;
 import core.Coordinate;
 import core.Player;
 /**
- * si occupa dello schieramento delle navi
+ * si occupa dello schieramento delle navi e della fase di combattimento
  * @author Francesco
  *
  */
@@ -33,8 +33,9 @@ public class MyShipController extends MouseAdapter implements Controller {
 	
 	public void setGrids(Frame f)
 	{
+		//DIOKHAN
 	  left=f.getPanel().getGrid().getLeft();
-      left=f.getPanel().getGrid().getRight();
+      right=f.getPanel().getGrid().getRight();
 	}
 
 	
@@ -47,14 +48,17 @@ public class MyShipController extends MouseAdapter implements Controller {
 		int y=e.getY()/50;
 		
 		Coordinate c=new Coordinate(x,y);
-		if(player.getPhase()==Phase.DEPLOYMENT && player.deploy(c) && g.getName().equals("left")) 
+		if(player.getPhase()==Phase.DEPLOYMENT && g.getName().equals("left") && player.deploy(c)) 
 		{
+			/*
+			 * qui decide se usare IMpero o Ribelli
+			 */
 			if(player.getID()==1)
 			  g.getSlot(c).setImage("TF");
 			else
 			  g.getSlot(c).setImage("XW_Square");
 		}
-		else if(player.getPhase()==Phase.COMBAT && !player.getEnemyShip().getStatus(c) && g.getName().equals("right"))
+		else if(player.getPhase()==Phase.COMBAT && g.getName().equals("right") && !player.getEnemyShip().getStatus(c))
 		{
 		  try
 		  {

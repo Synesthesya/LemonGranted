@@ -18,6 +18,11 @@ public class Start {
 	
   public static void main(String[] args) 
 	{
+	  
+	  /*
+	   * inizializza la parte client-server
+	   */
+	  
 		try
 		{
 		  ServerI s= (ServerI)Naming.lookup("rmi://127.0.0.1:1677/server");
@@ -28,11 +33,13 @@ public class Start {
 		  }
 		  Integer ID=s.getID();
 		  Player p=new Player(ID);
+		  //creazione stub
 	      Naming.bind("rmi://127.0.0.1:1677/player"+ ID.toString(), p);
 	      Controller c=new MyShipController(p,s);
 	      p.setController(c);
 	      Frame f=new Frame(ID,c, null);
 	      c.setGrids(f);
+	      //comunica lo stub al server
 	      s.caricaPlayer();
 		}
 		catch(Exception e)
@@ -42,6 +49,10 @@ public class Start {
 		//System.out.println(Start.class.getProtectionDomain().getCodeSource().getLocation().getPath());
 		
 		//f.getPanel().getInfo().mockup(Start.class.getProtectionDomain().getCodeSource().getLocation().getPath());
+		
+		/*
+		 * inizio parte grafica: esecuzione del client
+		 */
 		
 	}
 

@@ -20,10 +20,17 @@ public class Server extends UnicastRemoteObject implements ServerI
 {
   public static final int NUMERO_GIOCATORI = 2;
   
-  
+  /**
+   * stub
+   */
   private PlayerI player1;
   private PlayerI player2;
+  
   private boolean turno=false;
+  
+  /**
+   * numero di giocatori registrati al server
+   */
   private int giocatori=0;
 
   
@@ -81,7 +88,8 @@ public class Server extends UnicastRemoteObject implements ServerI
   }
   
   /**
-   * Chiamato da un client per caricare lo stub dei dati di gioco
+   * <p>Chiamato da un client per caricare lo stub dei dati di gioco</p>
+   * <p>mockup</p>
    */
   public void caricaPlayer()
   {
@@ -98,17 +106,22 @@ public class Server extends UnicastRemoteObject implements ServerI
   
   /**
    * Chiamato dai client che richiedere l'elaborazione di uno sparo
+   * 
+   * WARNING: ha un nome diverso da quello che si aspetta
    */
   public void shot(int ID, Coordinate c)
   {
     try
     {
-      if(ID==1 && player2.hit(c))
+    	/*controlla quale player è che spara 
+    	 * e se l'altro player ha una nave a quelle coordinate
+    	 */
+      if(ID==1 && player2.getStatus(c))
       {
           player2.callHit(true, c);
           player1.callHit(false, c);
       }
-      else if(player1.hit(c))
+      else if(player1.getStatus(c))
       {
         player1.callHit(true, c);
         player2.callHit(false, c);
@@ -147,10 +160,9 @@ public class Server extends UnicastRemoteObject implements ServerI
    */
   public static void main (String[] args)
   {
-    Server s=null;
     try
     {
-      s=new Server();
+      Server s=new Server();
       
     }
     catch(Exception e)

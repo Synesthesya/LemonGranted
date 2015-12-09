@@ -1,5 +1,7 @@
 package core;
 
+import java.io.Serializable;
+
 
 /**
  * 
@@ -7,10 +9,13 @@ package core;
  * questa classe è richiesta per memorizzare coppie di numeri e tradurli come coordinate (numeri, lettere)
  * </p>
  * 
+ * @implements Serializable consente l'invio tramite connessione
+ * 
  * @author Synesthesy
  *
  */
-public class Coordinate {
+public class Coordinate implements Serializable
+{
 	
 	/**
 	 * array di lettere
