@@ -33,4 +33,10 @@ public interface PlayerI extends Remote
 	 * chiamto dal server per avvertire che si vuole agire a quelle coordinate
 	 */
   public void callHit(boolean b, Coordinate c) throws RemoteException;
+  
+  /**
+   * metodo per ottenere il nick del giocatore
+   * @return il nick scelto
+   */
+  public String getName();
 }

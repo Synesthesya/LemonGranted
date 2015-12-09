@@ -36,7 +36,7 @@ public class Information extends JPanel {
 	/**
 	 * il nome del giocatore
 	 */
-	public static String playerName= "Giocatore 1";
+	public static String playerName="player";
 	
 	/**
 	 * il nick del giocatore
@@ -91,7 +91,7 @@ public class Information extends JPanel {
 		player=new JLabel();
 		ImageIcon icon = new ImageIcon(".//bin//lightsaber.png");
 		player.setIcon(icon);
-		player.setText("Giocatore 1");
+		player.setText(playerName);
 		player.setHorizontalTextPosition(JLabel.CENTER);
 		player.setVerticalTextPosition(JLabel.CENTER);
 		
