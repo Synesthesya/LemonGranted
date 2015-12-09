@@ -1,36 +1,52 @@
 package graphic;
 
-//
 import interfaces.Controller;
-
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-
-import javax.imageio.ImageIO;
-//
-
-
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Image;
-
 import javax.swing.ImageIcon;
-import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+
+/**
+ * pannello principale del gioco
+ * 
+ * @author Alex
+ * @author Giorgio
+ *
+ */
 public class Game extends JPanel {
 	
-	private final GridCouple grid;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
+	public static final String LOGO = ".//bin//logo1.png";
+	
+	/**
+	 * parte grafica delle griglie 
+	 */
+	private final GridCouple grids;
+	
+	/**
+	 * parte grafica contenente le informazioni
+	 */
 	private final Information info;
 	
+	
+	/**
+	 * costruttore standard
+	 * 
+	 * @param ID id del giocatore 
+	 * @param c MyShipController
+	 * @param i Controller delle informazioni
+	 */
 	public Game(int ID, Controller c, Controller i) {
 		
 		super();
-		grid=new GridCouple(ID,c);
-		grid.setBackground(Color.black); // colore di prova
+		grids=new GridCouple(ID,c);
+		grids.setBackground(Color.black); // colore di prova
 		info=new Information(ID,i);
 		info.setBackground(Color.black); // colore di prova
 		
@@ -52,19 +68,27 @@ public class Game extends JPanel {
 		setLayout(new BorderLayout());
 		
 		JLabel ab = new JLabel();
-		ImageIcon icon = new ImageIcon(".//bin//logo1.png");
+		ImageIcon icon = new ImageIcon(LOGO);
 		ab.setIcon(icon);
 		
 		add(ab, BorderLayout.NORTH);
 		add(info, BorderLayout.CENTER);
-		add(grid, BorderLayout.SOUTH);
+		add(grids, BorderLayout.SOUTH);
 
 	}
 	
-	public GridCouple getGrid() {
-		return grid;
+	/**
+	 * metodo per ottenere il contenitore delle griglie
+	 * @return
+	 */
+	public GridCouple getGrids() {
+		return grids;
 	}
 	
+	/**
+	 * metodo per ottenere il contenitore delle informazioni
+	 * @return
+	 */
 	public Information getInfo() {
 		return info;
 	}

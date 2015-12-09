@@ -18,12 +18,20 @@ import core.Coordinate;
  */
 public class Server extends UnicastRemoteObject implements ServerI
 {
-  public static final int NUMERO_GIOCATORI = 2;
+  /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+public static final int NUMERO_GIOCATORI = 2;
   
   /**
    * stub
    */
   private PlayerI player1;
+  /**
+   * stub
+   */
   private PlayerI player2;
   
   private boolean turno=false;
@@ -59,7 +67,7 @@ public class Server extends UnicastRemoteObject implements ServerI
   }
   
   /**
-   * chiude il gioco
+   * chiude il server
    */
   private void exit()
   {
@@ -91,6 +99,7 @@ public class Server extends UnicastRemoteObject implements ServerI
    * <p>Chiamato da un client per caricare lo stub dei dati di gioco</p>
    * <p>mockup</p>
    */
+  @Override
   public void caricaPlayer()
   {
     try
@@ -105,14 +114,17 @@ public class Server extends UnicastRemoteObject implements ServerI
   }
   
   /**
+   * MOCKUP
+   * 
    * Chiamato dai client che richiedere l'elaborazione di uno sparo
    * 
    * WARNING: ha un nome diverso da quello che si aspetta
+ * @throws RemoteException 
    */
-  public void shot(int ID, Coordinate c)
+  @Override
+  public void shot(int ID, Coordinate c) throws RemoteException
   {
-    try
-    {
+
     	/*controlla quale player è che spara 
     	 * e se l'altro player ha una nave a quelle coordinate
     	 */
@@ -126,12 +138,10 @@ public class Server extends UnicastRemoteObject implements ServerI
         player1.callHit(true, c);
         player2.callHit(false, c);
       }
+ 
+
     }
-    catch(Exception e)
-    {
-      System.err.println(e.getMessage());
-    }
-  }
+  
   
   /**
    * Controlla che entrambi i client siano pronti

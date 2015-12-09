@@ -18,7 +18,12 @@ public class Coordinate implements Serializable
 {
 	
 	/**
-	 * array di lettere
+	 * WARNING
+	 */
+	private static final long serialVersionUID = 1L;
+
+	/**
+	 * array di lettere (utilizzato solo in fase di debug)
 	 */
 	public static final char[] LETTERS = {'A','B','C','D','E','F','G','H','I','L'};
 	
@@ -28,7 +33,13 @@ public class Coordinate implements Serializable
 	 */
 	public static final int SIZE = 10;
 	
+	/**
+	 * riga
+	 */
 	private final int row;
+	/**
+	 * colonna
+	 */
 	private final int column;
 
 	/**
@@ -60,6 +71,11 @@ public class Coordinate implements Serializable
 		return row;
 	}
 	
+	/**
+	 * ottiene la colonna a partire dalla lettera
+	 * @param c la lettera della colonna
+	 * @return il numero della colonna
+	 */
 	public int getColumn(char c) {
 		
 		for(int i=0; i<LETTERS.length; i++) {
@@ -73,8 +89,10 @@ public class Coordinate implements Serializable
 	}
 	
 	/**
-	 * metodo per sapere se la coordinata c è più alta dell'attuale
-	 * a parità di altezza, vince la coordinata più a destra
+	 * metodo per sapere se la coordinata c è più alta dell'attuale.
+	 * A parità di altezza, vince la coordinata più a destra.
+	 * 
+	 * Viene usato solo nella modalità con navi maggiori di 1
 	 * 
 	 * @param c
 	 */
