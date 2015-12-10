@@ -48,3 +48,4 @@ Temporary Items
 
 # File compilati di Java
 *.class
+/bin
