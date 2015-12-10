@@ -95,7 +95,7 @@ public class Player extends UnicastRemoteObject implements PlayerI
 		myShip=new GridCore();
 		enemyShip=new GridCore();
 		fleet=new Ship[FLEETNUMBER];
-		alive=0;		
+		alive=0;
 	}
 	
 	/**
