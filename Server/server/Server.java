@@ -77,9 +77,10 @@ public static final int NUMERO_GIOCATORI = 2;
   /**
    * restituise l'id del giocatore (1,2) da usare solo al momento della registrazione del giocatore
    */
-  public int getID()
+  public synchronized int getID() 
   {
-    return giocatori;
+	  giocatori++;
+	  return giocatori;
   }
   
   /**
@@ -89,7 +90,6 @@ public static final int NUMERO_GIOCATORI = 2;
   {
     if(giocatori<NUMERO_GIOCATORI)
     {
-      giocatori++;
       return true;
     }
     return false;
@@ -100,12 +100,14 @@ public static final int NUMERO_GIOCATORI = 2;
    * <p>mockup</p>
    */
   @Override
-  public void caricaPlayer()
+  public synchronized void caricaPlayer()
   {
     try
     {
-       player1=(PlayerI)Naming.lookup("rmi://127.0.0.1:1677/player1");
-       player2=(PlayerI)Naming.lookup("rmi://127.0.0.1:1677/player2");
+    	if(player1==null)
+	       player1=(PlayerI)Naming.lookup("rmi://127.0.0.1:1677/player1");
+    	else
+	       player2=(PlayerI)Naming.lookup("rmi://127.0.0.1:1677/player2");
     }
     catch(Exception e)
     {
