@@ -187,4 +187,15 @@ public static final int NUMERO_GIOCATORI = 2;
     Command c=new Command(s);
     c.run();
   }
+  
+  /**
+   * metodo per ottenere i due Player dal server
+   * 
+   * @return un array contenente in posizione 0 player1 e in posizione 1 player2
+   */
+  public PlayerI[] getPlayers() {
+	  PlayerI[] i={player1, player2};
+	  return i;
+  }
+  
 }

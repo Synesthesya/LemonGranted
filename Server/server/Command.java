@@ -2,6 +2,9 @@ package server;
 
 import java.util.Scanner;
 
+import core.Player;
+import interfaces.PlayerI;
+
 /**
  * 
  * interfaccia testuale del server, usata anche per implementare, da qualche parte, un thread separato
@@ -43,6 +46,12 @@ public class Command implements Runnable {
 				System.out.println("disconnessione del server in corso...");
 				sc.close();
 				Server.exit();
+			}
+			case "print": {
+				PlayerI[] i=server.getPlayers();
+				System.out.println("stampa del giocatore 1:\n"+i[0].toString());
+				System.out.println("stampa del giocatore 2:\n"+i[1].toString());
+				break;
 			}
 			default:
 				System.out.println("errore: comando sconosciuto");

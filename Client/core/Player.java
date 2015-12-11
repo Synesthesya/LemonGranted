@@ -271,5 +271,4 @@ public class Player extends UnicastRemoteObject implements PlayerI
 		
 		return "Nome: "+name+"\tID: "+ID+"\tnavi ancora in vita: "+alive+"\nnavi possedute:\n"+myShip+"\ncolpi sparati:\n"+enemyShip;		
 	}
-	
 }
