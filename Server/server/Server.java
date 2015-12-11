@@ -69,7 +69,7 @@ public static final int NUMERO_GIOCATORI = 2;
   /**
    * chiude il server
    */
-  private void exit()
+  protected void exit()
   {
     System.exit(0);
   }

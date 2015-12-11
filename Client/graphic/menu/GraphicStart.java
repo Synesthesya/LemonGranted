@@ -20,6 +20,7 @@ public class GraphicStart {
 	 */
 	 public static void main(String... argv) {
 		    JFrame frame = new JFrame("Demo Grafica");
+		    frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		    Background back = new Background(".//bin//vader.png");
 		    frame.add(back);
 		    frame.setSize(1200, 800);
