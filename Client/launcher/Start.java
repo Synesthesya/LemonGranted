@@ -4,7 +4,6 @@ import interfaces.Controller;
 import interfaces.ServerI;
 
 import java.rmi.Naming;
-import java.rmi.RemoteException;
 
 import graphic.Frame;
 import control.MyShipController;
@@ -26,44 +25,32 @@ public class Start {
 	 */
 	public static void main(String[] args) 
 	{
-	  
-	  /*
-	   * inizializza la parte client-server
-	   */
-		
 		ServerI s;
 		Player p;
-		int tried=0;
-		try {
-			s = (ServerI) Naming.lookup("rmi://127.0.0.1:1677/server");
-			if (!s.registraPlayer()) {
-				System.out.println("Numero massimo di giocatori raggiunto");
-				//System.exit(1);
+		while(true)
+		{
+			try {
+				s = (ServerI) Naming.lookup("rmi://127.0.0.1:1677/server");
+				if (!s.registraPlayer()) {
+					System.out.println("Numero massimo di giocatori raggiunto");
+					System.exit(1);
+				}
+				Integer ID = s.getID();
+				p = new Player(ID);
+				//creazione stub
+				Naming.bind("rmi://127.0.0.1:1677/player" + ID.toString(), p);
+				Controller c = new MyShipController(p, s);
+				p.setController(c);
+				Frame f = new Frame(ID, c, null);
+				c.setGrids(f);
+				//comunica lo stub al server
+				s.caricaPlayer();
+				break;
 			}
-			Integer ID = s.getID();
-			p = new Player(ID);
-			//creazione stub
-			Naming.bind("rmi://127.0.0.1:1677/player" + ID.toString(), p);
-			Controller c = new MyShipController(p, s);
-			p.setController(c);
-			Frame f = new Frame(ID, c, null);
-			c.setGrids(f);
-			//comunica lo stub al server
-			s.caricaPlayer();
-		}
-			/*catch (RemoteException e)
-			{
-				System.err.println(e);
-			}*/
 			catch (Exception e) {
 				System.err.println(e);
 			}
-			
-		
-		/*
-		 * inizio parte grafica: esecuzione del client
-		 */
-		
+		}
 	}
 
 }
