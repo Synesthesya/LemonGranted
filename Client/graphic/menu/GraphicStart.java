@@ -1,13 +1,26 @@
-package graphic;
+package graphic.menu;
 
-import java.awt.GridLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 
-public class main {
+/**
+ * 
+ * mockup della grafica non inerente al gioco:
+ * 
+ *usiamo questo main per vedere la rappresentazione grafica di tutto il resto
+ * 
+ * @author Giorgio
+ *
+ */
+public class GraphicStart {
+	
+	/**
+	 * metodo da lanciare per eseguire il mockup grafico
+	 * @param argv
+	 */
 	 public static void main(String... argv) {
-		    JFrame frame = new JFrame("Demo Background Image");
-		    wallpaper back = new wallpaper();
+		    JFrame frame = new JFrame("Demo Grafica");
+		    Background back = new Background(".//bin//vader.png");
 		    frame.add(back);
 		    frame.setSize(1200, 800);
 		    frame.setVisible(true);
