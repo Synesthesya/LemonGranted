@@ -51,6 +51,7 @@ public class Start {
 				c.setGrids(f);
 				//comunica lo stub al server
 				s.caricaPlayer();
+				break;
 			} catch (Exception e) {
 				System.err.println(e);
 			} 
