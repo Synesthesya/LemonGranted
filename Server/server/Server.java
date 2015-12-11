@@ -69,7 +69,7 @@ public static final int NUMERO_GIOCATORI = 2;
   /**
    * chiude il server
    */
-  protected void exit()
+  protected static void exit()
   {
     System.exit(0);
   }
@@ -172,14 +172,19 @@ public static final int NUMERO_GIOCATORI = 2;
    */
   public static void main (String[] args)
   {
+	  Server s=null;
     try
     {
-      Server s=new Server();
+      s=new Server();
       
     }
     catch(Exception e)
     {
       System.out.println("Failed to create Server object" + e.getMessage());
+      exit();
     }
+    
+    Command c=new Command(s);
+    c.run();
   }
 }
