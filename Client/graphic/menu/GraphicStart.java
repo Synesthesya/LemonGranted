@@ -27,10 +27,10 @@ public class GraphicStart {
 		    frame.setVisible(true);
 		    back.setLayout(null);
 		    
-		    JButton button1 = new JButton("PORCO DIO");
-		    JButton button2 = new JButton("PORCA MADONNA");
-		    JButton button3 = new JButton("DIO CANAGLIA DI DIO");
-		    JButton button4 = new JButton("INGRANAGGIANO-ANO-ANO");
+		    JButton button1 = new JButton("MULTIPLAYER");
+		    JButton button2 = new JButton("SINGLEPLAYER");
+		    JButton button3 = new JButton("OPZIONI");
+		    JButton button4 = new JButton("ESCILE");
 		    
 		    back.add(button1);
 		    back.add(button2);
