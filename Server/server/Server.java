@@ -119,9 +119,8 @@ public static final int NUMERO_GIOCATORI = 2;
   	 * 
   	 */
   	@Override
-	public void shot(int ID, Coordinate c) throws RemoteException
+	public synchronized void shot(int ID, Coordinate c) throws RemoteException
 	{
-  		
   		if(ID==1) //giocatore 1 spara
   		{
   			if(player2.getStatus(c)) //true indica colpito
@@ -148,6 +147,18 @@ public static final int NUMERO_GIOCATORI = 2;
   				player1.colpoSchivato(c);
   			}
   		}
+  		if(!player1.isAlive())
+  		{
+  			player1.sconfitta();
+  			player2.vittoria();
+  		}
+  		else if(!player2.isAlive())
+  		{
+  			player1.vittoria();
+  			player2.sconfitta();
+  		}
+  		player1.cambiaTurno();
+  		player2.cambiaTurno();
 	}
   
   
@@ -163,6 +174,7 @@ public static final int NUMERO_GIOCATORI = 2;
       {
         player1.setPhase(Phase.COMBAT);
         player2.setPhase(Phase.COMBAT);
+        player1.cambiaTurno();
         //System.out.println("uscita fase di schieramento");
       }
     }

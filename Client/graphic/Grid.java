@@ -31,14 +31,12 @@ public class Grid extends JPanel {
 	private static final long serialVersionUID = 1L;
 	
 	private final Slot[] grid;
-	private Controller c;
 	private String name;
 	
 	public Grid(int ID,Controller c, String s) {
 		
 	    name=s;
 		int size=Coordinate.SIZE;
-		this.c=c;
 		
 		setLayout(new GridLayout(size, size));		
 		grid= new Slot[size*size];

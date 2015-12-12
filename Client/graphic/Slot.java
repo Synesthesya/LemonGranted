@@ -18,6 +18,11 @@ import core.Coordinate;
 public class Slot extends JLabel {
 	
 	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	/**
 	 * percorso della cartella che contiene le immagini
 	 */
 	public static final String PATH = ".//bin//";
@@ -35,7 +40,7 @@ public class Slot extends JLabel {
 	/**
 	 * percorso dell'immagine vuota
 	 */
-	public static final String WATER = ".//bin//WATER.png";
+	public static final String INESPLORATO = "SpaceSquareBorderAlternate";
 	
 	/**
 	 * immagine del Pannello
@@ -57,17 +62,8 @@ public class Slot extends JLabel {
 	 * costruttore standard: il costruttore genera una casella vuota
 	 */
 	public Slot(Coordinate co) {
-		
-		/*
-		super(new ImageIcon(WATER));		
+		this.setIcon(new ImageIcon(PATH+INESPLORATO+FORMAT));
 		where=co;
-		this.setSize(32, 32);
-		*/
-		
-		this.setIcon(new ImageIcon(WATER));
-		where=co;
-		
-		
 	}
 	
 	
@@ -97,11 +93,8 @@ public class Slot extends JLabel {
 	 * @param img il nome dell'immagine senza formato
 	 */
 	public void setImage(String img) {
-		
-		//System.out.print("madonna ");
 		image=img;
 		this.setIcon(new ImageIcon(PATH+img+FORMAT));		
-		//System.out.println("maiala: "+PATH+img+FORMAT);
 	}
 	
 	public Coordinate getCoordinate() {

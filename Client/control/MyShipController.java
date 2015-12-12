@@ -33,6 +33,11 @@ public class MyShipController extends MouseAdapter implements Controller {
 	 * stub del server
 	 */
 	private ServerI server;
+	
+	/**
+	 * riferimento al frame
+	 */
+	private Frame frame;
 	/**
 	 * griglia con le proprie navi
 	 */
@@ -63,13 +68,12 @@ public class MyShipController extends MouseAdapter implements Controller {
 	 * 
 	 * @param f il Frame del gioco
 	 */
-	//@Deprecated
 	@Override
-	public void setGrids(Frame f)
+	public void linkFrame(Frame f)
 	{
-		//DIOKHAN
-	  left=f.getPanel().getGrids().getLeft();
-      right=f.getPanel().getGrids().getRight();
+		frame=f;
+		left=frame.getPanel().getGrids().getLeft();
+		right=frame.getPanel().getGrids().getRight();
 	}
 
 	/**
@@ -104,7 +108,7 @@ public class MyShipController extends MouseAdapter implements Controller {
 			  g.getSlot(c).setImage("XW_Square");
 			
 		}
-		else if(player.getPhase()==Phase.COMBAT && g.getName().equals("right") && !player.getEnemyShip().getStatus(c))
+		else if(player.getPhase()==Phase.COMBAT && player.getTurno() && g.getName().equals("right") && !player.getEnemyShip().getStatus(c))
 		{
 		  try
 		  {
@@ -144,12 +148,28 @@ public class MyShipController extends MouseAdapter implements Controller {
 	{
 	  if(b)
 	  {
-	    right.getSlot(c).setImage(player.getID()==1 ? "empireLogo" : "rebelsLogo");
+	    right.getSlot(c).setImage(s);
 	  }
 	  else
 	  {
-	    left.getSlot(c).setImage(player.getID()==1 ? "empireLogo" : "rebelsLogo");
+	    left.getSlot(c).setImage(s);
 	  }
+	}
+
+	@Override
+	public void sconfitta() 
+	{
+		frame.getPanel().getInfo().setStatus("Sconfitta");
+		left.removeMouseListener(this);
+		right.removeMouseListener(this);
+	}
+
+	@Override
+	public void vittoria() 
+	{
+		frame.getPanel().getInfo().setStatus("Vittoria");
+		left.removeMouseListener(this);
+		right.removeMouseListener(this);
 	}
 
 }

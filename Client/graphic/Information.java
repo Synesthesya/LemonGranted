@@ -189,7 +189,7 @@ public class Information extends JPanel {
 	}
 	
 	//MOCKUP
-	public void mockup(String s) {
+	public void setStatus(String s) {
 		status.setText(s);
 	}
 

@@ -38,5 +38,15 @@ public interface Controller
 	 * 
 	 * @param f il Frame del gioco
 	 */
-	public void setGrids(Frame f);
+	public void linkFrame(Frame f);
+
+	/**
+	 * avverte la parte grafica di eseguire la sconfitta
+	 */
+	public void sconfitta();
+
+	/**
+	 * avverte la parte grafica di eseguire la vittoria
+	 */
+	public void vittoria();
 }

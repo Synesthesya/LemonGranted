@@ -83,7 +83,10 @@ public class Player extends UnicastRemoteObject implements PlayerI
 	 */
 	private String name = "player";
 	
-	
+	/**
+	 * indica il turno
+	 */
+	public boolean turno=false;
 	/**
 	 * costruttore standard
 	 * 
@@ -275,13 +278,14 @@ public class Player extends UnicastRemoteObject implements PlayerI
 	public void nemicoMancato(Coordinate c) throws RemoteException 
 	{
 		enemyShip.setGridValue(true, c);
-		controller.setImage(true,c,"colpito");
+		controller.setImage(true,c,"SpaceSquareBorder");
 	}
 
 	@Override
 	public void colpoSubito(Coordinate c) throws RemoteException 
 	{
 		myShip.setGridValue(false, c);
+		alive--;
 		if(ID==1)
 			controller.setImage(false, c, "empireLogo");
 		else
@@ -292,6 +296,29 @@ public class Player extends UnicastRemoteObject implements PlayerI
 	public void colpoSchivato(Coordinate c) throws RemoteException 
 	{
 		//niente setGridValue perchè è già falso
-		controller.setImage(false,c,"colpito");
+		controller.setImage(false,c,"SpaceSquareBorder");
+	}
+
+	@Override
+	public void sconfitta() throws RemoteException 
+	{
+		controller.sconfitta();
+	}
+
+	@Override
+	public void vittoria() throws RemoteException 
+	{
+		controller.vittoria();
+	}
+	
+	public boolean getTurno()
+	{
+		return turno;
+	}
+	
+	@Override
+	public void cambiaTurno()
+	{
+		turno=!turno;
 	}
 }

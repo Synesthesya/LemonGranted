@@ -15,6 +15,12 @@ import core.Coordinate;
 public interface PlayerI extends Remote
 {
 	/**
+	 * verifica che il player sia ancora vivo
+	 * @return se il giocatore è vivo
+	 * @throws RemoteException
+	 */
+	public boolean isAlive() throws RemoteException;
+	/**
 	 * restituisce la flag legata allo schieramento
 	 */
   public boolean getDeployed() throws RemoteException;
@@ -54,4 +60,22 @@ public interface PlayerI extends Remote
   	 * @throws RemoteException
   	 */
   	public void colpoSchivato(Coordinate c) throws RemoteException;
+  	
+  	/**
+  	 * dichiara la sconfitta
+  	 * @throws RemoteException
+  	 */
+  	public void sconfitta() throws RemoteException;
+  	
+  	/**
+  	 * dichiara la vittoria
+  	 * @throws RemoteException
+  	 */
+  	public void vittoria() throws RemoteException;
+  	
+  	/**
+  	 * cambia il turno del giocatore
+  	 * @throws RemoteException
+  	 */
+	public void cambiaTurno() throws RemoteException;
 }
