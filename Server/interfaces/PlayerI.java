@@ -25,12 +25,33 @@ public interface PlayerI extends Remote
 	 */
   public void setPhase(Phase fase) throws RemoteException;
 	/**
-	 * Controlla se a quelle coordinate c'è una nave
+	 * <p>controlla se a quelle coordinate c'è una nave</p>
+	 * <p>usato principalmente per la griglia di sinistra</p>
 	 */
   public boolean getStatus(Coordinate c) throws RemoteException;
-	
-	/**
-	 * chiamto dal server per avvertire che si vuole agire a quelle coordinate
-	 */
-  public void callHit(boolean b, Coordinate c) throws RemoteException;
+  
+  	/**
+  	 * Dichiara le coordinate sulla griglia di destra come colpita
+  	 * @param c le coordinate
+  	 * @throws RemoteException
+  	 */
+  	public void nemicoColpito(Coordinate c) throws RemoteException;
+  	/**
+  	 * Dichiara le coordinate sulla griglia di destra come mancato
+  	 * @param c le coordinate
+  	 * @throws RemoteException
+  	 */
+  	public void nemicoMancato(Coordinate c) throws RemoteException;
+  	/**
+  	 * Dichiara le coordinate sulla griglia di sinistra come colpita
+  	 * @param c le coordinate
+  	 * @throws RemoteException
+  	 */
+  	public void colpoSubito(Coordinate c) throws RemoteException;
+  	/**
+  	 * Dichiara le coordinate sulla griglia di sinistra come mancato
+  	 * @param c le coordinate
+  	 * @throws RemoteException
+  	 */
+  	public void colpoSchivato(Coordinate c) throws RemoteException;
 }

@@ -114,35 +114,41 @@ public static final int NUMERO_GIOCATORI = 2;
       //Vuoto perchè verrà sempre generata un'eccezione che ci si aspetta
     }
   }
-  
-  /**
-   * MOCKUP
-   * 
-   * Chiamato dai client che richiedere l'elaborazione di uno sparo
-   * 
-   * WARNING: ha un nome diverso da quello che si aspetta
- * @throws RemoteException 
-   */
-  @Override
-  public void shot(int ID, Coordinate c) throws RemoteException
-  {
 
-    	/*controlla quale player è che spara 
-    	 * e se l'altro player ha una nave a quelle coordinate
-    	 */
-      if(ID==1 && player2.getStatus(c))
-      {
-          player2.callHit(true, c);
-          player1.callHit(false, c);
-      }
-      else if(player1.getStatus(c))
-      {
-        player1.callHit(true, c);
-        player2.callHit(false, c);
-      }
- 
-
-    }
+  	/**
+  	 * 
+  	 */
+  	@Override
+	public void shot(int ID, Coordinate c) throws RemoteException
+	{
+  		
+  		if(ID==1) //giocatore 1 spara
+  		{
+  			if(player2.getStatus(c)) //true indica colpito
+  			{
+  				player1.nemicoColpito(c);
+  				player2.colpoSubito(c);
+  			}
+  			else //mancato
+  			{
+  				player1.nemicoMancato(c);
+  				player2.colpoSchivato(c);
+  			}
+  		}
+  		else //giocatore 2 spara
+  		{
+  			if(player1.getStatus(c)) //true indica colpito
+  			{
+  				player2.nemicoColpito(c);
+  				player1.colpoSubito(c);
+  			}
+  			else //mancato
+  			{
+  				player2.nemicoMancato(c);
+  				player1.colpoSchivato(c);
+  			}
+  		}
+	}
   
   
   /**

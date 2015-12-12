@@ -135,22 +135,20 @@ public class MyShipController extends MouseAdapter implements Controller {
 	    System.err.println(e.getMessage());
 	  }
 	}
-	
 	/**
-	 * MOCKUP
-	 * 
-	 * cambia le immagini quando le caselle vengono cliccate
+	 * b=true indica griglia di destra
+	 * b=false indica griglia di sinistra
 	 */
 	@Override
-	public void setImage(boolean b, Coordinate c)
+	public void setImage(boolean b, Coordinate c, String s)
 	{
 	  if(b)
 	  {
-	    left.getSlot(c).setImage(player.getID()==1 ? "empireLogo" : "rebelsLogo");
+	    right.getSlot(c).setImage(player.getID()==1 ? "empireLogo" : "rebelsLogo");
 	  }
 	  else
 	  {
-	    right.getSlot(c).setImage(player.getID()==1 ? "empireLogo" : "rebelsLogo");
+	    left.getSlot(c).setImage(player.getID()==1 ? "empireLogo" : "rebelsLogo");
 	  }
 	}
 

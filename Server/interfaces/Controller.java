@@ -22,11 +22,12 @@ public interface Controller
 	public void checkDeployment();
 	
 	/**
-	 * MOCKUP
-	 * 
-	 * cambia le immagini quando le caselle vengono cliccate
+	 * cambia l'immagine alle coordinate di una griglia
+	 * @param b true=griglia di destra, false=griglia di sinistra
+	 * @param c le coordinate
+	 * @param s il nome della nuova immagine 
 	 */
-	public void setImage(boolean b, Coordinate c);
+	public void setImage(boolean b, Coordinate c, String s);
 	
 	/**
 	 * <p>

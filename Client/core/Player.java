@@ -172,18 +172,6 @@ public class Player extends UnicastRemoteObject implements PlayerI
 	}
 	
 	/**
-	 * chiamto dal server per avvertire che si vuole agire a quelle coordinate
-	 */
-	public void callHit(boolean b, Coordinate c)
-	{
-	  if(b)
-	  {
-	    myShip.hit(c);
-	    controller.setImage(b,c);
-	  }
-	}
-	
-	/**
 	 * aggiorna la struttura dati della griglia per aggiungere o meno una nave
 	 * se il numero massimo di navi è stato raggiunto, avverte il server che si è finita la fase di schieramento 
 	 * @param c
@@ -270,5 +258,40 @@ public class Player extends UnicastRemoteObject implements PlayerI
 	public String toString() {
 		
 		return "Nome: "+name+"\tID: "+ID+"\tnavi ancora in vita: "+alive+"\nnavi possedute:\n"+myShip+"\ncolpi sparati:\n"+enemyShip;		
+	}
+
+	
+	@Override
+	public void nemicoColpito(Coordinate c) throws RemoteException 
+	{
+		enemyShip.setGridValue(true, c); //la coordinata è stata usata
+		if(ID==1)
+			controller.setImage(true,c,"rebelsLogo");
+		else
+			controller.setImage(true, c, "empireLogo");
+	}
+
+	@Override
+	public void nemicoMancato(Coordinate c) throws RemoteException 
+	{
+		enemyShip.setGridValue(true, c);
+		controller.setImage(true,c,"colpito");
+	}
+
+	@Override
+	public void colpoSubito(Coordinate c) throws RemoteException 
+	{
+		myShip.setGridValue(false, c);
+		if(ID==1)
+			controller.setImage(false, c, "empireLogo");
+		else
+			controller.setImage(false, c, "rebelsLogo");
+	}
+
+	@Override
+	public void colpoSchivato(Coordinate c) throws RemoteException 
+	{
+		//niente setGridValue perchè è già falso
+		controller.setImage(false,c,"colpito");
 	}
 }

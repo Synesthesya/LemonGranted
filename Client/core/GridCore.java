@@ -27,6 +27,8 @@ public class GridCore
 	/**
 	 * costruttore standard che inizializza una griglia vuota di dimensione <i>DIMENSION</i>
 	 * il valore vuoto è <b>false</b> per ogni casella
+	 * <p>inoltre per la griglia di sinistra un valore true indica la presenza di una nave, 
+	 * mentre su quella di destra indica che è stata cliccata per sparare</p>
 	 */
 	public GridCore()
 	{
@@ -130,5 +132,15 @@ public class GridCore
 			if(i%10==0) s=s+"\n";			
 		}
 		return s;		
+	}
+	
+	/**
+	 * setta il valore nella casella specificata
+	 * @param b valore da settare
+	 * @param c coordinate della cella
+	 */
+	public void setGridValue(boolean b, Coordinate c)
+	{
+		grid[c.toInteger()]=b;
 	}
 }
