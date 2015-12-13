@@ -50,4 +50,10 @@ public interface ServerI extends Remote
 	   * @throws RemoteException 
 	   */
 	public void shot(int ID, Coordinate c) throws RemoteException;
+	
+	/**
+	 * deregistra i giocatori
+	 * @throws RemoteException
+	 */
+	public void deregistra() throws RemoteException;
 }

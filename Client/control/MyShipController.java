@@ -8,6 +8,7 @@ import interfaces.ServerI;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.rmi.Naming;
 import java.util.Observable;
 
 import server.Phase;
@@ -169,6 +170,8 @@ public class MyShipController extends MouseAdapter implements Controller
 		setMessage("Sconfitta! ");
 		left.removeMouseListener(this);
 		right.removeMouseListener(this);
+		server=null;
+		deregistra();
 	}
 
 	@Override
@@ -178,6 +181,8 @@ public class MyShipController extends MouseAdapter implements Controller
 		setMessage("Vittoria! ");
 		left.removeMouseListener(this);
 		right.removeMouseListener(this);
+		server=null;
+		deregistra();
 	}
 
 	@Override
@@ -209,5 +214,17 @@ public class MyShipController extends MouseAdapter implements Controller
 	public void setTesto2(String string)
 	{
 		testo2=string;
+	}
+	
+	private void deregistra()
+	{
+		try
+		{
+			Naming.unbind("rmi://127.0.0.1:1677/player" + player.getID());
+		}
+		catch(Exception e)
+		{
+			System.err.println(e.getMessage());
+		}
 	}
 }
