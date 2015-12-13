@@ -34,14 +34,8 @@ public class Information extends JPanel {
 	private static final long serialVersionUID = 1L;
 	
 	/**
-	 * il nome del giocatore
-	 */
-	public static String playerName= "Giocatore 1";
-	
-	/**
 	 * il nick del giocatore
 	 */
-	//private final JLabel player; // mettere JLabel
 	private final JLabel player;
 	
 	/**
@@ -91,7 +85,7 @@ public class Information extends JPanel {
 		player=new JLabel();
 		ImageIcon icon = new ImageIcon(".//bin//lightsaber.png");
 		player.setIcon(icon);
-		player.setText("Giocatore 1");
+		player.setText("Giocatore "+ID);
 		player.setHorizontalTextPosition(JLabel.CENTER);
 		player.setVerticalTextPosition(JLabel.CENTER);
 		
@@ -148,21 +142,8 @@ public class Information extends JPanel {
 		enemyPanel.add(rebelsLogo);
 		
 		// ---------------- POSIZIONAMENTO STATUS --------------------------------
-		status=new JLabel("status");
+		status=new JLabel();
 		status.setForeground(Color.red);
-		
-		/*
-		 * WARNING
-		 * gestire corretamente il layout
-		 */
-		
-		JLabel asd = new JLabel("\n\n");
-		
-		/*
-		 *  WARNING
-		 *  label alla cazzo per fare spazio
-		 * 
-		 */
 		
 		this.setLayout(new BorderLayout(100, 0));
 		status.setAlignmentX(500);
@@ -171,124 +152,23 @@ public class Information extends JPanel {
 	    add(myShipPanel, "West");
 		add(status, "Center");
 		add(enemyPanel, "East");
-		// RIMUOVERE
-	//	add(asd, "South");
 	}
 	
-	/*
-	 * WARNING getMyShip anche per le altre ship
-	 */
-	public JLabel getMyShip() { // mettere JLabel
+	public JLabel getMyShip()
+	{
 		return myShip1;
 	}
-/*	public JLabel getEnemyShip() { // mettere Jabel
-		return enemyShip;
-	} */
-	public JLabel getStatus() { // mettere Jlabel
+	public JLabel getStatus()
+	{
 		return status;
 	}
 	
-	//MOCKUP
+	/**
+	 * cambia il testo del messagio
+	 * @param s il nuovo messaggio
+	 */
 	public void setStatus(String s) {
 		status.setText(s);
 	}
 
 }
-
-
-
-
-
-
-
-
-/* package graphic;
-
-import java.awt.GridLayout;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import control.Controller;
-
-public class Information extends JPanel {
-
-
-	 * #crescile(R)
-	 *
-	private static final long serialVersionUID = 1L;
-	
-	/**
-	 * il nome del giocatore
-	 *
-	public static String playerName= "Giocatore 1";
-	
-	/**
-	 * il nick del giocatore
-	 *
-	private final JLabel player;
-	/**
-	 * lo status delle navi del giocatore
-	 *
-	private final JLabel myShip;
-	/**
-	 * lo status delle navi dell'avversario
-	 *
-	private final JLabel enemyShip;
-	/**
-	 * lo status del turno
-	 *
-	private final JLabel status;
-	/**
-	 * il controllore che comunica tra i due giocatori
-	 *
-	private final Controller control;
-	
-	/**
-	 * costruttore standard 
-	 * @param c
-	 *
-	public Information(Controller c) {
-		
-		super();
-		control=c;
-		player=new JLabel(playerName);
-		
-		/*
-		 * WARNING
-		 * gestire correamente i label
-		 *
-		
-		myShip=new JLabel();
-		enemyShip=new JLabel();
-		status=new JLabel();
-		
-		
-		/*
-		 * WARNING
-		 * gestire corretamente il layout
-		 *
-		
-		this.setLayout(new GridLayout(2,2));
-		
-		add(player);
-		add(myShip);
-		add(status);
-		add(enemyShip);		
-	}
-	
-	public JLabel getMyShip() {
-		return myShip;
-	}
-	public JLabel getEnemyShip() {
-		return enemyShip;
-	}
-	public JLabel getStatus() {
-		return status;
-	}
-	
-	
-	//MOCKUP
-	public void mockup(String s) {
-		status.setText(s);
-	}
-
-} */

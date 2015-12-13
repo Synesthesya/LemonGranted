@@ -13,6 +13,7 @@ import core.Coordinate;
  */
 public interface Controller
 {
+
 	/**
 	 * 
 	 * funzione che viene chiamata quando si ha schierata l'ultima nave: comunica col server 
@@ -49,4 +50,28 @@ public interface Controller
 	 * avverte la parte grafica di eseguire la vittoria
 	 */
 	public void vittoria();
+
+	/**
+	 * setta il messaggio del turno
+	 * @param t true=proprio turno, turno avversario altrimenti
+	 */
+	public void cambiaTurno(boolean t);
+	
+	/**
+	 * cambia il messaggio nel label status, composto da fase + il paramentro stringa
+	 * @param s la stringa
+	 */
+	public void setMessage(String s);
+
+	/**
+	 * cambia la stringa fase con la nuova stringa
+	 * @param string
+	 */
+	public void setFase(String string);
+	
+	/**
+	 * cambia la stringa di testo2
+	 * @param string
+	 */
+	public void setTesto2(String string);
 }

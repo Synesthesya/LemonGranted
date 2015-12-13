@@ -40,9 +40,9 @@ public class Start {
 				//creazione stub
 				Naming.bind("rmi://127.0.0.1:1677/player" + ID.toString(), p);
 				Controller c = new MyShipController(p, s);
-				p.setController(c);
 				Frame f = new Frame(ID, c, null);
 				c.linkFrame(f);
+				p.setController(c);
 				//comunica lo stub al server
 				s.caricaPlayer();
 				break;

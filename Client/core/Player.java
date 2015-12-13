@@ -56,7 +56,7 @@ public class Player extends UnicastRemoteObject implements PlayerI
 	/**
 	 * l'elenco delle navi del giocatore
 	 */
-	private final Ship[] fleet;
+	//private final Ship[] fleet;
 	
 	/**
 	 * il numero di navi ancora vive
@@ -97,7 +97,7 @@ public class Player extends UnicastRemoteObject implements PlayerI
 	    this.ID=ID;
 		myShip=new GridCore();
 		enemyShip=new GridCore();
-		fleet=new Ship[FLEETNUMBER];
+		//fleet=new Ship[FLEETNUMBER];
 		alive=0;
 	}
 	
@@ -147,7 +147,7 @@ public class Player extends UnicastRemoteObject implements PlayerI
 	 * @param c la coordinata colpita
 	 * @return <b>true</b> se è stata colpita una nave, <b>false</b> altrimenti
 	 */
-	public boolean hit(Coordinate c) {
+	/*public boolean hit(Coordinate c) {
 		
 		if(myShip.getStatus(c)) {
 			for(int i=0; i<alive; i++) {
@@ -165,7 +165,7 @@ public class Player extends UnicastRemoteObject implements PlayerI
 			return true;
 		}
 		else return false;		
-	}
+	}*/
 	/**
 	 * Controlla se a quelle coordinate c'è una nave
 	 */
@@ -185,9 +185,11 @@ public class Player extends UnicastRemoteObject implements PlayerI
   		{
   		  alive++;
   		  myShip.deploy(c);
+  		  controller.setMessage("Devi schierare ancora "+ (5-getAlive())+ " navi!");
   		  if(alive==FLEETNUMBER) //controlla se è stato raggiunto il numero max di navi
   		  {
   		    deployed=true;
+  		    controller.setMessage("Attesa dell'avversario");
   		    controller.checkDeployment();
   		  }
   		  return true;
@@ -210,6 +212,7 @@ public class Player extends UnicastRemoteObject implements PlayerI
 	public void setController(Controller c)
 	{
 	  controller=c;
+	  controller.setMessage("Devi schierare ancora 5 navi!");
 	}
 	
 	/**
@@ -228,7 +231,12 @@ public class Player extends UnicastRemoteObject implements PlayerI
 	 */
 	public void setPhase(Phase fase)
 	{
-	  this.fase=fase;
+		this.fase=fase;
+		if(fase==Phase.COMBAT)
+		{
+			controller.setFase("Combattimento! ");
+			controller.setMessage("E' il turno dell'avversario!");
+		}
 	}
 	
 	/**
@@ -267,16 +275,18 @@ public class Player extends UnicastRemoteObject implements PlayerI
 	@Override
 	public void nemicoColpito(Coordinate c) throws RemoteException 
 	{
+		controller.setTesto2("Nemico colpito! ");
 		enemyShip.setGridValue(true, c); //la coordinata è stata usata
 		if(ID==1)
-			controller.setImage(true,c,"rebelsLogo");
+			controller.setImage(true,c,"XW_RED");
 		else
-			controller.setImage(true, c, "empireLogo");
+			controller.setImage(true, c, "TF_RED");
 	}
 
 	@Override
 	public void nemicoMancato(Coordinate c) throws RemoteException 
 	{
+		controller.setTesto2("Nemico mancato! ");
 		enemyShip.setGridValue(true, c);
 		controller.setImage(true,c,"SpaceSquareBorder");
 	}
@@ -284,17 +294,19 @@ public class Player extends UnicastRemoteObject implements PlayerI
 	@Override
 	public void colpoSubito(Coordinate c) throws RemoteException 
 	{
+		controller.setTesto2("Sei stato colpito! ");
 		myShip.setGridValue(false, c);
 		alive--;
 		if(ID==1)
-			controller.setImage(false, c, "empireLogo");
+			controller.setImage(false, c, "TF_RED");
 		else
-			controller.setImage(false, c, "rebelsLogo");
+			controller.setImage(false, c, "XW_RED");
 	}
 
 	@Override
 	public void colpoSchivato(Coordinate c) throws RemoteException 
 	{
+		controller.setTesto2("Sei stato mancato! ");
 		//niente setGridValue perchè è già falso
 		controller.setImage(false,c,"SpaceSquareBorder");
 	}
@@ -320,5 +332,6 @@ public class Player extends UnicastRemoteObject implements PlayerI
 	public void cambiaTurno()
 	{
 		turno=!turno;
+		controller.cambiaTurno(turno);
 	}
 }

@@ -111,7 +111,7 @@ public static final int NUMERO_GIOCATORI = 2;
     }
     catch(Exception e)
     {
-      //Vuoto perchè verrà sempre generata un'eccezione che ci si aspetta
+      System.err.println(e.getMessage());
     }
   }
 
@@ -147,6 +147,8 @@ public static final int NUMERO_GIOCATORI = 2;
   				player1.colpoSchivato(c);
   			}
   		}
+  		player1.cambiaTurno();
+  		player2.cambiaTurno();
   		if(!player1.isAlive())
   		{
   			player1.sconfitta();
@@ -157,8 +159,6 @@ public static final int NUMERO_GIOCATORI = 2;
   			player1.vittoria();
   			player2.sconfitta();
   		}
-  		player1.cambiaTurno();
-  		player2.cambiaTurno();
 	}
   
   

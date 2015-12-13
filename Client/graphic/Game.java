@@ -50,20 +50,6 @@ public class Game extends JPanel {
 		info=new Information(ID,i);
 		info.setBackground(Color.black); // colore di prova
 		
-		/*
-		 * setLayout(null);
-		 * setSize();
-		 * setPreferredSize();
-		 * setMaximumSize();
-		 * setMinimumSize();
-		 * 
-		 * add add
-		 * 
-		 * setBounds(a, b, c, d);
-		 */
-		/*
-		 * BORDER LAYOUT CON ALTO, CENTRO E BASSO
-		 */
 		
 		setLayout(new BorderLayout());
 		
@@ -94,35 +80,3 @@ public class Game extends JPanel {
 	}
 	
 }
-
-/* VECCHIO CODICE
-
-import java.awt.GridLayout;
-import javax.swing.JPanel;
-import control.Controller;
-
-public class Game extends JPanel {
-	
-	private final GridCouple grid;
-	private final Information info;
-	
-	public Game(Controller l, Controller r, Controller i) {
-		
-		super();
-		grid=new GridCouple(l,r);
-		info=new Information(i);
-		
-		setLayout(new GridLayout(2,1));
-		add(info);
-		add(grid);		
-	}
-	
-	public GridCouple getGrid() {
-		return grid;
-	}
-	
-	public Information getInfo() {
-		return info;
-	}
-	
-} */

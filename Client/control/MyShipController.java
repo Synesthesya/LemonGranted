@@ -23,7 +23,14 @@ import core.Player;
  * @implements Controller
  *
  */
-public class MyShipController extends MouseAdapter implements Controller {
+public class MyShipController extends MouseAdapter implements Controller 
+{
+	/**
+	 * stringa che indica la fase
+	 */
+	private String fase="Schieramento! ";
+	
+	private String testo2="";;
 	
 	/**
 	 * riferimento al Player
@@ -106,7 +113,6 @@ public class MyShipController extends MouseAdapter implements Controller {
 			  g.getSlot(c).setImage("TF");
 			else
 			  g.getSlot(c).setImage("XW_Square");
-			
 		}
 		else if(player.getPhase()==Phase.COMBAT && player.getTurno() && g.getName().equals("right") && !player.getEnemyShip().getStatus(c))
 		{
@@ -132,7 +138,7 @@ public class MyShipController extends MouseAdapter implements Controller {
 	{
 	  try
 	  {
-	    server.isReady();
+		  server.isReady();
 	  }
 	  catch(Exception e)
 	  {
@@ -159,7 +165,8 @@ public class MyShipController extends MouseAdapter implements Controller {
 	@Override
 	public void sconfitta() 
 	{
-		frame.getPanel().getInfo().setStatus("Sconfitta");
+		fase="Fine gioco! ";
+		setMessage("Sconfitta! ");
 		left.removeMouseListener(this);
 		right.removeMouseListener(this);
 	}
@@ -167,9 +174,40 @@ public class MyShipController extends MouseAdapter implements Controller {
 	@Override
 	public void vittoria() 
 	{
-		frame.getPanel().getInfo().setStatus("Vittoria");
+		fase="Fine gioco! ";
+		setMessage("Vittoria! ");
 		left.removeMouseListener(this);
 		right.removeMouseListener(this);
 	}
 
+	@Override
+	public void cambiaTurno(boolean t)
+	{
+		if(t)
+			setMessage("è il tuo turno!");
+		else
+			setMessage("è il turno dell'avversario!");
+	}
+	
+	/**
+	 * cambia il messaggio nel label status, composto da fase + il paramentro stringa
+	 * @param s la stringa
+	 */
+	@Override
+	public void setMessage(String s)
+	{
+		frame.getPanel().getInfo().setStatus(fase + testo2 + s);
+	}
+
+	@Override
+	public void setFase(String string) 
+	{
+		fase=string;
+	}
+
+	@Override
+	public void setTesto2(String string)
+	{
+		testo2=string;
+	}
 }
