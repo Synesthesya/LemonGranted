@@ -21,6 +21,7 @@ public class GraphicStart {
 	 public static void main(String... argv) {
 		    JFrame frame = new JFrame("Demo Grafica");
 		    frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		    /*
 		    Background back = new Background(".//bin//vader.png");
 		    frame.add(back);
 		    frame.setSize(1200, 800);
@@ -41,5 +42,12 @@ public class GraphicStart {
 		    button2.setBounds(50, 200, 300, 100);
 		    button3.setBounds(50, 350, 300, 100);
 		    button4.setBounds(50, 500, 300, 100);
+		    */
+		    
+		    MainMenu mm=new MainMenu();
+		    frame.add(mm);
+		    frame.setSize(1200, 800);
+		    frame.setVisible(true);
+		    
 		  }
 }

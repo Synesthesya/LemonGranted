@@ -204,8 +204,10 @@ public class Server extends UnicastRemoteObject implements ServerI
 	      uscita();
 	    }
 	    
+	    
 	    Command c=new Command(s);
 	    c.run();
+	    
 	  }
   
 	  /**
