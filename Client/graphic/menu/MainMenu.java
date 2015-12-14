@@ -17,13 +17,24 @@ import javax.swing.ImageIcon;
  *
  */
 public class MainMenu extends JPanel {
+	
+	
+		/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
-	  private Image img;
+		public static final String EMPIRE_BACKGROUND = ".//bin//vader.png";
+		
+	  	/**
+	  	 * l'immagine di sfondo
+	  	 */
+		private Image img;
+	  
 
 	  public MainMenu() {
-		String path = ".//bin//vader.png";
-	    img = Toolkit.getDefaultToolkit().createImage(path);
-	    loadImage(img);
+
+	    setImage(EMPIRE_BACKGROUND);
 	    setLayout(null);
 	    
 	    JButton button1 = new JButton("MULTIPLAYER");
@@ -44,7 +55,12 @@ public class MainMenu extends JPanel {
 	    button3.setBounds(50, 350, 300, 100);
 	    button4.setBounds(50, 500, 300, 100);
 	  }
-
+	  
+	  /**
+	   * metodo utilizzato per caricare un'immagine come sfondo
+	   * 
+	   * @param img
+	   */
 	  private void loadImage(Image img) {
 	    try {
 	      MediaTracker track = new MediaTracker(this);
@@ -54,11 +70,33 @@ public class MainMenu extends JPanel {
 	      e.printStackTrace();
 	    }
 	  }
-
+	  
+	  /**
+	   * metodo ereditato dalla classe JPanel
+	   * 
+	   */
+	  @Override
 	  protected void paintComponent(Graphics g) {
 	    setOpaque(false);
 	    g.drawImage(img, 0, 0, null);
 	    super.paintComponent(g);
+	  }
+	  
+	  /**
+	   * metodo per settare un'immagine come sfondo
+	   * @param path il percorso dell'immagine
+	   */
+	  public void setImage(String path) {
+		  img = Toolkit.getDefaultToolkit().createImage(EMPIRE_BACKGROUND);
+		  loadImage(img);
+	  }
+	  
+	  /**
+	   * metodo di get dell'immagine di sfondo
+	   * @return
+	   */
+	  public Image getImage() {
+		  return img;
 	  }
 
 	}
