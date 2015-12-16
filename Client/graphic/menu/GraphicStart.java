@@ -1,8 +1,8 @@
 package graphic.menu;
 
-import javax.swing.JButton;
-import javax.swing.JFrame;
+import java.io.IOException;
 
+import javax.swing.JFrame;
 import control.MenuController;
 
 /**
@@ -19,8 +19,9 @@ public class GraphicStart {
 	/**
 	 * metodo da lanciare per eseguire il mockup grafico
 	 * @param argv
+	 * @throws IOException 
 	 */
-	 public static void main(String... argv) {
+	 public static void main(String... argv) throws IOException {
 		 JFrame frame = new JFrame("Demo Background Image");
 		 MenuController mc=new MenuController(null);
 		 MainMenu menu = new MainMenu(mc);
@@ -28,5 +29,6 @@ public class GraphicStart {
 		 frame.setSize(1200, 800);
 		 frame.setResizable(false);
 		 frame.setVisible(true);
+		 frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	 }
 }

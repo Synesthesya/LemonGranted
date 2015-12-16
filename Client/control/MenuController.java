@@ -6,6 +6,7 @@ import interfaces.Controller;
 import interfaces.ServerI;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.rmi.Naming;
 import core.Player;
 
@@ -68,7 +69,12 @@ public class MenuController implements ActionListener {
 			}
 			catch(Exception e) {
 				ErrorPopUp er = new ErrorPopUp("impossibile collegarsi al server!\n"+e);
-				f.setMenu(this);
+				try {
+					f.setMenu(this);
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 				return;
 			}
 		}

@@ -9,6 +9,7 @@ import interfaces.ServerI;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.IOException;
 import java.rmi.Naming;
 import java.util.Observable;
 
@@ -126,7 +127,12 @@ public class MyShipController extends MouseAdapter implements Controller
 		  {
 		    System.err.println("errore: " +err.getMessage());
 		    ErrorPopUp er=new ErrorPopUp("errore: disconnessione dal server\n"+err);
-		    frame.setMenu(new MenuController(frame));
+		    try {
+				frame.setMenu(new MenuController(frame));
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 		  }
 		}
 	}
@@ -148,7 +154,12 @@ public class MyShipController extends MouseAdapter implements Controller
 	  {
 	    System.err.println(e.getMessage());
 	    ErrorPopUp er=new ErrorPopUp("errore: impossibile connettersi al server");
-	    frame.setMenu(new MenuController(frame));
+	    try {
+			frame.setMenu(new MenuController(frame));
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 	  }
 	}
 	/**

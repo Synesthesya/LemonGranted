@@ -1,6 +1,7 @@
 package graphic;
 
 import java.awt.Dimension;
+import java.io.IOException;
 
 import graphic.menu.MainMenu;
 import interfaces.Controller;
@@ -97,8 +98,9 @@ public class Frame extends JFrame {
 	 * metodo che colloca il Menù principale nel frame; si assume sia il primo metodo eseguito
 	 * 
 	 * @param mc il MenuController
+	 * @throws IOException 
 	 */
-	public void initialize(MenuController mc) {
+	public void initialize(MenuController mc) throws IOException {
 		
 		panel=new MainMenu(mc);
 		add(panel);	
@@ -110,8 +112,9 @@ public class Frame extends JFrame {
 	 * metodo che colloca il menù principale nel frame; utilizzato dalla seconda volta in avanti
 	 * 
 	 * @param mc il MenuController del menù principale
+	 * @throws IOException 
 	 */
-	public void setMenu(MenuController mc) {
+	public void setMenu(MenuController mc) throws IOException {
 		
 		remove(panel);
 		panel=new MainMenu(mc);

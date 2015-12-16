@@ -3,6 +3,7 @@ package launcher;
 import interfaces.Controller;
 import interfaces.ServerI;
 
+import java.io.IOException;
 import java.rmi.Naming;
 
 import graphic.Frame;
@@ -23,8 +24,9 @@ public class Start {
 	 * main
 	 * 
 	 * @param args
+	 * @throws IOException 
 	 */
-	public static void main(String[] args) {
+	public static void main(String[] args) throws IOException {
 		
 		Frame f=new Frame();
 		f.initialize(new MenuController(f));

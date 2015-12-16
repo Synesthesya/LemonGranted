@@ -1,12 +1,21 @@
 package graphic.menu;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.MediaTracker;
 import java.awt.Toolkit;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import sun.audio.*;
+
+
 import control.MenuController;
 
 
@@ -47,8 +56,15 @@ public class MainMenu extends JPanel {
 		private JButton[] buttons=new JButton[BUTTON_NUMBER];
 	  
 
-	  public MainMenu(MenuController mc) {
-
+	  public MainMenu(MenuController mc) throws IOException {
+		/*
+		 * Inizializzazione ed inserimento traccia musicale
+		 */
+		String gongFile = ".//bin//SW.wav";
+		InputStream in = new FileInputStream(gongFile);
+		AudioStream audio = new AudioStream(in);
+		AudioPlayer.player.start(audio);
+		  
 	    setImage(EMPIRE_BACKGROUND);
 	    setLayout(null);
 	    
@@ -57,41 +73,38 @@ public class MainMenu extends JPanel {
 	    	buttons[i].addActionListener(mc);
 	    	buttons[i].setActionCommand(control.MenuController.MAINMENU[i]);
 	    	add(buttons[i]);
-	    	buttons[i].setBounds(50,BOUND[i],300,100);
+	    	buttons[i].setBounds(75,BOUND[i],300,126);
 	    }
 	    
 	    /*
-	    JButton button1 = new JButton("MULTIPLAYER");
-	    JButton button2 = new JButton("SINGLEPLAYER");
-	    JButton button3 = new JButton("OPZIONI");
-	    JButton button4 = new JButton("ESCILE");
+	     * Inizializzazione icone
+	     */
+	    ImageIcon iconB1 = new ImageIcon(".//bin//BattagliaSpazialeButton1.jpg");
+	    ImageIcon iconB2 = new ImageIcon(".//bin//BattagliaSpazialeButton2.jpg");
+	    ImageIcon iconB3 = new ImageIcon(".//bin//BattagliaSpazialeButton3.jpg");
+	    ImageIcon iconB4 = new ImageIcon(".//bin//BattagliaSpazialeButton4.jpg");
+	    
+	    buttons[0].setIcon(iconB1);
+	    buttons[1].setIcon(iconB2);
+	    buttons[2].setIcon(iconB3);
+	    buttons[3].setIcon(iconB4);
 	    
 	    /*
-	     * CODICE PER IMPLEMENTARE I PULSANTI
-	     * 
-	     *	    
+	     * Inizializzazione logo
+	     */
+	    JLabel title = new JLabel("");
+	    ImageIcon iconTitle = new ImageIcon(".//bin//logoMain.png");
+	    title.setIcon(iconTitle);
+	    title.setBounds(750, 600, 400, 136);
+	    add(title);
 	    
-	    button1.setActionCommand("MP");
-	    button2.setActionCommand("SP");
-	    button3.setActionCommand("OP");
-	    button4.setActionCommand("QT");
-	    
-
-	    
-	    add(button1);
-	    add(button2);
-	    add(button3);
-	    add(button4);
-	    
-	    
-	    button1.setBounds(50, 50, 300, 100);
-	    //ImageIcon iconB1 = new ImageIcon("/home/giorgio/Immagini/squirtle.png");
-	    button1.setIcon(iconB1);
-	    
-	    button2.setBounds(50, 200, 300, 100);
-	    button3.setBounds(50, 350, 300, 100);
-	    button4.setBounds(50, 500, 300, 100);
-	    */
+	    /*
+	     * Inizializzazione credits
+	     */
+	    JLabel credits = new JLabel("STAR WARS © TM 2016 LemonGranted Ltd. All rights reserved.");
+	    credits.setForeground(Color.GRAY);
+	    credits.setBounds(20, 660, 600, 136);
+	    add(credits);
 	  }
 	  
 	  /**
