@@ -2,6 +2,7 @@ package control;
 
 import graphic.Frame;
 import graphic.Grid;
+import graphic.menu.ErrorPopUp;
 import interfaces.Controller;
 import interfaces.PlayerI;
 import interfaces.ServerI;
@@ -124,6 +125,8 @@ public class MyShipController extends MouseAdapter implements Controller
 		  catch(Exception err)
 		  {
 		    System.err.println("errore: " +err.getMessage());
+		    ErrorPopUp er=new ErrorPopUp("errore: disconnessione dal server\n"+err);
+		    frame.setMenu(new MenuController(frame));
 		  }
 		}
 	}
@@ -144,6 +147,8 @@ public class MyShipController extends MouseAdapter implements Controller
 	  catch(Exception e)
 	  {
 	    System.err.println(e.getMessage());
+	    ErrorPopUp er=new ErrorPopUp("errore: impossibile connettersi al server");
+	    frame.setMenu(new MenuController(frame));
 	  }
 	}
 	/**
@@ -225,6 +230,7 @@ public class MyShipController extends MouseAdapter implements Controller
 		catch(Exception e)
 		{
 			System.err.println(e.getMessage());
+			
 		}
 	}
 }

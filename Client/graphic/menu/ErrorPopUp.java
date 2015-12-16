@@ -19,7 +19,11 @@ public class ErrorPopUp extends JFrame {
 		
 		super("Errore!");
 		JLabel error=new JLabel(s);
-		error.setSize(DIM);		
+		add(error);
+		error.setSize(DIM);
+		pack();
+		setVisible(true);
+		
 	}
 
 }
