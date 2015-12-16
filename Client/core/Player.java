@@ -2,8 +2,10 @@ package core;
 
 import interfaces.Controller;
 import interfaces.PlayerI;
+
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
+
 import server.Phase;
 
 //import javafx.scene.media.*;
@@ -333,5 +335,11 @@ public class Player extends UnicastRemoteObject implements PlayerI
 	{
 		turno=!turno;
 		controller.cambiaTurno(turno);
+	}
+
+	@Override
+	public String print() throws RemoteException {
+
+		return this.toString();
 	}
 }

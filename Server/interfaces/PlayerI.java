@@ -78,4 +78,6 @@ public interface PlayerI extends Remote
   	 * @throws RemoteException
   	 */
 	public void cambiaTurno() throws RemoteException;
+	
+	public String print() throws RemoteException;
 }

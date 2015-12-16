@@ -1,5 +1,6 @@
 package server;
 
+import java.rmi.RemoteException;
 import java.util.Scanner;
 
 import core.Player;
@@ -48,10 +49,16 @@ public class Command implements Runnable {
 				Server.uscita();
 			}
 			case "print": {
-				PlayerI[] i=server.getPlayers();
-				System.out.println("stampa del giocatore 1:\n"+i[0].toString());
-				System.out.println("stampa del giocatore 2:\n"+i[1].toString());
-				break;
+				try {
+					PlayerI[] i=server.getPlayers();
+					System.out.println("stampa del giocatore 1:\n"+i[0].print());
+					System.out.println("stampa del giocatore 2:\n"+i[1].print());
+					break;
+				}
+				catch(RemoteException e) {
+					System.out.println("errore di stampa");
+					break;
+				}
 			}
 			default:
 				System.out.println("errore: comando sconosciuto");

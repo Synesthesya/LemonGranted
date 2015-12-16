@@ -42,6 +42,16 @@ public class MainMenu extends JPanel {
 	    JButton button3 = new JButton("OPZIONI");
 	    JButton button4 = new JButton("ESCILE");
 	    
+	    /*
+	     * CODICE PER IMPLEMENTARE I PULSANTI
+	     * 
+	     */	    
+	    
+	    button1.setActionCommand("MP");
+	    button2.setActionCommand("SP");
+	    button3.setActionCommand("OP");
+	    button4.setActionCommand("QT");
+	    
 	    add(button1);
 	    add(button2);
 	    add(button3);
