@@ -89,17 +89,33 @@ public class Frame extends JFrame {
 		return (Game)panel;
 	}
 	
+	public JPanel getPanel() {
+		return panel;
+	}
+	
 	/**
-	 * metodo che colloca il Menù principale nel frame
+	 * metodo che colloca il Menù principale nel frame; si assume sia il primo metodo eseguito
 	 * 
 	 * @param mc il MenuController
 	 */
-	public void setMenu(MenuController mc) {
+	public void initialize(MenuController mc) {
 		
 		panel=new MainMenu(mc);
 		add(panel);	
 		setVisible(true);
 		this.setSize(1200,800);
+	}
+	
+	/**
+	 * metodo che colloca il menù principale nel frame; utilizzato dalla seconda volta in avanti
+	 * 
+	 * @param mc il MenuController del menù principale
+	 */
+	public void setMenu(MenuController mc) {
+		
+		remove(panel);
+		panel=new MainMenu(mc);
+		add(panel);
 	}
 	
 	/**
@@ -109,7 +125,8 @@ public class Frame extends JFrame {
 	 */
 	public void setGame(int id, Controller msc) {
 		
-		panel=new Game(id,msc);
+		this.remove(panel);
+		panel=new Game(id,msc);		
 		add(panel);
 	}
 

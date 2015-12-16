@@ -20,7 +20,7 @@ import control.MenuController;
 public class MainMenu extends JPanel {
 	
 	
-		/**
+	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
@@ -54,6 +54,7 @@ public class MainMenu extends JPanel {
 	    
 	    for(int i=0; i<BUTTON_NUMBER; i++) {
 	    	buttons[i]=new JButton(NAME[i]);
+	    	buttons[i].addActionListener(mc);
 	    	buttons[i].setActionCommand(control.MenuController.MAINMENU[i]);
 	    	add(buttons[i]);
 	    	buttons[i].setBounds(50,BOUND[i],300,100);

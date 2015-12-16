@@ -4,12 +4,9 @@ import graphic.Frame;
 import graphic.menu.ErrorPopUp;
 import interfaces.Controller;
 import interfaces.ServerI;
-
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.rmi.Naming;
-
-import server.Server;
 import core.Player;
 
 /**
@@ -36,7 +33,6 @@ public class MenuController implements ActionListener {
 	 */
 	public static final String[] MAINMENU = {"MP","SP","OP","QT"};
 	
-	
 	private Frame f;
 	
 	/**
@@ -49,7 +45,6 @@ public class MenuController implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
 		
-		System.out.println(arg0.getActionCommand());
 		switch(arg0.getActionCommand()) {
 		case "MP": {
 			
@@ -64,7 +59,6 @@ public class MenuController implements ActionListener {
 				//creazione stub
 				Naming.bind("rmi://127.0.0.1:1677/player" + ID.toString(), p);
 				Controller c = new MyShipController(p, s);
-				//Frame f = new Frame(ID, c, null);
 				f.setGame(ID, c);
 				c.linkFrame(f);
 				p.setController(c);
@@ -74,6 +68,7 @@ public class MenuController implements ActionListener {
 			}
 			catch(Exception e) {
 				ErrorPopUp er = new ErrorPopUp("impossibile collegarsi al server!\n"+e);
+				f.setMenu(this);
 				return;
 			}
 		}

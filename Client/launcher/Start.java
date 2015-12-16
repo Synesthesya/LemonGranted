@@ -27,7 +27,7 @@ public class Start {
 	public static void main(String[] args) {
 		
 		Frame f=new Frame();
-		f.setMenu(new MenuController(f));
+		f.initialize(new MenuController(f));
 		
 		
 	}
