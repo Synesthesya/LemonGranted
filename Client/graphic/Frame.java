@@ -1,9 +1,16 @@
 package graphic;
 
+import java.awt.Dimension;
+
+import graphic.menu.MainMenu;
 import interfaces.Controller;
+
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+
+import control.MenuController;
+import control.MyShipController;
 
 /**
  * 
@@ -23,7 +30,9 @@ public class Frame extends JFrame {
 	/**
 	 * icona (quella visualizzata in alto a sinistra)
 	 */
-	public static final ImageIcon ICON = new ImageIcon("mockup");
+	public static final ImageIcon ICON = new ImageIcon(".//bin//Icon.png");
+	
+	public static final Dimension SIZE = new Dimension(1200,800);
 	
 	/**
 	 * il panel attualmente visualizzato nella finestra
@@ -31,7 +40,12 @@ public class Frame extends JFrame {
 	private JPanel panel;
 	
 	/**
-	 * costruttore che implica che si parta direttamente con la battaglia, escludendo il menù
+	 * <p>
+	 * costruttore che implica che si parta direttamente con la battaglia, escludendo il menù.
+	 * </p>
+	 * <p>
+	 * è stato mantenuto per esigenze di debug
+	 * </p>
 	 * @param ID l'ID del giocatore
 	 * @param c MyShipController
 	 * @param i controllore dell'informazioni
@@ -47,21 +61,58 @@ public class Frame extends JFrame {
 		 * codice di mockup
 		 */
 		
-		panel=new Game(ID, c, null);
+		panel=new Game(ID, c);
 		add(panel); 
-	//	this.pack();
 		this.setSize(1200, 800);
 		
 	}
 	
+	/**
+	 * costruttore standard
+	 */
+	public Frame() {
+		
+		super("StarBattle!");
+		setDefaultCloseOperation(EXIT_ON_CLOSE);
+		this.setIconImage(ICON.getImage());
+
+	}
+	
+	/*
 	//MOCKUP
 	/**
-	 * metodo che ritorna il panel (sotto forma di Game)
-	 * @return
+	 * metodo che ritorna il panel sotto forma di Game
+	 * @return il caste del panel come Game
 	 */
-	public Game getPanel() {
+	@Deprecated
+	public Game getGamePanel() {
 		return (Game)panel;
 	}
+	
+	/**
+	 * metodo che colloca il Menù principale nel frame
+	 * 
+	 * @param mc il MenuController
+	 */
+	public void setMenu(MenuController mc) {
+		
+		panel=new MainMenu(mc);
+		add(panel);	
+		setVisible(true);
+		this.setSize(1200,800);
+	}
+	
+	/**
+	 * metodo per collocare il game all'interno del frame
+	 * 
+	 * @param msc il Controller del Game
+	 */
+	public void setGame(int id, Controller msc) {
+		
+		panel=new Game(id,msc);
+		add(panel);
+	}
+
 
 }
 

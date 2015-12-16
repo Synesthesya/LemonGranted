@@ -51,8 +51,11 @@ public class Command implements Runnable {
 			case "print": {
 				try {
 					PlayerI[] i=server.getPlayers();
-					System.out.println("stampa del giocatore 1:\n"+i[0].print());
-					System.out.println("stampa del giocatore 2:\n"+i[1].print());
+					if(i[0]==null) System.out.println("il giocatore 1 non si è ancora iscritto!");
+					else System.out.println("stampa del giocatore 1:\n"+i[0].print());
+					
+					if(i[1]==null) System.out.println("il giocatore 2 non si è ancora iscritto!");
+					else System.out.println("stampa del giocatore 2:\n"+i[1].print());
 					break;
 				}
 				catch(RemoteException e) {

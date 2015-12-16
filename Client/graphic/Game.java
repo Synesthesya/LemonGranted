@@ -40,14 +40,13 @@ public class Game extends JPanel {
 	 * 
 	 * @param ID id del giocatore 
 	 * @param c MyShipController
-	 * @param i Controller delle informazioni
 	 */
-	public Game(int ID, Controller c, Controller i) {
+	public Game(int ID, Controller c) {
 		
 		super();
 		grids=new GridCouple(ID,c);
 		grids.setBackground(Color.black); // colore di prova
-		info=new Information(ID,i);
+		info=new Information(ID);
 		info.setBackground(Color.black); // colore di prova
 		
 		

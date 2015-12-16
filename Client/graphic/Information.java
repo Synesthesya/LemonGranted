@@ -1,7 +1,5 @@
 package graphic;
 
-import interfaces.Controller;
-
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.FlowLayout;
@@ -71,17 +69,16 @@ public class Information extends JPanel {
 	/**
 	 * il controllore che comunica tra i due giocatori
 	 */
-	private final Controller control;
+	//private final Controller control;
 	
 	/**
 	 * costruttore standard 
 	 * @param ID l'id del giocatore
-	 * @param c il controllore
 	 */
-	public Information(int ID,Controller c) {
+	public Information(int ID) {
 		
 		super();
-		control=c;
+		//control=c;
 		player=new JLabel();
 		ImageIcon icon = new ImageIcon(".//bin//lightsaber.png");
 		player.setIcon(icon);

@@ -80,8 +80,8 @@ public class MyShipController extends MouseAdapter implements Controller
 	public void linkFrame(Frame f)
 	{
 		frame=f;
-		left=frame.getPanel().getGrids().getLeft();
-		right=frame.getPanel().getGrids().getRight();
+		left=frame.getGamePanel().getGrids().getLeft();
+		right=frame.getGamePanel().getGrids().getRight();
 	}
 
 	/**
@@ -201,7 +201,7 @@ public class MyShipController extends MouseAdapter implements Controller
 	@Override
 	public void setMessage(String s)
 	{
-		frame.getPanel().getInfo().setStatus(fase + testo2 + s);
+		frame.getGamePanel().getInfo().setStatus(fase + testo2 + s);
 	}
 
 	@Override
