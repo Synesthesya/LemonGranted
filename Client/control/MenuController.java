@@ -7,6 +7,7 @@ import interfaces.Controller;
 import interfaces.ServerI;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.rmi.Naming;
 import javax.swing.JButton;
 import core.Player;
@@ -67,13 +68,18 @@ public class MenuController implements ActionListener {
 				p.setController(c);
 				//comunica lo stub al server
 				s.caricaPlayer();
-				break;
 			}
 			catch(Exception e) {
 				ErrorPopUp er = new ErrorPopUp("impossibile collegarsi al server!\n"+e);
 				f.setMenu(this);
 				return;
 			}
+			try {
+				f.playSound(5);
+			} catch (IOException e) {
+				soundError(5);
+			}
+			
 		}
 		case "SP": {
 			//WARNING: manca il Singleplayer
@@ -81,6 +87,12 @@ public class MenuController implements ActionListener {
 		}
 		case "OP": {
 			f.setOption(this);
+			try {
+				f.playSound(7);
+			}
+			catch(IOException e) {
+				soundError(7);
+			}
 			break;
 		}
 		case "QT": {
@@ -88,6 +100,12 @@ public class MenuController implements ActionListener {
 		}
 		case "MM": {
 			f.setMenu(this);
+			try {
+				f.playSound(7);
+			}
+			catch(IOException e) {
+				soundError(7);
+			}
 			break;
 		}
 		case "NOME": {
@@ -102,6 +120,11 @@ public class MenuController implements ActionListener {
 			OptionPanel op=(OptionPanel)but.getParent();
 			op.setFaction("EMPIRE");
 			f.setID(1);
+			try {
+				f.playSound(6);
+			} catch(IOException e) {
+				soundError(6);
+			}
 			break;
 		}
 		case "REBELS": {
@@ -109,12 +132,27 @@ public class MenuController implements ActionListener {
 			OptionPanel op=(OptionPanel)but.getParent();
 			op.setFaction("REBELS");
 			f.setID(2);
+			try {
+				f.playSound(6);
+			} catch(IOException e) {
+				soundError(6);
+			}
 			break;
 		}
 		case "END": {
 			f.setMenu(this);
+			try {
+				f.playSound(7);
+			}
+			catch(IOException e) {
+				soundError(7);
+			}
 			break;
 		}
 		}		
+	}
+	
+	private void soundError(int i) {
+		ErrorPopUp er=new ErrorPopUp("Errore di esecuzione del file sonoro "+f.getID()+" "+i);
 	}
 }

@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import javax.swing.JFrame;
 import control.MenuController;
+import sound.Effect;
 
 /**
  * 
@@ -30,5 +31,9 @@ public class GraphicStart {
 		 frame.setResizable(false);
 		 frame.setVisible(true);
 		 frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		 
+		 Effect e=new Effect();
+		 
+		 e.load(1, 3);
 	 }
 }

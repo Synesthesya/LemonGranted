@@ -7,6 +7,7 @@ import graphic.menu.EndGame;
 import graphic.menu.MainMenu;
 import graphic.menu.OptionPanel;
 import interfaces.Controller;
+import sound.Effect;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
@@ -57,6 +58,8 @@ public class Frame extends JFrame {
 	 */
 	private int ID=1;
 	
+	private Effect sound;
+	
 	/**
 	 * <p>
 	 * costruttore che implica che si parta direttamente con la battaglia, escludendo il menù.
@@ -93,7 +96,7 @@ public class Frame extends JFrame {
 		super("StarBattle!");
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		this.setIconImage(ICON.getImage());
-
+		sound=new Effect();
 	}
 	
 	/*
@@ -213,6 +216,18 @@ public class Frame extends JFrame {
 	 */
 	public int getID() {
 		return ID;
+	}
+	
+	/**
+	 * 
+	 * metodo per far partire un effetto sonoro
+	 * 
+	 * @param number
+	 * @throws IOException
+	 */
+	public void playSound(int number) throws IOException {
+		
+		sound.load(ID, number);		
 	}
 	
 

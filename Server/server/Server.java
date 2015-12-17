@@ -119,17 +119,20 @@ public class Server extends UnicastRemoteObject implements ServerI
   	 * 
   	 */
   	@Override
-	public synchronized void shot(int ID, Coordinate c) throws RemoteException
+	public synchronized boolean shot(int ID, Coordinate c) throws RemoteException
 	{
+  		boolean r=false;
   		if(ID==1) //giocatore 1 spara
   		{
   			if(player2.getStatus(c)) //true indica colpito
   			{
+  				r=true;
   				player1.nemicoColpito(c);
   				player2.colpoSubito(c);
   			}
   			else //mancato
   			{
+  				r=false;
   				player1.nemicoMancato(c);
   				player2.colpoSchivato(c);
   			}
@@ -138,11 +141,13 @@ public class Server extends UnicastRemoteObject implements ServerI
   		{
   			if(player1.getStatus(c)) //true indica colpito
   			{
+  				r=true;
   				player2.nemicoColpito(c);
   				player1.colpoSubito(c);
   			}
   			else //mancato
   			{
+  				r=false;
   				player2.nemicoMancato(c);
   				player1.colpoSchivato(c);
   			}
@@ -161,6 +166,7 @@ public class Server extends UnicastRemoteObject implements ServerI
   			player2.sconfitta();
   			deregistra();
   		}
+  		return r;
 	}
   
   

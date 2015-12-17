@@ -47,9 +47,13 @@ public interface ServerI extends Remote
 	   * Chiamato dai client che richiedere l'elaborazione di uno sparo
 	   * 
 	   * WARNING: ha un nome diverso da quello che si aspetta
+	   * 
+	   * Il valore di return viene utilizzato dalla classe che elabora il sonoro
+	   * 
+	   * @return <b>true</b> se è stata colpita una nave, <b>false</b> altrimenti.
 	   * @throws RemoteException 
 	   */
-	public void shot(int ID, Coordinate c) throws RemoteException;
+	public boolean shot(int ID, Coordinate c) throws RemoteException;
 	
 	/**
 	 * deregistra i giocatori

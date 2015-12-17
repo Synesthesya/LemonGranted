@@ -72,7 +72,7 @@ public class MainMenu extends JPanel {
 		 * Inizializzazione ed inserimento traccia musicale
 		 */
 		  try {
-			String gongFile = ".//bin//SW.wav";
+			String gongFile = ".//bin//Main.wav";
 			InputStream in = new FileInputStream(gongFile);
 			AudioStream audio = new AudioStream(in);
 			AudioPlayer.player.start(audio);

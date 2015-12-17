@@ -7,7 +7,10 @@ import interfaces.Controller;
 import interfaces.ServerI;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.IOException;
 import java.rmi.Naming;
+import java.rmi.RemoteException;
+
 import server.Phase;
 import core.Coordinate;
 import core.Player;
@@ -107,22 +110,34 @@ public class MyShipController extends MouseAdapter implements Controller
 			/*
 			 * qui decide se usare IMpero o Ribelli
 			 */
-			if(frame.getID()==1)
+			if(frame.getID()==1) {
 			  g.getSlot(c).setImage("TF");
+			}
 			else
 			  g.getSlot(c).setImage("XW_Square");
+			
+			try {
+				frame.playSound(3);
+			} catch (IOException e1) {
+				ErrorPopUp er=new ErrorPopUp("errore: impossibile eseguire il file audio "+frame.getID()+" 3");
+			}
 		}
 		else if(player.getPhase()==Phase.COMBAT && player.getTurno() && g.getName().equals("right") && !player.getEnemyShip().getStatus(c))
 		{
 		  try
 		  {
-		    server.shot(player.getID(), c);
+		    boolean hit=server.shot(player.getID(), c);
+		    if(hit) frame.playSound(0);
+		    else frame.playSound(1);
 		  }
-		  catch(Exception err)
+		  catch(RemoteException err)
 		  {
 		    System.err.println("errore: " +err.getMessage());
 		    ErrorPopUp er=new ErrorPopUp("errore: disconnessione dal server\n"+err);
 		    frame.setMenu(new MenuController(frame));
+		  }
+		  catch(IOException e1) {
+			  ErrorPopUp er=new ErrorPopUp("errore: impossibile eseguire il file audio "+frame.getID()+" 1");
 		  }
 		}
 	}
@@ -177,7 +192,12 @@ public class MyShipController extends MouseAdapter implements Controller
 		server=null;
 		deregistra();
 		frame.setEnd(new MenuController(frame), frame.getID()-1);
-				
+		try {
+			frame.playSound(2);
+		}
+		catch(IOException e) {
+			System.out.println("errore di esecuzione del file sonoro");
+		}
 	}
 	
 	/**
@@ -193,6 +213,12 @@ public class MyShipController extends MouseAdapter implements Controller
 		server=null;
 		deregistra();
 		frame.setEnd(new MenuController(frame), 1+frame.getID());
+		try {
+			frame.playSound(4);
+		}
+		catch(IOException e) {
+			System.out.println("errore di esecuzione del file sonoro");
+		}
 	}
 
 	@Override
