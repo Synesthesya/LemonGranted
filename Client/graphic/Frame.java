@@ -113,13 +113,14 @@ public class Frame extends JFrame {
 	 * metodo che colloca il menù principale nel frame; utilizzato dalla seconda volta in avanti
 	 * 
 	 * @param mc il MenuController del menù principale
-	 * @throws IOException 
+	 * 
 	 */
 	public void setMenu(MenuController mc) {
 		
 		remove(panel);
 		panel=new MainMenu(mc);
 		add(panel);
+		revalidate();
 	}
 	
 	/**
@@ -132,6 +133,7 @@ public class Frame extends JFrame {
 		this.remove(panel);
 		panel=new Game(id,msc);		
 		add(panel);
+		revalidate();
 	}
 	
 	public void setOption(MenuController msc) {
@@ -139,6 +141,7 @@ public class Frame extends JFrame {
 		this.remove(panel);
 		panel=new OptionPanel(msc);
 		add(panel);
+		revalidate();
 	}
 
 

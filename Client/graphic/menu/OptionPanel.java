@@ -63,6 +63,7 @@ public class OptionPanel extends JPanel implements ActionListener {
 		 * Richiama il metodo che dipinge l'immagine di sfondo.
 		 */
 		
+		  super();
 	    background = Toolkit.getDefaultToolkit().createImage(PATH+"what.jpg");
 	    loadImage(background);
 	    
@@ -93,19 +94,31 @@ public class OptionPanel extends JPanel implements ActionListener {
 		nuovo = new JTextArea("");
 		add(nuovo);
 		
+		/*
+		 * INIZIO PARTE PULSANTI
+		 */
+		
 		JButton inputButton = new JButton("Conferma");
+		inputButton.setActionCommand("NOME");
+		inputButton.addActionListener(mc);
 		add(inputButton);
 		
 		JButton back = new JButton("<- BACK");
+		back.setActionCommand("MM");
+		back.addActionListener(mc);
 		add(back);
 		
 		JButton empire = new JButton("empire");
+		empire.setActionCommand("EMPIRE");
+		empire.addActionListener(mc);
 		add(empire);
 		ImageIcon logoImpero = new ImageIcon(PATH+"LogoImpero.png");
 		empire.setIcon(logoImpero);
 		empire.setBorderPainted(false);
 		
 		JButton rebels = new JButton("rebels");
+		rebels.setActionCommand("REBELS");
+		rebels.addActionListener(mc);
 		add(rebels);
 		ImageIcon logoRibelli = new ImageIcon(PATH+"LogoRibelli.png");
 		rebels.setIcon(logoRibelli);
@@ -118,6 +131,10 @@ public class OptionPanel extends JPanel implements ActionListener {
 		risultato.enable(false);
 		
 		inputButton.addActionListener(this);
+		
+		/*
+		 * INIZIO PARTE BOUNDS
+		 */
 		
 		this.setLayout(null);
 		back.setBounds(1050, 25, 100, 50);
