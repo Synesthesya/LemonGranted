@@ -25,7 +25,7 @@ public class GraphicStart {
 	 public static void main(String... argv) throws IOException {
 		 JFrame frame = new JFrame("Demo Background Image");
 		 MenuController mc=new MenuController(null);
-		 OptionPanel menu=new OptionPanel(null);
+		 OptionPanel menu=new OptionPanel(null, 0);
 		 frame.add(menu);
 		 frame.setSize(1200, 800);
 		 frame.setResizable(false);

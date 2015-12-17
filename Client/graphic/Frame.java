@@ -163,7 +163,7 @@ public class Frame extends JFrame {
 	public void setOption(MenuController msc) {
 		
 		this.remove(panel);
-		panel=new OptionPanel(msc);
+		panel=new OptionPanel(msc, ID);
 		add(panel);
 		revalidate();
 	}
