@@ -62,7 +62,7 @@ public class MenuController implements ActionListener {
 				//creazione stub
 				Naming.bind("rmi://127.0.0.1:1677/player" + ID.toString(), p);
 				Controller c = new MyShipController(p, s);
-				f.setGame(ID, c);
+				f.setGame(c);
 				c.linkFrame(f);
 				p.setController(c);
 				//comunica lo stub al server
@@ -95,6 +95,20 @@ public class MenuController implements ActionListener {
 			OptionPanel op=(OptionPanel)but.getParent();
 			String s=op.setName();
 			f.setName(s);
+			break;
+		}
+		case "EMPIRE": {
+			JButton but=(JButton)arg0.getSource();
+			OptionPanel op=(OptionPanel)but.getParent();
+			op.setFaction("EMPIRE");
+			f.setID(1);
+			break;
+		}
+		case "REBELS": {
+			JButton but=(JButton)arg0.getSource();
+			OptionPanel op=(OptionPanel)but.getParent();
+			op.setFaction("REBELS");
+			f.setID(2);
 			break;
 		}
 		}		

@@ -2,17 +2,14 @@ package graphic;
 
 import java.awt.Dimension;
 import java.io.IOException;
-
 import graphic.menu.MainMenu;
 import graphic.menu.OptionPanel;
 import interfaces.Controller;
-
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-
 import control.MenuController;
-import control.MyShipController;
+
 
 /**
  * 
@@ -48,6 +45,13 @@ public class Frame extends JFrame {
 	 * il nome del giocatore
 	 */
 	private String nick = "Giocatore 1";
+	
+	/**
+	 * l'ID del giocatore, ovvero la fazione
+	 * 1 impero
+	 * 2 ribelli
+	 */
+	private int ID=1;
 	
 	/**
 	 * <p>
@@ -136,14 +140,19 @@ public class Frame extends JFrame {
 	 * 
 	 * @param msc il Controller del Game
 	 */
-	public void setGame(int id, Controller msc) {
+	public void setGame(Controller msc) {
 		
 		this.remove(panel);
-		panel=new Game(id,nick, msc);		
+		panel=new Game(ID,nick, msc);		
 		add(panel);
 		revalidate();
 	}
 	
+	/**
+	 * metodo per aprire il pannello delle opzioni
+	 * 
+	 * @param msc
+	 */
 	public void setOption(MenuController msc) {
 		
 		this.remove(panel);
@@ -168,6 +177,24 @@ public class Frame extends JFrame {
 	 */
 	public String getName() {
 		return nick;
+	}
+	
+	/**
+	 * metodo per settare la fazione
+	 * 
+	 * @param i <b>1</b> impero, <b>2</b> ribelli
+	 */
+	public void setID(int i) {
+		ID=i;
+	}
+	
+	/**
+	 * metodo per ottenere la fazione 
+	 * 
+	 * @return <b>1</b> impero, <b>2</b> ribelli
+	 */
+	public int getID() {
+		return ID;
 	}
 
 

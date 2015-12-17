@@ -203,5 +203,18 @@ public class OptionPanel extends JPanel {
 	    g.drawImage(background, 0, 0, null);
 	    super.paintComponent(g);
 	  }
+	  
+	  public void setFaction(String s) {
+		  
+		  switch(s) {
+		  case "EMPIRE": {
+			  actual.setText("IMPERO");
+			  return;
+		  }
+		  case "REBELS": {
+			  actual.setText("RIBELLI");
+		  }
+		  }		  
+	  }
 
 	}
