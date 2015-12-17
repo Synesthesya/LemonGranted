@@ -19,6 +19,8 @@ import core.Player;
  */
 public class Start {
 	
+	public static final String PATH = ".//bin//";
+	
 
 	/**
 	 * main
