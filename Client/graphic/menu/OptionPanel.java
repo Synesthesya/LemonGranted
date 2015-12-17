@@ -58,7 +58,7 @@ public class OptionPanel extends JPanel {
 		 * @param mc TODO
 		 */
 	  @SuppressWarnings("deprecation")
-	public OptionPanel(MenuController mc) {
+	public OptionPanel(MenuController mc, int id) {
 		/*
 		 * Richiama il metodo che dipinge l'immagine di sfondo.
 		 */
@@ -77,7 +77,9 @@ public class OptionPanel extends JPanel {
 	    fazione.setFont(new Font("Times New Roman", Font.BOLD, 16));
 	    add(fazione);
 	    
-	    actual = new JTextArea("Impero");
+	    String[] faction={"Errore","IMPERO","RIBELLI"};
+	    
+	    actual = new JTextArea(faction[id]);
 		add(actual);
 		actual.setFont(new Font("Times New Roman", Font.BOLD, 16));
 		actual.setBackground(Color.BLACK);
