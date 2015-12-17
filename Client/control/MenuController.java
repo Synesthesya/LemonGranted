@@ -2,11 +2,13 @@ package control;
 
 import graphic.Frame;
 import graphic.menu.ErrorPopUp;
+import graphic.menu.OptionPanel;
 import interfaces.Controller;
 import interfaces.ServerI;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.rmi.Naming;
+import javax.swing.JButton;
 import core.Player;
 
 /**
@@ -86,6 +88,13 @@ public class MenuController implements ActionListener {
 		}
 		case "MM": {
 			f.setMenu(this);
+			break;
+		}
+		case "NOME": {
+			JButton but=(JButton)arg0.getSource();
+			OptionPanel op=(OptionPanel)but.getParent();
+			String s=op.setName();
+			f.setName(s);
 			break;
 		}
 		}		

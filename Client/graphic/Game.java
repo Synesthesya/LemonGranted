@@ -1,8 +1,10 @@
 package graphic;
 
 import interfaces.Controller;
+
 import java.awt.BorderLayout;
 import java.awt.Color;
+
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -39,14 +41,15 @@ public class Game extends JPanel {
 	 * costruttore standard
 	 * 
 	 * @param ID id del giocatore 
+	 * @param name TODO
 	 * @param c MyShipController
 	 */
-	public Game(int ID, Controller c) {
+	public Game(int ID, String name, Controller c) {
 		
 		super();
 		grids=new GridCouple(ID,c);
 		grids.setBackground(Color.black); // colore di prova
-		info=new Information(ID);
+		info=new Information(ID, name);
 		info.setBackground(Color.black); // colore di prova
 		
 		

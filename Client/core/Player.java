@@ -80,10 +80,7 @@ public class Player extends UnicastRemoteObject implements PlayerI
 	 */
 	private Phase fase = Phase.DEPLOYMENT;
 	
-	/**
-	 * il nome in gioco del giocatore
-	 */
-	private String name = "player";
+
 	
 	/**
 	 * indica il turno
@@ -250,27 +247,11 @@ public class Player extends UnicastRemoteObject implements PlayerI
 	  return fase;
 	}
 	
-	/**
-	 * metodo per ottenere il nick del giocatore
-	 * @return
-	 */
-	public String getName() {
-		return name;
-	}
-	
-	/**
-	 * metodo per settare il nick del giocatore
-	 * @param n
-	 */
-	public void setName(String n) {
-		name=n;
-	}
-	
 	
 	@Override
 	public String toString() {
 		
-		return "Nome: "+name+"\tID: "+ID+"\tnavi ancora in vita: "+alive+"\nnavi possedute:\n"+myShip+"\ncolpi sparati:\n"+enemyShip;		
+		return "ID: "+ID+"\tnavi ancora in vita: "+alive+"\nnavi possedute:\n"+myShip+"\ncolpi sparati:\n"+enemyShip;		
 	}
 
 	

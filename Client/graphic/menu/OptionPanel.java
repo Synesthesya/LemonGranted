@@ -22,7 +22,7 @@ import control.MenuController;
  * @author Alex
  *
  */
-public class OptionPanel extends JPanel implements ActionListener {
+public class OptionPanel extends JPanel {
 	
 	/**
 	 * il percorso delle immagini
@@ -130,7 +130,7 @@ public class OptionPanel extends JPanel implements ActionListener {
 		risultato.setForeground(Color.GRAY);
 		risultato.enable(false);
 		
-		inputButton.addActionListener(this);
+		//inputButton.addActionListener(this);
 		
 		/*
 		 * INIZIO PARTE BOUNDS
@@ -150,6 +150,7 @@ public class OptionPanel extends JPanel implements ActionListener {
 		rebels.setBounds(350, 470, 200, 200);
 	  }
 	  
+	  /*
 		public void actionPerformed(ActionEvent e) {
 			String errore = null;
 			
@@ -158,6 +159,24 @@ public class OptionPanel extends JPanel implements ActionListener {
 			} catch (Exception ecc) {System.out.println(ecc.getMessage());}
 			
 			risultato.setText(errore);
+		}
+		*/
+		
+		
+		/**
+		 * metodo che risponde alla pressione del pulsante conferma
+		 */
+		public String setName() {
+			
+			String s="";
+			try {
+				s=nuovo.getText();
+			}
+			catch(Exception e) {
+				System.out.println("porco dio");
+			}
+			risultato.setText(s);	
+			return s;
 		}
 		
 		/**

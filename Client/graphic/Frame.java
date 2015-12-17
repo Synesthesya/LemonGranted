@@ -34,12 +34,20 @@ public class Frame extends JFrame {
 	 */
 	public static final ImageIcon ICON = new ImageIcon(".//bin//Icon.png");
 	
+	/**
+	 * le dimensioni del frame
+	 */
 	public static final Dimension SIZE = new Dimension(1200,800);
 	
 	/**
 	 * il panel attualmente visualizzato nella finestra
 	 */
 	private JPanel panel;
+	
+	/**
+	 * il nome del giocatore
+	 */
+	private String nick = "Giocatore 1";
 	
 	/**
 	 * <p>
@@ -63,7 +71,7 @@ public class Frame extends JFrame {
 		 * codice di mockup
 		 */
 		
-		panel=new Game(ID, c);
+		panel=new Game(ID, null, c);
 		add(panel); 
 		this.setSize(1200, 800);
 		
@@ -131,7 +139,7 @@ public class Frame extends JFrame {
 	public void setGame(int id, Controller msc) {
 		
 		this.remove(panel);
-		panel=new Game(id,msc);		
+		panel=new Game(id,nick, msc);		
 		add(panel);
 		revalidate();
 	}
@@ -142,6 +150,24 @@ public class Frame extends JFrame {
 		panel=new OptionPanel(msc);
 		add(panel);
 		revalidate();
+	}
+	
+	/**
+	 * metodo per settare il nome del giocatore
+	 * 
+	 * @param s il nick del giocatore
+	 */
+	public void setName(String s) {
+		nick=s;
+	}
+	
+	/**
+	 * metodo per ottenere il nick del giocatore
+	 * 
+	 * @return il nick del giocatore
+	 */
+	public String getName() {
+		return nick;
 	}
 
 

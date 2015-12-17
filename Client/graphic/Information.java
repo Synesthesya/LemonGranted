@@ -74,15 +74,16 @@ public class Information extends JPanel {
 	/**
 	 * costruttore standard 
 	 * @param ID l'id del giocatore
+	 * @param name TODO
 	 */
-	public Information(int ID) {
+	public Information(int ID, String name) {
 		
 		super();
 		//control=c;
 		player=new JLabel();
 		ImageIcon icon = new ImageIcon(".//bin//lightsaber.png");
 		player.setIcon(icon);
-		player.setText("Giocatore "+ID);
+		player.setText(name);
 		player.setHorizontalTextPosition(JLabel.CENTER);
 		player.setVerticalTextPosition(JLabel.CENTER);
 		
