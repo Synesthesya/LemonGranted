@@ -4,7 +4,6 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
@@ -14,8 +13,6 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import sun.audio.*;
-
-
 import control.MenuController;
 
 
@@ -44,8 +41,14 @@ public class MainMenu extends JPanel {
 		 */
 		public static final int BUTTON_NUMBER = 4;
 		
+		/**
+		 * i nomi dei pulsanti
+		 */
 		public static final String[] NAME = {"MULTIPLAYER", "SINGLEPLAYER","OPTIONS","QUIT"};
 		
+		/**
+		 * i valori di altezza dei pulsanti
+		 */
 		public static final int[] BOUND = {50, 200, 350, 500};
 		
 	  	/**
@@ -53,9 +56,17 @@ public class MainMenu extends JPanel {
 	  	 */
 		private Image img;
 		
+		/**
+		 * i pulsanti del menù
+		 */
 		private JButton[] buttons=new JButton[BUTTON_NUMBER];
 	  
-
+		/**
+		 * costruttore standard
+		 * 
+		 * @param mc il controller dei pulsanti
+		 * @throws IOException
+		 */
 	  public MainMenu(MenuController mc) throws IOException {
 		/*
 		 * Inizializzazione ed inserimento traccia musicale
