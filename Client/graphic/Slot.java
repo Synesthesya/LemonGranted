@@ -42,6 +42,8 @@ public class Slot extends JLabel {
 	 */
 	public static final String INESPLORATO = "SpaceSquareBorderAlternate";
 	
+	public static final String[] IMAGE = {"TF_RED","XW_RED"};
+	
 	/**
 	 * immagine del Pannello
 	 */
@@ -95,6 +97,10 @@ public class Slot extends JLabel {
 	public void setImage(String img) {
 		image=img;
 		this.setIcon(new ImageIcon(PATH+img+FORMAT));		
+	}
+	
+	public void setImage(int img) {
+		setImage(IMAGE[img]);
 	}
 	
 	public Coordinate getCoordinate() {

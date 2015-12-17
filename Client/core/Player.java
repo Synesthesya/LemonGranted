@@ -2,13 +2,10 @@ package core;
 
 import interfaces.Controller;
 import interfaces.PlayerI;
-
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
-
 import server.Phase;
 
-//import javafx.scene.media.*;
 
 /**
  * <p>
@@ -86,6 +83,7 @@ public class Player extends UnicastRemoteObject implements PlayerI
 	 * indica il turno
 	 */
 	public boolean turno=false;
+	
 	/**
 	 * costruttore standard
 	 * 
@@ -253,9 +251,17 @@ public class Player extends UnicastRemoteObject implements PlayerI
 		
 		return "ID: "+ID+"\tnavi ancora in vita: "+alive+"\nnavi possedute:\n"+myShip+"\ncolpi sparati:\n"+enemyShip;		
 	}
-
 	
+	/*
+	 * METODO ERRATO
+	 */
+
+	/*
+	 * (non-Javadoc)
+	 * @see interfaces.PlayerI#nemicoColpito(core.Coordinate)
+	 */
 	@Override
+	@Deprecated
 	public void nemicoColpito(Coordinate c) throws RemoteException 
 	{
 		controller.setTesto2("Nemico colpito! ");
@@ -275,6 +281,7 @@ public class Player extends UnicastRemoteObject implements PlayerI
 	}
 
 	@Override
+	@Deprecated
 	public void colpoSubito(Coordinate c) throws RemoteException 
 	{
 		controller.setTesto2("Sei stato colpito! ");
