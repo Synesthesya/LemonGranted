@@ -4,15 +4,10 @@ import graphic.Frame;
 import graphic.Grid;
 import graphic.menu.ErrorPopUp;
 import interfaces.Controller;
-import interfaces.PlayerI;
 import interfaces.ServerI;
-
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.io.IOException;
 import java.rmi.Naming;
-import java.util.Observable;
-
 import server.Phase;
 import core.Coordinate;
 import core.Player;
@@ -112,7 +107,7 @@ public class MyShipController extends MouseAdapter implements Controller
 			/*
 			 * qui decide se usare IMpero o Ribelli
 			 */
-			if(player.getID()==1)
+			if(frame.getID()==1)
 			  g.getSlot(c).setImage("TF");
 			else
 			  g.getSlot(c).setImage("XW_Square");
@@ -168,27 +163,36 @@ public class MyShipController extends MouseAdapter implements Controller
 	    left.getSlot(c).setImage(s);
 	  }
 	}
-
+	
+	/**
+	 * metodo per gestire la sconfitta
+	 */
 	@Override
 	public void sconfitta() 
 	{
 		fase="Fine gioco! ";
-		setMessage("Sconfitta! ");
+		//setMessage("Sconfitta! ");
 		left.removeMouseListener(this);
 		right.removeMouseListener(this);
 		server=null;
 		deregistra();
+		frame.setEnd(new MenuController(frame), frame.getID()-1);
+				
 	}
-
+	
+	/**
+	 * metodo per gestire la vittoria
+	 */
 	@Override
 	public void vittoria() 
 	{
 		fase="Fine gioco! ";
-		setMessage("Vittoria! ");
+		//setMessage("Vittoria! ");
 		left.removeMouseListener(this);
 		right.removeMouseListener(this);
 		server=null;
 		deregistra();
+		frame.setEnd(new MenuController(frame), 1+frame.getID());
 	}
 
 	@Override

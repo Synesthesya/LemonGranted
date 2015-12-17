@@ -34,7 +34,7 @@ public class MenuController implements ActionListener {
 	 * </ul>
 	 * </p>
 	 */
-	public static final String[] MAINMENU = {"MP","SP","OP","QT","MM"};
+	public static final String[] MAINMENU = {"MP","SP","OP","QT","MM","NOME","EMPIRE","REBELS","END"};
 	
 	private Frame f;
 	
@@ -109,6 +109,10 @@ public class MenuController implements ActionListener {
 			OptionPanel op=(OptionPanel)but.getParent();
 			op.setFaction("REBELS");
 			f.setID(2);
+			break;
+		}
+		case "END": {
+			f.setMenu(this);
 			break;
 		}
 		}		

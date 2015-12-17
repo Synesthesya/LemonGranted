@@ -2,12 +2,16 @@ package graphic;
 
 import java.awt.Dimension;
 import java.io.IOException;
+
+import graphic.menu.EndGame;
 import graphic.menu.MainMenu;
 import graphic.menu.OptionPanel;
 import interfaces.Controller;
+
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+
 import control.MenuController;
 
 
@@ -162,6 +166,20 @@ public class Frame extends JFrame {
 	}
 	
 	/**
+	 * metodo per aprire il pannello di fine gioco
+	 * 
+	 * @param msc il controller
+	 * @param win la fazione
+	 */
+	public void setEnd(MenuController msc, int win) {
+		
+		this.remove(panel);
+		panel=new EndGame(msc,win);
+		add(panel);
+		revalidate();
+	}
+	
+	/**
 	 * metodo per settare il nome del giocatore
 	 * 
 	 * @param s il nick del giocatore
@@ -196,6 +214,7 @@ public class Frame extends JFrame {
 	public int getID() {
 		return ID;
 	}
+	
 
 
 }
