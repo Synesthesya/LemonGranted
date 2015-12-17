@@ -127,12 +127,7 @@ public class MyShipController extends MouseAdapter implements Controller
 		  {
 		    System.err.println("errore: " +err.getMessage());
 		    ErrorPopUp er=new ErrorPopUp("errore: disconnessione dal server\n"+err);
-		    try {
-				frame.setMenu(new MenuController(frame));
-			} catch (IOException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
+		    frame.setMenu(new MenuController(frame));
 		  }
 		}
 	}
@@ -154,12 +149,7 @@ public class MyShipController extends MouseAdapter implements Controller
 	  {
 	    System.err.println(e.getMessage());
 	    ErrorPopUp er=new ErrorPopUp("errore: impossibile connettersi al server");
-	    try {
-			frame.setMenu(new MenuController(frame));
-		} catch (IOException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
+	    frame.setMenu(new MenuController(frame));
 	  }
 	}
 	/**

@@ -29,10 +29,11 @@ public class MenuController implements ActionListener {
 	 * SP: singleplayer, il comando che lancia il gioco singolo
 	 * OP: option
 	 * QT: esci
+	 * MM: main menù (Torna al menù principale)
 	 * </ul>
 	 * </p>
 	 */
-	public static final String[] MAINMENU = {"MP","SP","OP","QT"};
+	public static final String[] MAINMENU = {"MP","SP","OP","QT","MM"};
 	
 	private Frame f;
 	
@@ -83,11 +84,14 @@ public class MenuController implements ActionListener {
 			break;
 		}
 		case "OP": {
-			//inserire le opzioni
+			f.setOption(this);
 			break;
 		}
 		case "QT": {
 			System.exit(0);
+		}
+		case "MM": {
+			f.setMenu(this);
 		}
 		}		
 	}

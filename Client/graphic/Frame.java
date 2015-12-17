@@ -4,6 +4,7 @@ import java.awt.Dimension;
 import java.io.IOException;
 
 import graphic.menu.MainMenu;
+import graphic.menu.OptionPanel;
 import interfaces.Controller;
 
 import javax.swing.ImageIcon;
@@ -100,7 +101,7 @@ public class Frame extends JFrame {
 	 * @param mc il MenuController
 	 * @throws IOException 
 	 */
-	public void initialize(MenuController mc) throws IOException {
+	public void initialize(MenuController mc) {
 		
 		panel=new MainMenu(mc);
 		add(panel);	
@@ -114,7 +115,7 @@ public class Frame extends JFrame {
 	 * @param mc il MenuController del menù principale
 	 * @throws IOException 
 	 */
-	public void setMenu(MenuController mc) throws IOException {
+	public void setMenu(MenuController mc) {
 		
 		remove(panel);
 		panel=new MainMenu(mc);
@@ -132,45 +133,13 @@ public class Frame extends JFrame {
 		panel=new Game(id,msc);		
 		add(panel);
 	}
+	
+	public void setOption(MenuController msc) {
+		
+		this.remove(panel);
+		panel=new OptionPanel(msc);
+		add(panel);
+	}
 
 
 }
-
-/* VECCHIO CODICE
- * package graphic;
-
-import javax.swing.ImageIcon;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import control.Controller;
-
-public class Frame extends JFrame {
-	
-	public static final ImageIcon ICON = new ImageIcon("mockup");
-	private JPanel panel;
-	
-	public Frame(Controller l, Controller r, Controller i) {
-		
-		super("Starship!");
-		setDefaultCloseOperation(EXIT_ON_CLOSE);
-		setVisible(true);
-		
-	
-		 * codice di mockup
-		
-		
-		panel=new Game(l,r,i);
-		add(panel);
-		
-		this.pack();
-		
-	}
-	
-	//MOCKUP
-	public Game getPanel() {
-		return (Game)panel;
-	}
-
-} */
-
-

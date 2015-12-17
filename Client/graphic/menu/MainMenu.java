@@ -67,14 +67,19 @@ public class MainMenu extends JPanel {
 		 * @param mc il controller dei pulsanti
 		 * @throws IOException
 		 */
-	  public MainMenu(MenuController mc) throws IOException {
+	  public MainMenu(MenuController mc) {
 		/*
 		 * Inizializzazione ed inserimento traccia musicale
 		 */
-		String gongFile = ".//bin//SW.wav";
-		InputStream in = new FileInputStream(gongFile);
-		AudioStream audio = new AudioStream(in);
-		AudioPlayer.player.start(audio);
+		  try {
+			String gongFile = ".//bin//SW.wav";
+			InputStream in = new FileInputStream(gongFile);
+			AudioStream audio = new AudioStream(in);
+			AudioPlayer.player.start(audio);
+		  }
+		  catch(Exception e) {
+			  ErrorPopUp er=new ErrorPopUp("errore musicale!");
+		  }
 		  
 	    setImage(EMPIRE_BACKGROUND);
 	    setLayout(null);
