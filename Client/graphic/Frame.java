@@ -235,18 +235,28 @@ public class Frame extends JFrame {
 	
 	/**
 	 * 
-	 * metodo per far partire un effetto sonoro
+	 * metodo per far partire un effetto sonoro della propria fazione
 	 * 
-	 * @param number
+	 * @param number il numero della traccia da far partire
 	 */
 	public void playSound(int number) {
 		
+		playSound(ID,number);
+	}
+	
+	/**
+	 * metodo per far partire un qualunque effetto sonoro
+	 * @param id la fazione, 1 impero, 2 ribelli, 0 neutrale
+	 * @param number la traccia da far partire
+	 */
+	public void playSound(int id, int number) {
+		
 		try {
-			sound.load(ID, number);
+			sound.load(id, number);
 		}
 		catch(IOException e) {
 			@SuppressWarnings("unused")
-			ErrorPopUp er=new ErrorPopUp("errore: impossibile eseguire l'effetto audio "+ID+" "+number);
+			ErrorPopUp er=new ErrorPopUp("errore: impossibile eseguire l'effetto audio "+id+" "+number);
 		}
 	}
 	

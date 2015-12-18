@@ -10,7 +10,6 @@ import java.awt.event.MouseEvent;
 import java.io.IOException;
 import java.rmi.Naming;
 import java.rmi.RemoteException;
-
 import server.Phase;
 import core.Coordinate;
 import core.Player;

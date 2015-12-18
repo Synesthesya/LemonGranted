@@ -18,6 +18,8 @@ public class Effect {
 	 */
 	public static final String[] EFFECTS = {"Hit","Water","No","Deploy","Win","NewGame","Join","Transition"};
 	
+	public static final String[] OTHERS = {"Transition","Error"};
+	
 	/**
 	 * formato audio
 	 */
@@ -61,6 +63,10 @@ public class Effect {
 		}
 		case 1: {
 			audio=new AudioStream(new FileInputStream(Start.PATH+"E"+EFFECTS[s]+FORMAT));
+			break;
+		}case 0: {
+			System.out.println("eseguo il load di "+Start.PATH+OTHERS[s]+FORMAT);
+			audio=new AudioStream(new FileInputStream(Start.PATH+OTHERS[s]+FORMAT));
 			break;
 		}
 		default: return; //CONTROLLO COERENZA STRINGA

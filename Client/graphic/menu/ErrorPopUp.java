@@ -1,11 +1,13 @@
 package graphic.menu;
 
 import java.awt.Dimension;
+import java.io.IOException;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.WindowConstants;
+import sound.Effect;
 
 /**
  * 
@@ -38,7 +40,8 @@ public class ErrorPopUp extends JFrame {
 		add(error);
 		error.setSize(DIM);
 		pack();
-		setVisible(true);		
+		setVisible(true);
+		errorSound();
 	}
 	
 	/**
@@ -57,6 +60,16 @@ public class ErrorPopUp extends JFrame {
 		ImageIcon tornaMenu = new ImageIcon("/home/giorgio/Immagini/Img2/MainMenuButton3.jpg");
 		errore.setIcon(tornaMenu);
 		this.add(errore);
+		errorSound();
 	}
-
+	
+	private static void errorSound() {
+		
+		Effect e=new Effect();
+		try {
+			e.load(0, 1);
+		} catch (IOException e1) {
+			System.out.println("errore: impossibile eseguire il file audio di errore");
+		}
+	}
 }

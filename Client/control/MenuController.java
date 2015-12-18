@@ -82,7 +82,7 @@ public class MenuController implements ActionListener {
 		}
 		case "OP": {
 			f.setOption(this);
-			f.playSound(7);
+			f.playSound(0,0);
 			break;
 		}
 		case "QT": {
@@ -90,7 +90,7 @@ public class MenuController implements ActionListener {
 		}
 		case "MM": {
 			f.setMenu(this);
-			f.playSound(7);
+			f.playSound(0,0);
 			break;
 		}
 		case "NOME": {
@@ -118,13 +118,9 @@ public class MenuController implements ActionListener {
 		}
 		case "END": {
 			f.setMenu(this);
-			f.playSound(7);
+			f.playSound(0,0);
 			break;
 		}
 		}		
-	}
-	
-	private void soundError(int i) {
-		ErrorPopUp er=new ErrorPopUp("Errore di esecuzione del file sonoro "+f.getID()+" "+i);
 	}
 }
