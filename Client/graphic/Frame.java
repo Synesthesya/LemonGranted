@@ -4,10 +4,12 @@ import java.awt.Dimension;
 import java.io.IOException;
 
 import graphic.menu.EndGame;
+import graphic.menu.ErrorPopUp;
 import graphic.menu.MainMenu;
 import graphic.menu.OptionPanel;
 import interfaces.Controller;
 import sound.Effect;
+import sound.MusicPlayer;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
@@ -58,7 +60,15 @@ public class Frame extends JFrame {
 	 */
 	private int ID=1;
 	
-	private Effect sound;
+	/**
+	 * oggetto che si preoccupa dell'esecuzione degli effetti audio
+	 */
+	private final Effect sound;
+	
+	/**
+	 * classe che si preoccupa dell'esecuzione della musica
+	 */
+	private final MusicPlayer music;
 	
 	/**
 	 * <p>
@@ -85,7 +95,8 @@ public class Frame extends JFrame {
 		panel=new Game(ID, null, c);
 		add(panel); 
 		this.setSize(1200, 800);
-		
+		sound=new Effect();
+		music=new MusicPlayer();
 	}
 	
 	/**
@@ -97,6 +108,7 @@ public class Frame extends JFrame {
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		this.setIconImage(ICON.getImage());
 		sound=new Effect();
+		music=new MusicPlayer();
 	}
 	
 	/*
@@ -140,6 +152,7 @@ public class Frame extends JFrame {
 		panel=new MainMenu(mc);
 		add(panel);
 		revalidate();
+		playMusic(0);
 	}
 	
 	/**
@@ -153,6 +166,7 @@ public class Frame extends JFrame {
 		panel=new Game(ID,nick, msc);		
 		add(panel);
 		revalidate();
+		playMusic(ID);
 	}
 	
 	/**
@@ -166,6 +180,7 @@ public class Frame extends JFrame {
 		panel=new OptionPanel(msc, ID);
 		add(panel);
 		revalidate();
+		playMusic(3);
 	}
 	
 	/**
@@ -223,11 +238,26 @@ public class Frame extends JFrame {
 	 * metodo per far partire un effetto sonoro
 	 * 
 	 * @param number
-	 * @throws IOException
 	 */
-	public void playSound(int number) throws IOException {
+	public void playSound(int number) {
 		
-		sound.load(ID, number);		
+		try {
+			sound.load(ID, number);
+		}
+		catch(IOException e) {
+			@SuppressWarnings("unused")
+			ErrorPopUp er=new ErrorPopUp("errore: impossibile eseguire l'effetto audio "+ID+" "+number);
+		}
+	}
+	
+	public void playMusic(int number) {
+		
+		try {
+			music.load(number);
+		} catch (IOException e) {
+			@SuppressWarnings("unused")
+			ErrorPopUp er=new ErrorPopUp("errore: impossibile eseguire il file musicale "+number);
+		}
 	}
 	
 

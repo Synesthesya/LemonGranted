@@ -116,11 +116,7 @@ public class MyShipController extends MouseAdapter implements Controller
 			else
 			  g.getSlot(c).setImage("XW_Square");
 			
-			try {
-				frame.playSound(3);
-			} catch (IOException e1) {
-				ErrorPopUp er=new ErrorPopUp("errore: impossibile eseguire il file audio "+frame.getID()+" 3");
-			}
+			frame.playSound(3);
 		}
 		else if(player.getPhase()==Phase.COMBAT && player.getTurno() && g.getName().equals("right") && !player.getEnemyShip().getStatus(c))
 		{
@@ -192,12 +188,7 @@ public class MyShipController extends MouseAdapter implements Controller
 		server=null;
 		deregistra();
 		frame.setEnd(new MenuController(frame), frame.getID()-1);
-		try {
-			frame.playSound(2);
-		}
-		catch(IOException e) {
-			System.out.println("errore di esecuzione del file sonoro");
-		}
+		frame.playSound(2);
 	}
 	
 	/**
@@ -213,12 +204,7 @@ public class MyShipController extends MouseAdapter implements Controller
 		server=null;
 		deregistra();
 		frame.setEnd(new MenuController(frame), 1+frame.getID());
-		try {
-			frame.playSound(4);
-		}
-		catch(IOException e) {
-			System.out.println("errore di esecuzione del file sonoro");
-		}
+		frame.playSound(4);
 	}
 
 	@Override

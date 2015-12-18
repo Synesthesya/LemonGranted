@@ -71,6 +71,7 @@ public class MainMenu extends JPanel {
 		/*
 		 * Inizializzazione ed inserimento traccia musicale
 		 */
+		  /*
 		  try {
 			String gongFile = ".//bin//Main.wav";
 			InputStream in = new FileInputStream(gongFile);
@@ -80,6 +81,7 @@ public class MainMenu extends JPanel {
 		  catch(Exception e) {
 			  ErrorPopUp er=new ErrorPopUp("errore musicale!");
 		  }
+		  */
 		  
 	    setImage(EMPIRE_BACKGROUND);
 	    setLayout(null);

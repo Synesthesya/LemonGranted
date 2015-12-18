@@ -1,8 +1,12 @@
 package sound;
 
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+
+import graphic.menu.ErrorPopUp;
+import launcher.Start;
 import sun.audio.*;
 
 /**
@@ -16,7 +20,7 @@ public class MusicPlayer extends Effect implements Runnable {
 	/**
 	 * elenco dei brani disponibili
 	 */
-	public static final String[] MUSIC = {"Main"};
+	public static final String[] MUSIC = {"Main","EFight","RFight","Option"};
 		
 	/**
 	 * costruttore standard, inizializza l'audio al file musicale zero (l'introduzione)
@@ -24,10 +28,19 @@ public class MusicPlayer extends Effect implements Runnable {
 	 * @throws IOException
 	 */
 	@SuppressWarnings("restriction")
-	public MusicPlayer() throws IOException {
+	public MusicPlayer() {
 		
-		InputStream in=new FileInputStream(MUSIC[0]);
-		audio=new AudioStream(in);		
+		InputStream in;
+		try {
+			in = new FileInputStream(Start.PATH+MUSIC[0]+FORMAT);
+			audio=new AudioStream(in);
+		} catch (FileNotFoundException e) {
+			ErrorPopUp er=new ErrorPopUp("errore: impossibile inizializzare la musica");
+		}
+		catch(IOException e1) {
+			ErrorPopUp er=new ErrorPopUp("errore: impossibile inizializzare la musica");
+		}
+		run();
 	}
 	
 	/**
@@ -44,11 +57,12 @@ public class MusicPlayer extends Effect implements Runnable {
 	 * @param m il numero della traccia da ascoltare
 	 * @throws IOException
 	 */
+	@SuppressWarnings("restriction")
 	public void load(int m) throws IOException {
 		
 		if(m<0||m>MUSIC.length) return;
 		stop();
-		audio=new AudioStream(new FileInputStream(MUSIC[m]));
+		audio=new AudioStream(new FileInputStream(Start.PATH+MUSIC[m]+FORMAT));
 		play();
 	}
 
