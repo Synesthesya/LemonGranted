@@ -2,12 +2,12 @@ package server;
 
 import interfaces.PlayerI;
 import interfaces.ServerI;
-
 import java.rmi.Naming;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
-
 import core.Coordinate;
+import graphic.menu.ErrorPopUp;
+import control.MyShipController;
 
 /**
  * Classe server per gestire i turni e le modifiche del gioco
@@ -69,9 +69,20 @@ public class Server extends UnicastRemoteObject implements ServerI
 	  /**
 	   * chiude il server
 	   */
-	  protected static void uscita()
+	  protected void uscita()
 	  {
-		  System.exit(0);
+		  
+		  try {
+			if(player1!=null) {
+				  player1.errorExit();
+			  }
+			  if(player2!=null) {
+				  player2.errorExit();
+			  }
+			  System.exit(0);
+		} catch (RemoteException e) {
+			e.printStackTrace();
+		}		  
 	  }
 	  
 	  /**
@@ -207,7 +218,7 @@ public class Server extends UnicastRemoteObject implements ServerI
 	    catch(Exception e)
 	    {
 	      System.out.println(e.getMessage());
-	      uscita();
+	      s.uscita();
 	    }
 	    
 	    

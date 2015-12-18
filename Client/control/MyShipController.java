@@ -35,7 +35,7 @@ public class MyShipController extends MouseAdapter implements Controller
 	/**
 	 * riferimento al Player
 	 */
-	private Player player;
+	protected Player player;
 	/**
 	 * stub del server
 	 */
@@ -48,11 +48,11 @@ public class MyShipController extends MouseAdapter implements Controller
 	/**
 	 * griglia con le proprie navi
 	 */
-	private Grid left;
+	protected Grid left;
 	/**
 	 * griglia con le navi nemiche (quella in cui si spara)
 	 */
-	private Grid right;
+	protected Grid right;
 	
 	/**
 	 * costruttore standard
@@ -130,9 +130,6 @@ public class MyShipController extends MouseAdapter implements Controller
 		    System.err.println("errore: " +err.getMessage());
 		    ErrorPopUp er=new ErrorPopUp("errore: disconnessione dal server\n"+err);
 		    frame.setMenu(new MenuController(frame));
-		  }
-		  catch(IOException e1) {
-			  ErrorPopUp er=new ErrorPopUp("errore: impossibile eseguire il file audio "+frame.getID()+" 1");
 		  }
 		}
 	}
@@ -237,6 +234,9 @@ public class MyShipController extends MouseAdapter implements Controller
 		testo2=string;
 	}
 	
+	/**
+	 * metodo utilizzato per concludere una partita
+	 */
 	private void deregistra()
 	{
 		try
@@ -245,8 +245,17 @@ public class MyShipController extends MouseAdapter implements Controller
 		}
 		catch(Exception e)
 		{
-			System.err.println(e.getMessage());
-			
+			ErrorPopUp er=new ErrorPopUp("errore durante la deregistrazione dal server!");			
 		}
+	}
+	
+	/**
+	 * metodo per concludere in anticipo una partita
+	 */
+	public void errorExit() {
+		
+		deregistra();
+		ErrorPopUp er=new ErrorPopUp("errore: impossibile proseguire la partita!");
+		frame.setMenu(new MenuController(frame));
 	}
 }

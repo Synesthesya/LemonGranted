@@ -5,6 +5,7 @@ import interfaces.PlayerI;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import server.Phase;
+import control.MyShipController;
 
 
 /**
@@ -330,4 +331,13 @@ public class Player extends UnicastRemoteObject implements PlayerI
 
 		return this.toString();
 	}
+	
+	/**
+	 * metodo che causa l'uscita preventiva e il reset del gioco
+	 */
+	@Override
+	public void errorExit() {
+		((MyShipController)controller).errorExit();
+	}
+	
 }

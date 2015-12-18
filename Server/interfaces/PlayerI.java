@@ -79,5 +79,16 @@ public interface PlayerI extends Remote
   	 */
 	public void cambiaTurno() throws RemoteException;
 	
+	/**
+	 * metodo per stampare i dati di un player su riga di comando
+	 * @return
+	 * @throws RemoteException
+	 */
 	public String print() throws RemoteException;
+	
+	/**
+	 * metodo che causa la fine di una partita causata da errori
+	 * @throws RemoteException
+	 */
+	public void errorExit() throws RemoteException;
 }
