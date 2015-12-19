@@ -45,7 +45,7 @@ public class Command implements Runnable {
 			}
 			case "exit": {
 				System.out.println("disconnessione del server in corso...");
-				sc.close();
+				//sc.close();
 				server.uscita();
 				break;
 			}

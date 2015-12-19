@@ -71,7 +71,6 @@ public class Server extends UnicastRemoteObject implements ServerI
 	   */
 	  protected void uscita()
 	  {
-		  
 		  try {
 			if(player1!=null) {
 				  player1.errorExit();

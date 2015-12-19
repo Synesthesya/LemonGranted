@@ -44,7 +44,7 @@ public class MyShipController extends MouseAdapter implements Controller
 	/**
 	 * riferimento al frame
 	 */
-	private Frame frame;
+	protected Frame frame;
 	/**
 	 * griglia con le proprie navi
 	 */
@@ -109,11 +109,15 @@ public class MyShipController extends MouseAdapter implements Controller
 			/*
 			 * qui decide se usare IMpero o Ribelli
 			 */
+			/*
 			if(frame.getID()==1) {
 			  g.getSlot(c).setImage("TF");
 			}
 			else
 			  g.getSlot(c).setImage("XW_Square");
+			  */
+			
+			g.deploy(frame.getID(),c);
 			
 			frame.playSound(3);
 		}
