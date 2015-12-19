@@ -9,6 +9,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.rmi.Naming;
+import java.rmi.RemoteException;
+
 import javax.swing.JButton;
 import core.Player;
 
@@ -72,12 +74,29 @@ public class MenuController implements ActionListener {
 			catch(Exception e) {
 				ErrorPopUp er = new ErrorPopUp("impossibile collegarsi al server!\n"+e);
 				f.setMenu(this);
-				return;
+				break;
 			}
 			f.playSound(5);			
 		}
 		case "SP": {
-			//WARNING: manca il Singleplayer
+			
+			Player p=null;
+			
+			try {
+				p=new Player(f.getID());
+
+			} catch (RemoteException e) {
+				// INUTILE MA NECESSARIA PER L'EREDITARIETA'
+
+				e.printStackTrace();
+				return;
+			}
+			Controller c=new SPController(p);
+			f.setGame(c);
+			c.linkFrame(f);
+			p.setController(c);
+			p.cambiaTurno();
+			f.playSound(5);
 			break;
 		}
 		case "OP": {

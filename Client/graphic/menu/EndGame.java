@@ -28,7 +28,7 @@ public class EndGame extends JPanel {
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	public static final String[] IMG = {"noRebels.jpg","noEmpire.png","winRebels.jpg","winEmpire.jpg"};
+	public static final String[] IMG = {"noEmpire.png","noRebels.jpg","winEmpire.jpg","winRebels.jpg"};
 	
 	public static final String MENUBUTTON = "MainMenuButton3.jpg";
 	
@@ -45,10 +45,6 @@ public class EndGame extends JPanel {
 		
 		super();
 		setLayout(null);
-	//	String path = "/home/giorgio/Immagini/winRebels.jpg";
-	//	String path = "/home/giorgio/Immagini/ROTS-DS.jpg";
-	//	String path = "/home/giorgio/Immagini/Img2/noRebels.jpg";
-	//	String path = "/home/giorgio/Immagini/Img2/noEmpire.png";
 	    background = Toolkit.getDefaultToolkit().createImage(Start.PATH+IMG[win]);
 	    loadImage(background);
     

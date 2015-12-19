@@ -86,12 +86,21 @@ public class Grid extends JPanel {
 	
 	/**
 	 * metodo per aggiungere l'immagine di un caccia colpito
-	 * @param id la fazione
+	 * @param id la fazione (NB: la nave colpita sarà della fazione opposta!)
 	 * @param c la coordinata
 	 */
 	public void setHit(int id, Coordinate c) {
 		
-		grid[c.toInteger()].setImage(SHIP[id-1]+HIT);
+		if(id==1) grid[c.toInteger()].setImage(SHIP[1]+HIT);
+		else grid[c.toInteger()].setImage(SHIP[0]+HIT);
+	}
+	
+	/**
+	 * metodo per le caselle colpite ma senza navi all'interno
+	 * @param c la coordinata
+	 */
+	public void setExplored(Coordinate c) {
+		grid[c.toInteger()].setExplored();
 	}
 	
 	

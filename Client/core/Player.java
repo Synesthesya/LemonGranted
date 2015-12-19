@@ -196,6 +196,26 @@ public class Player extends UnicastRemoteObject implements PlayerI
 	}
 	
 	/**
+	 * metodo che aggiorna la struttra dati della griglia per aggiungere le navi;
+	 * se il numero massimo di navi è stato raggiunto, viene inizializzata la fase di combattimento
+	 * @param c
+	 */
+	public boolean deploySP(Coordinate c) {
+		
+		if(alive<FLEETNUMBER && !myShip.getStatus(c)) {
+			alive++;
+			myShip.deploy(c);
+			controller.setMessage("Devi schierare ancora "+ (5-getAlive())+ " navi!");
+			if(alive==FLEETNUMBER) {
+				deployed=true;
+				setPhase(Phase.COMBAT);
+			}
+			return true;
+		}		
+		return false;
+	}
+	
+	/**
 	 * restituisce la flag legata allo schieramento
 	 */
 	public boolean getDeployed()
@@ -274,6 +294,7 @@ public class Player extends UnicastRemoteObject implements PlayerI
 	}
 
 	@Override
+	@Deprecated
 	public void nemicoMancato(Coordinate c) throws RemoteException 
 	{
 		controller.setTesto2("Nemico mancato! ");

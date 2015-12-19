@@ -32,9 +32,10 @@ public class SPPlayer {
 	 * metodo per schierare <i>FLEETNUMBER</i> caccia; valido solo per navi di dimensione 1
 	 */
 	public void deploy() {
-		
+
 		while(alive<Player.FLEETNUMBER) {
-			Coordinate c=new Coordinate((int)Math.random()*100);
+			Coordinate c=new Coordinate((int)(Math.random()*100));
+			System.out.println("random="+c.toInteger()+" "+left.getStatus(c));
 			if(!left.getStatus(c)) {
 				left.deploy(c);
 				alive++;
