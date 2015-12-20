@@ -63,7 +63,12 @@ public class SPController extends MyShipController {
 		}
 		else if(player.getPhase()==Phase.COMBAT && player.getTurno() && g.getName().equals("right") && !player.getEnemyShip().getStatus(c)) {
 			
+			System.out.println("click ricevuto alle coordinate "+c);
+			
 			boolean hit=enemy.reciveHit(c);
+			
+			System.out.println("il valore hit è "+hit);
+			
 			if(hit) {
 				frame.playSound(0);
 				right.setHit(frame.getID(), c);
@@ -73,12 +78,21 @@ public class SPController extends MyShipController {
 				right.setExplored(c);
 			}
 			
-			endGame(true);
+			System.out.println("ho calcolato il risultato");
+			
+			try {
+				endGame(true);
+			} catch (InterruptedException e2) {
+				// TODO Auto-generated catch block
+				e2.printStackTrace();
+			}
 			
 			player.cambiaTurno();
 			
+			System.out.println("ho cambiato turno");
+			
 			try {
-				Thread.sleep(500);
+				Thread.sleep(1000);
 				enemyTurn();
 			}
 			catch(Exception e1) {
@@ -86,7 +100,12 @@ public class SPController extends MyShipController {
 				ErrorPopUp er=new ErrorPopUp(""+e);
 				frame.setMenu(new MenuController(frame));
 			}
-			endGame(false);
+			try {
+				endGame(false);
+			} catch (InterruptedException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 		}
 	}
 	
@@ -95,6 +114,8 @@ public class SPController extends MyShipController {
 	 * @throws RemoteException ereditato dalla classe MyShipController che estende un oggetto remoto
 	 */
 	public void enemyTurn() throws RemoteException {
+		
+		System.out.println("entro nel turno avversario");
 		
 		Coordinate c=enemy.hit();
 		
@@ -120,15 +141,19 @@ public class SPController extends MyShipController {
 		else return 1;
 	}
 	
-	public void endGame(boolean a) {
+	public void endGame(boolean a) throws InterruptedException {
+		
+		System.out.println("enemy: "+enemy.getAlive()+"\tplayer: "+player.getAlive());
 		
 		if(a && !enemy.isAlive()) {
+			Thread.sleep(1000);
 			left.removeMouseListener(this);
 			right.removeMouseListener(this);
 			frame.setEnd(new MenuController(frame), frame.getID()+1);
 			frame.playSound(4);
 		}
-		else if(!a && player.isAlive()) {
+		else if(!a && !player.isAlive()) {
+			Thread.sleep(1000);
 			left.removeMouseListener(this);
 			right.removeMouseListener(this);
 			frame.setEnd(new MenuController(frame), frame.getID()-1);

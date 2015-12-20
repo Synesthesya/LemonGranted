@@ -50,7 +50,8 @@ public class SPPlayer {
 	public Coordinate hit() {
 		
 		while(true) {
-			Coordinate c=new Coordinate((int)Math.random()*100);
+			Coordinate c=new Coordinate((int)(Math.random()*100));
+			System.out.println(c);
 			if(!right.getStatus(c)) {
 				right.hit(c);
 				return c; 
@@ -80,6 +81,14 @@ public class SPPlayer {
 	 */
 	public boolean isAlive() {
 		return alive>0;
+	}
+	
+	/**
+	 * metodo per ottenere il numero di navi ancora in vita
+	 * @return il numero di navi ancora in vita
+	 */
+	public int getAlive() {
+		return alive;
 	}
 
 }
