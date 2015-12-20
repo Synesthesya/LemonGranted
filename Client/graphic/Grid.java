@@ -44,9 +44,19 @@ public class Grid extends JPanel {
 	 */
 	private static final long serialVersionUID = 1L;
 	
+	/**
+	 * la rappresentazione grafica della griglia
+	 */
 	private final Slot[] grid;
 	private String name;
 	
+	/**
+	 * costruttore standard
+	 * 
+	 * @param ID l'ID rappresentante la fazione
+	 * @param c il Controller
+	 * @param s 
+	 */
 	public Grid(int ID,Controller c, String s) {
 		
 	    name=s;

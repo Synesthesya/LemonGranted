@@ -123,6 +123,4 @@ public class Slot extends JLabel {
 	public void setExplored() {
 		setImage(ESPLORATO);
 	}
-	
-
 }

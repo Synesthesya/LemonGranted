@@ -58,11 +58,9 @@ public class Game extends JPanel {
 		JLabel ab = new JLabel();
 		ImageIcon icon = new ImageIcon(LOGO);
 		ab.setIcon(icon);
-		
 		add(ab, BorderLayout.NORTH);
 		add(info, BorderLayout.CENTER);
 		add(grids, BorderLayout.SOUTH);
-
 	}
 	
 	/**

@@ -21,7 +21,10 @@ public class SPPlayer {
 	 * numero di navi ancora vive
 	 */
 	private int alive=0;
-
+	
+	/**
+	 * costruttore standard
+	 */
 	public SPPlayer() {
 		
 		left=new GridCore();
