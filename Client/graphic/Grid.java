@@ -29,7 +29,7 @@ public class Grid extends JPanel {
 	/**
 	 * le immagini dei caccia
 	 */
-	public static final String[] SHIP = {"TF","XW_SQUARE"};
+	public static final String[] SHIP = {"TF","XW"};
 	/**
 	 * immagine del caccia colpito
 	 */

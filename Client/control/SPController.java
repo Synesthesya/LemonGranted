@@ -56,11 +56,17 @@ public class SPController extends MyShipController {
 		
 		Coordinate c=new Coordinate(x,y);
 		
+		/*
+		 * fase di schieramento 
+		 */
 		if(player.getPhase()==Phase.DEPLOYMENT && g.getName().equals("left") && player.deploySP(c)) {
 			
 			g.deploy(frame.getID(),c);			
 			frame.playSound(3);
 		}
+		/*
+		 * fase di combattimento
+		 */
 		else if(player.getPhase()==Phase.COMBAT && player.getTurno() && g.getName().equals("right") && !player.getEnemyShip().getStatus(c)) {
 			
 			System.out.println("click ricevuto alle coordinate "+c);
@@ -141,6 +147,12 @@ public class SPController extends MyShipController {
 		else return 1;
 	}
 	
+	/**
+	 * metodo che gestisce la fine della partita in SinglePlayer
+	 * 
+	 * @param a <b>true</b> per controllare il player, <b>false</b> per controllare il computer
+	 * @throws InterruptedException causata dall'attesa che si ha per consentire ai file sonori di essere eseguiti prima di passare al Panel di fine gioco
+	 */
 	public void endGame(boolean a) throws InterruptedException {
 		
 		System.out.println("enemy: "+enemy.getAlive()+"\tplayer: "+player.getAlive());
