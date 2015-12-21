@@ -52,12 +52,7 @@ public class Player extends UnicastRemoteObject implements PlayerI
 	private final GridCore myShip;
 	
 	private final GridCore enemyShip;
-	
-	/**
-	 * l'elenco delle navi del giocatore
-	 */
-	//private final Ship[] fleet;
-	
+		
 	/**
 	 * il numero di navi ancora vive
 	 */
