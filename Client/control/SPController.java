@@ -42,76 +42,38 @@ public class SPController extends MyShipController {
 		enemy.deploy();
 	}
 	
-	
-	/**
-	 * metodo che gestisce gli eventi di una partita
-	 */
-	@Override
-	public void mouseClicked(MouseEvent e) {
-	
-		Grid g=(Grid)e.getComponent();
-		
-		int x=e.getX()/50;
-		int y=e.getY()/50;
-		
-		Coordinate c=new Coordinate(x,y);
-		
-		/*
-		 * fase di schieramento 
-		 */
-		if(player.getPhase()==Phase.DEPLOYMENT && g.getName().equals("left") && player.deploySP(c)) {
-			
-			g.deploy(frame.getID(),c);			
-			frame.playSound(3);
+	@Override	
+	public void shot(Coordinate c) {
+		boolean hit=enemy.reciveHit(c);
+		if(hit) {
+			frame.playSound(0);
+			right.setHit(frame.getID(), c);
 		}
-		/*
-		 * fase di combattimento
-		 */
-		else if(player.getPhase()==Phase.COMBAT && player.getTurno() && g.getName().equals("right") && !player.getEnemyShip().getStatus(c)) {
-			
-			System.out.println("click ricevuto alle coordinate "+c);
-			
-			boolean hit=enemy.reciveHit(c);
-			
-			System.out.println("il valore hit è "+hit);
-			
-			if(hit) {
-				frame.playSound(0);
-				right.setHit(frame.getID(), c);
-			}
-			else {
-				frame.playSound(1);
-				right.setExplored(c);
-			}
-			
-			System.out.println("ho calcolato il risultato");
-			
-			try {
-				endGame(true);
-			} catch (InterruptedException e2) {
-				// TODO Auto-generated catch block
-				e2.printStackTrace();
-			}
-			
-			player.cambiaTurno();
-			
-			System.out.println("ho cambiato turno");
-			
-			try {
-				Thread.sleep(1000);
-				enemyTurn();
-			}
-			catch(Exception e1) {
-				@SuppressWarnings("unused")
-				ErrorPopUp er=new ErrorPopUp(""+e);
-				frame.setMenu(new MenuController(frame));
-			}
-			try {
-				endGame(false);
-			} catch (InterruptedException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
+		else {
+			frame.playSound(1);
+			right.setExplored(c);
+		}
+		try {
+			endGame(true);
+		} catch (InterruptedException e2) {
+			e2.printStackTrace();
+		}
+		
+		player.cambiaTurno();
+		
+		try {
+			Thread.sleep(1000);
+			enemyTurn();
+		}
+		catch(Exception e1) {
+			@SuppressWarnings("unused")
+			ErrorPopUp er=new ErrorPopUp(""+e1);
+			frame.setMenu(new MenuController(frame));
+		}
+		try {
+			endGame(false);
+		} catch (InterruptedException e1) {
+			e1.printStackTrace();
 		}
 	}
 	

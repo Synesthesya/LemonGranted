@@ -7,10 +7,8 @@ import interfaces.Controller;
 import interfaces.ServerI;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.IOException;
 import java.rmi.Naming;
 import java.rmi.RemoteException;
-
 import javax.swing.JButton;
 import core.Player;
 
@@ -18,9 +16,21 @@ import core.Player;
  * classe che controlla i menù principali
  * 
  * @author Alex
+ * @implements ActionListener
  *
  */
 public class MenuController implements ActionListener {
+	
+	
+	/**
+	 * l'IP del server
+	 */
+	public static String IP = "127.0.0.1";
+	
+	/**
+	 * la porta del server
+	 */
+	public static String DOOR = ":1677";
 	
 	/**
 	 * <p>
@@ -39,15 +49,23 @@ public class MenuController implements ActionListener {
 	 */
 	public static final String[] MAINMENU = {"MP","SP","OP","QT","MM","NOME","EMPIRE","REBELS","END"};
 	
-	private Frame f;
+	/**
+	 * il frame a cui viene associato il Controller
+	 */
+	private Frame frame;
 	
 	/**
 	 * costruttore standard
+	 * 
+	 * @param f il Frame da cui viene chiamato il Controller
 	 */
-	public MenuController(Frame frame) {
-		f=frame;
+	public MenuController(Frame f) {
+		frame=f;
 	}
-
+	
+	/**
+	 * metodo ereditato da ActionListener
+	 */
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
 		
@@ -55,35 +73,37 @@ public class MenuController implements ActionListener {
 		case "MP": {
 			
 			try {
-				ServerI s = (ServerI) Naming.lookup("rmi://127.0.0.1:1677/server");
+				ServerI s = (ServerI) Naming.lookup("rmi:"+IP+DOOR+"/server");
 				if (!s.registraPlayer()) {
+					@SuppressWarnings("unused")
 					ErrorPopUp er = new ErrorPopUp("Numero massimo di giocatori raggiunto");
 					return;
 				}
 				Integer ID = s.getID();
 				Player p = new Player(ID);
 				//creazione stub
-				Naming.bind("rmi://127.0.0.1:1677/player" + ID.toString(), p);
+				Naming.bind("rmi://"+IP+DOOR+"/player" + ID.toString(), p);
 				Controller c = new MyShipController(p, s);
-				f.setGame(c);
-				c.linkFrame(f);
+				frame.setGame(c);
+				c.linkFrame(frame);
 				p.setController(c);
 				//comunica lo stub al server
 				s.caricaPlayer();
 			}
 			catch(Exception e) {
+				@SuppressWarnings("unused")
 				ErrorPopUp er = new ErrorPopUp("impossibile collegarsi al server!\n"+e);
-				f.setMenu(this);
+				frame.setMenu(this);
 				break;
 			}
-			f.playSound(5);			
+			frame.playSound(5);			
 		}
 		case "SP": {
 			
 			Player p=null;
 			
 			try {
-				p=new Player(f.getID());
+				p=new Player(frame.getID());
 
 			} catch (RemoteException e) {
 				// INUTILE MA NECESSARIA PER L'EREDITARIETA'
@@ -92,52 +112,52 @@ public class MenuController implements ActionListener {
 				return;
 			}
 			Controller c=new SPController(p);
-			f.setGame(c);
-			c.linkFrame(f);
+			frame.setGame(c);
+			c.linkFrame(frame);
 			p.setController(c);
 			p.cambiaTurno();
-			f.playSound(5);
+			frame.playSound(5);
 			break;
 		}
 		case "OP": {
-			f.setOption(this);
-			f.playSound(0,0);
+			frame.setOption(this);
+			frame.playSound(0,0);
 			break;
 		}
 		case "QT": {
 			System.exit(0);
 		}
 		case "MM": {
-			f.setMenu(this);
-			f.playSound(0,0);
+			frame.setMenu(this);
+			frame.playSound(0,0);
 			break;
 		}
 		case "NOME": {
 			JButton but=(JButton)arg0.getSource();
 			OptionPanel op=(OptionPanel)but.getParent();
 			String s=op.setName();
-			f.setName(s);
+			frame.setName(s);
 			break;
 		}
 		case "EMPIRE": {
 			JButton but=(JButton)arg0.getSource();
 			OptionPanel op=(OptionPanel)but.getParent();
 			op.setFaction("EMPIRE");
-			f.setID(1);
-			f.playSound(6);
+			frame.setID(1);
+			frame.playSound(6);
 			break;
 		}
 		case "REBELS": {
 			JButton but=(JButton)arg0.getSource();
 			OptionPanel op=(OptionPanel)but.getParent();
 			op.setFaction("REBELS");
-			f.setID(2);
-			f.playSound(6);
+			frame.setID(2);
+			frame.playSound(6);
 			break;
 		}
 		case "END": {
-			f.setMenu(this);
-			f.playSound(0,0);
+			frame.setMenu(this);
+			frame.playSound(0,0);
 			break;
 		}
 		}		

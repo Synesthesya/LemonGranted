@@ -9,19 +9,37 @@ package core;
  * @author Synesthesy
  *
  */
-@Deprecated
 public class Ship {
 	
+	/**
+	 * la direzione della nave: <b>UP</b> o <b>LEFT</b>
+	 */
 	public static final String[] DIRECTIONS = {"UP","LEFT"};
+	
+	/**
+	 * la coordinata più alta della nave
+	 */
 	private final Coordinate head;
+	
+	/**
+	 * la coordinata più bassa della nave
+	 */
 	private final Coordinate tail;
+	
+	/**
+	 * la direzione della nave 
+	 */
 	private final String dir;
 	/**
 	 * la vita della nave
 	 */
 	private int hp;
 	
-
+	/**
+	 * costruttore standard: non importa l'ordine delle coordinate, in quanto verranno sempre ordinate prima di venire inserite
+	 * @param h
+	 * @param t
+	 */
 	public Ship(Coordinate h, Coordinate t) {
 		
 		if(h.isHigher(t)) {
@@ -40,11 +58,25 @@ public class Ship {
 		
 	}
 	
+	/**
+	 * variante del costruttore standard
+	 * 
+	 * @param h
+	 * @param tc
+	 * @param tr
+	 */
 	public Ship(Coordinate h, int tc, int tr) {
 		
 		this(h, new Coordinate(tc,tr));
 	}
 	
+	/**
+	 * variante del costruttore standard
+	 * @param hc
+	 * @param hr
+	 * @param tc
+	 * @param tr
+	 */
 	public Ship(int hc, int hr, int tc, int tr) {
 		
 		this(new Coordinate(hc,hr),new Coordinate(tc,tr));		
@@ -55,8 +87,13 @@ public class Ship {
 		return hp;
 	}
 	
-	public void hit() {
+	/**
+	 * abbassa la vita di uno
+	 * @return <b>true</b> se la nave è ancora viva, <b>false</b> altrimenti
+	 */
+	public boolean hit() {
 		hp--;
+		return hp>0;
 	}
 	
 	/**
@@ -104,11 +141,21 @@ public class Ship {
 		return head;
 	}
 	
+	/**
+	 * metodo che stabilisce se due navi hanno la stessa direzione
+	 * @param s
+	 * @return
+	 */
 	public boolean hasSameDirection(Ship s) {
 		
 		return this.dir.equals(s.dir);		
 	}
 	
+	/**
+	 * metodo che stabilisce se due navi si trovano nella stessa riga
+	 * @param s
+	 * @return
+	 */
 	public boolean isInSameLine(Ship s) {
 		
 		if(hasSameDirection(s)) {

@@ -7,12 +7,12 @@ import interfaces.Controller;
 import interfaces.ServerI;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.io.IOException;
 import java.rmi.Naming;
 import java.rmi.RemoteException;
 import server.Phase;
 import core.Coordinate;
 import core.Player;
+import graphic.Game;
 
 
 /**
@@ -25,11 +25,15 @@ import core.Player;
  */
 public class MyShipController extends MouseAdapter implements Controller 
 {
+		
 	/**
 	 * stringa che indica la fase
 	 */
 	private String fase="Schieramento! ";
 	
+	/**
+	 * testo
+	 */
 	private String testo2="";;
 	
 	/**
@@ -79,8 +83,8 @@ public class MyShipController extends MouseAdapter implements Controller
 	public void linkFrame(Frame f)
 	{
 		frame=f;
-		left=frame.getGamePanel().getGrids().getLeft();
-		right=frame.getGamePanel().getGrids().getRight();
+		left=((Game)(frame.getPanel())).getGrids().getLeft();
+		right=((Game)(frame.getPanel())).getGrids().getLeft();
 	}
 
 	/**
@@ -105,24 +109,23 @@ public class MyShipController extends MouseAdapter implements Controller
 		
 		Coordinate c=new Coordinate(x,y);
 		if(player.getPhase()==Phase.DEPLOYMENT && g.getName().equals("left") && player.deploy(c)) 
-		{
-			/*
-			 * qui decide se usare IMpero o Ribelli
-			 */
-			/*
-			if(frame.getID()==1) {
-			  g.getSlot(c).setImage("TF");
-			}
-			else
-			  g.getSlot(c).setImage("XW_Square");
-			  */
-			
+		{			
 			g.deploy(frame.getID(),c);
 			
 			frame.playSound(3);
 		}
 		else if(player.getPhase()==Phase.COMBAT && player.getTurno() && g.getName().equals("right") && !player.getEnemyShip().getStatus(c))
 		{
+			shot(c);
+		}
+	}
+	
+	/**
+	 * metodo che si occupa di comunicare al Server il colpo sparato
+	 * 
+	 * @param c la Coordinata colpita
+	 */
+	protected void shot(Coordinate c) {
 		  try
 		  {
 		    boolean hit=server.shot(player.getID(), c);
@@ -132,10 +135,10 @@ public class MyShipController extends MouseAdapter implements Controller
 		  catch(RemoteException err)
 		  {
 		    System.err.println("errore: " +err.getMessage());
-		    ErrorPopUp er=new ErrorPopUp("errore: disconnessione dal server\n"+err);
+		    @SuppressWarnings("unused")
+			ErrorPopUp er=new ErrorPopUp("errore: disconnessione dal server\n"+err);
 		    frame.setMenu(new MenuController(frame));
 		  }
-		}
 	}
 	
 	/**
@@ -154,13 +157,18 @@ public class MyShipController extends MouseAdapter implements Controller
 	  catch(Exception e)
 	  {
 	    System.err.println(e.getMessage());
-	    ErrorPopUp er=new ErrorPopUp("errore: impossibile connettersi al server");
+	    @SuppressWarnings("unused")
+		ErrorPopUp er=new ErrorPopUp("errore: impossibile connettersi al server");
 	    frame.setMenu(new MenuController(frame));
 	  }
 	}
 	/**
-	 * b=true indica griglia di destra
-	 * b=false indica griglia di sinistra
+	 * 
+	 * metodo utilizzato per modificare un immagine in una griglia
+	 * 
+	 * @param b <b>true</b> indica la griglia di destra, <b>false</b> la griglia di sinistra
+	 * @param c la Coordinata da modificare
+	 * @param s il nome dell'immagine da inserire
 	 */
 	@Override
 	public void setImage(boolean b, Coordinate c, String s)
@@ -182,11 +190,7 @@ public class MyShipController extends MouseAdapter implements Controller
 	public void sconfitta() 
 	{
 		fase="Fine gioco! ";
-		//setMessage("Sconfitta! ");
-		left.removeMouseListener(this);
-		right.removeMouseListener(this);
-		server=null;
-		deregistra();
+		ending();
 		frame.setEnd(new MenuController(frame), frame.getID()-1);
 		frame.playSound(2);
 	}
@@ -199,14 +203,26 @@ public class MyShipController extends MouseAdapter implements Controller
 	{
 		fase="Fine gioco! ";
 		//setMessage("Vittoria! ");
+		ending();
+		frame.setEnd(new MenuController(frame), 1+frame.getID());
+		frame.playSound(4);
+	}
+	
+	/**
+	 * metodo che gestisce la fine di una partita, disconnettendo dal server e deregistrando il Controller
+	 */
+	protected void ending() {
 		left.removeMouseListener(this);
 		right.removeMouseListener(this);
 		server=null;
 		deregistra();
-		frame.setEnd(new MenuController(frame), 1+frame.getID());
-		frame.playSound(4);
 	}
-
+	
+	/**
+	 * metoto che cambia graficamente la visualizzazione del turno
+	 * 
+	 * @param t <b>true</b> per farlo diventare il turno del giocatore, <b>false</b> per farlo diventare il turno dell'avversario
+	 */
 	@Override
 	public void cambiaTurno(boolean t)
 	{
@@ -223,7 +239,7 @@ public class MyShipController extends MouseAdapter implements Controller
 	@Override
 	public void setMessage(String s)
 	{
-		frame.getGamePanel().getInfo().setStatus(fase + testo2 + s);
+		((Game)(frame.getPanel())).getInfo().setStatus(fase + testo2 + s);
 	}
 
 	@Override
@@ -245,10 +261,11 @@ public class MyShipController extends MouseAdapter implements Controller
 	{
 		try
 		{
-			Naming.unbind("rmi://127.0.0.1:1677/player" + player.getID());
+			Naming.unbind("rmi://"+MenuController.IP+MenuController.DOOR+"/player" + player.getID());
 		}
 		catch(Exception e)
 		{
+			@SuppressWarnings("unused")
 			ErrorPopUp er=new ErrorPopUp("errore durante la deregistrazione dal server!");			
 		}
 	}
@@ -258,7 +275,8 @@ public class MyShipController extends MouseAdapter implements Controller
 	 */
 	public void errorExit() {
 		
-		deregistra();
+		ending();
+		@SuppressWarnings("unused")
 		ErrorPopUp er=new ErrorPopUp("errore: impossibile proseguire la partita!");
 		frame.setMenu(new MenuController(frame));
 	}
