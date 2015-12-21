@@ -42,6 +42,28 @@ public class SPController extends MyShipController {
 		enemy.deploy();
 	}
 	
+	@Override
+	public void mouseClicked(MouseEvent e) 
+	{
+		
+		Grid g=(Grid)e.getComponent();
+		
+		int x=e.getX()/50;
+		int y=e.getY()/50;
+		
+		Coordinate c=new Coordinate(x,y);
+		if(player.getPhase()==Phase.DEPLOYMENT && g.getName().equals("left") && player.deploySP(c)) 
+		{			
+			g.deploy(frame.getID(),c);
+			
+			frame.playSound(3);
+		}
+		else if(player.getPhase()==Phase.COMBAT && player.getTurno() && g.getName().equals("right") && !player.getEnemyShip().getStatus(c))
+		{
+			shot(c);
+		}
+	}
+	
 	@Override	
 	public void shot(Coordinate c) {
 		boolean hit=enemy.reciveHit(c);

@@ -84,7 +84,7 @@ public class MyShipController extends MouseAdapter implements Controller
 	{
 		frame=f;
 		left=((Game)(frame.getPanel())).getGrids().getLeft();
-		right=((Game)(frame.getPanel())).getGrids().getLeft();
+		right=((Game)(frame.getPanel())).getGrids().getRight();
 	}
 
 	/**
