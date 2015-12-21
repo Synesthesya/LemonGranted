@@ -73,7 +73,7 @@ public class MenuController implements ActionListener {
 		case "MP": {
 			
 			try {
-				ServerI s = (ServerI) Naming.lookup("rmi:"+IP+DOOR+"/server");
+				ServerI s = (ServerI) Naming.lookup("rmi://"+IP+DOOR+"/server");
 				if (!s.registraPlayer()) {
 					@SuppressWarnings("unused")
 					ErrorPopUp er = new ErrorPopUp("Numero massimo di giocatori raggiunto");
