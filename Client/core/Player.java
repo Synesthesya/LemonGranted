@@ -248,18 +248,12 @@ public class Player extends UnicastRemoteObject implements PlayerI
 		return "ID: "+ID+"\tnavi ancora in vita: "+alive+"\nnavi possedute:\n"+myShip+"\ncolpi sparati:\n"+enemyShip;		
 	}
 	
-	/*
-	 * METODO ERRATO
-	 */
 
-	/*
-	 * (non-Javadoc)
-	 * @see interfaces.PlayerI#nemicoColpito(core.Coordinate)
-	 */
 	@Override
 	public void nemicoColpito(Coordinate c) throws RemoteException 
 	{
 		controller.setTesto2("Nemico colpito! ");
+		controller.isHit();
 		enemyShip.setGridValue(true, c); //la coordinata è stata usata
 		if(faction==1)
 			controller.setImage(true,c,"XW_RED");
@@ -279,6 +273,7 @@ public class Player extends UnicastRemoteObject implements PlayerI
 	public void colpoSubito(Coordinate c) throws RemoteException 
 	{
 		controller.setTesto2("Sei stato colpito! ");
+		controller.imHit();
 		myShip.setGridValue(false, c);
 		alive--;
 		if(faction==1)

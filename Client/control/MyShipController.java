@@ -272,7 +272,7 @@ public class MyShipController extends MouseAdapter implements Controller
 	/**
 	 * metodo per concludere in anticipo una partita
 	 * 
-	 * NON ANCORA IMPLEMENTATO
+	 * 
 	 */
 	public void errorExit() {
 		
@@ -281,4 +281,20 @@ public class MyShipController extends MouseAdapter implements Controller
 		ErrorPopUp er=new ErrorPopUp("errore: impossibile proseguire la partita!");
 		frame.setMenu(new MenuController(frame));
 	}
+	
+	/**
+	 * scala di uno il numero di navi possedute
+	 */
+	public void imHit() {
+		
+		((Game)frame.getPanel()).getInfo().setPlayerHit();		
+	}
+	
+	/**
+	 * scala di uno il numero di navi del nemico
+	 */
+	public void isHit() {
+		((Game)frame.getPanel()).getInfo().setEnemyHit();
+	}
+	
 }

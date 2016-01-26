@@ -38,7 +38,6 @@ public class SPPlayer {
 
 		while(alive<Player.FLEETNUMBER) {
 			Coordinate c=new Coordinate((int)(Math.random()*100));
-			System.out.println("random="+c.toInteger()+" "+left.getStatus(c));
 			if(!left.getStatus(c)) {
 				left.deploy(c);
 				alive++;
@@ -54,7 +53,6 @@ public class SPPlayer {
 		
 		while(true) {
 			Coordinate c=new Coordinate((int)(Math.random()*100));
-			System.out.println(c);
 			if(!right.getStatus(c)) {
 				right.deploy(c);
 				return c; 
@@ -69,7 +67,10 @@ public class SPPlayer {
 	 */
 	public boolean reciveHit(Coordinate c) {
 		
-		if(!left.getStatus(c)) return false;
+		if(!left.getStatus(c)) {
+			left.setGridValue(false, c);
+			return false;
+		}
 		else {
 			left.setGridValue(false, c);
 			alive--;

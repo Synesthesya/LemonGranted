@@ -74,4 +74,14 @@ public interface Controller
 	 * @param string
 	 */
 	public void setTesto2(String string);
+	
+	/**
+	 * scala di uno il numero di navi possedute
+	 */
+	public void imHit();
+	
+	/**
+	 * scala di uno il numero di navi del nemico
+	 */
+	public void isHit();
 }

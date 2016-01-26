@@ -90,6 +90,7 @@ public class SPController extends MouseAdapter implements Controller {
 		if(hit) {
 			frame.playSound(0);
 			right.setHit(frame.getID(), c);
+			isHit();
 		}
 		else {
 			frame.playSound(1);
@@ -236,5 +237,20 @@ public class SPController extends MouseAdapter implements Controller {
 	public void setTesto2(String string) {
 		// TODO Auto-generated method stub
 		testo2=string;
+	}
+	
+	/**
+	 * scala di uno il numero di navi possedute
+	 */
+	public void imHit() {
+		
+		((Game)frame.getPanel()).getInfo().setPlayerHit();		
+	}
+	
+	/**
+	 * scala di uno il numero di navi del nemico
+	 */
+	public void isHit() {
+		((Game)frame.getPanel()).getInfo().setEnemyHit();
 	}
 }
