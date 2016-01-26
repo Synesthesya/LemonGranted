@@ -33,14 +33,11 @@ public class Background extends JPanel {
   public Background(String path) {
 	  
 	super();
-	//String path = ".//bin//vader.png"; COMMENTATO CAUSA MOCKUP
-	//img = Toolkit.getDefaultToolkit().createImage(path);
-	//loadImage();
 	setImage(path);
   }
   
   /**
-   * metodo per caricare l'immaginenello sfondo
+   * metodo per caricare l'immagine nello sfondo
    * 
    */
   private void loadImage() {
@@ -61,14 +58,6 @@ public class Background extends JPanel {
     setOpaque(false);
     g.drawImage(img, 0, 0, null);
     super.paintComponent(g);
-  }
-  
-  /**
-   * metodo di get, può servire?
-   * @return
-   */
-  public Image getImage() {
-	  return img;
   }
   
   /**

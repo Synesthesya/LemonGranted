@@ -9,10 +9,7 @@ import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.MediaTracker;
 import java.awt.Toolkit;
-import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import sun.audio.*;
 import control.MenuController;
 
 
@@ -26,10 +23,10 @@ import control.MenuController;
 public class MainMenu extends JPanel {
 	
 	
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = 1L;
 		
 		/**
 		 * percorso dell'immagine di sfondo
@@ -68,20 +65,7 @@ public class MainMenu extends JPanel {
 		 * @throws IOException
 		 */
 	  public MainMenu(MenuController mc) {
-		/*
-		 * Inizializzazione ed inserimento traccia musicale
-		 */
-		  /*
-		  try {
-			String gongFile = ".//bin//Main.wav";
-			InputStream in = new FileInputStream(gongFile);
-			AudioStream audio = new AudioStream(in);
-			AudioPlayer.player.start(audio);
-		  }
-		  catch(Exception e) {
-			  ErrorPopUp er=new ErrorPopUp("errore musicale!");
-		  }
-		  */
+	
 		  
 	    setImage(EMPIRE_BACKGROUND);
 	    setLayout(null);
@@ -168,4 +152,4 @@ public class MainMenu extends JPanel {
 		  return img;
 	  }
 
-	}
+}

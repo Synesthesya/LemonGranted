@@ -34,7 +34,7 @@ public class MenuController implements ActionListener {
 	
 	/**
 	 * <p>
-	 * elenco dei quattro comandi disponibili dal menù principale
+	 * elenco dei comandi disponibili dal menù 
 	 * </p>
 	 * 
 	 * <p>
@@ -44,6 +44,10 @@ public class MenuController implements ActionListener {
 	 * OP: option
 	 * QT: esci
 	 * MM: main menù (Torna al menù principale)
+	 * NOME: il pulsante che gestisce il nick del giocatore
+	 * EMPIRE: il pulsante che seleziona l'Impero
+	 * REBELS: il pulsante che seleziona i Ribelli
+	 * END: il pulsante che ritorna al menù principale terminata una partita
 	 * </ul>
 	 * </p>
 	 */
@@ -80,7 +84,7 @@ public class MenuController implements ActionListener {
 					return;
 				}
 				Integer ID = s.getID();
-				Player p = new Player(ID);
+				Player p = new Player(ID, frame.getID());
 				//creazione stub
 				Naming.bind("rmi://"+IP+DOOR+"/player" + ID.toString(), p);
 				Controller c = new MyShipController(p, s);
@@ -96,14 +100,15 @@ public class MenuController implements ActionListener {
 				frame.setMenu(this);
 				break;
 			}
-			frame.playSound(5);			
+			frame.playSound(5);
+			break;
 		}
 		case "SP": {
 			
 			Player p=null;
 			
 			try {
-				p=new Player(frame.getID());
+				p=new Player(frame.getID(), frame.getID());
 
 			} catch (RemoteException e) {
 				// INUTILE MA NECESSARIA PER L'EREDITARIETA'

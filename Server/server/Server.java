@@ -6,8 +6,7 @@ import java.rmi.Naming;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import core.Coordinate;
-import graphic.menu.ErrorPopUp;
-import control.MyShipController;
+
 
 /**
  * Classe server per gestire i turni e le modifiche del gioco
@@ -50,7 +49,6 @@ public class Server extends UnicastRemoteObject implements ServerI
 	  {
 	    try
 	    {
-	      //System.setProperty("java.security.policy", "server.policy");
 	      if(System.getSecurityManager()==null)
 	      {
 	        System.setSecurityManager(new SecurityManager());
@@ -193,8 +191,7 @@ public class Server extends UnicastRemoteObject implements ServerI
 	        player1.setPhase(Phase.COMBAT);
 	        player2.setPhase(Phase.COMBAT);
 	        player1.cambiaTurno();
-	        //System.out.println("uscita fase di schieramento");
-	      }
+	        }
 	    }
 	    catch(Exception e)
 	    {
@@ -217,7 +214,7 @@ public class Server extends UnicastRemoteObject implements ServerI
 	    catch(Exception e)
 	    {
 	      System.out.println(e.getMessage());
-	      s.uscita();
+	      if(s!=null) s.uscita();
 	    }
 	    
 	    

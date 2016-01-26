@@ -34,7 +34,7 @@ public class MyShipController extends MouseAdapter implements Controller
 	/**
 	 * testo
 	 */
-	private String testo2="";;
+	private String testo2="";
 	
 	/**
 	 * riferimento al Player
@@ -101,11 +101,10 @@ public class MyShipController extends MouseAdapter implements Controller
 	@Override
 	public void mouseClicked(MouseEvent e) 
 	{
-		
 		Grid g=(Grid)e.getComponent();
 		
-		int x=e.getX()/50;
-		int y=e.getY()/50;
+		int x=e.getX()/graphic.Slot.CELLSIZE;
+		int y=e.getY()/graphic.Slot.CELLSIZE;
 		
 		Coordinate c=new Coordinate(x,y);
 		if(player.getPhase()==Phase.DEPLOYMENT && g.getName().equals("left") && player.deploy(c)) 
@@ -126,6 +125,7 @@ public class MyShipController extends MouseAdapter implements Controller
 	 * @param c la Coordinata colpita
 	 */
 	protected void shot(Coordinate c) {
+
 		  try
 		  {
 		    boolean hit=server.shot(player.getID(), c);
@@ -202,7 +202,6 @@ public class MyShipController extends MouseAdapter implements Controller
 	public void vittoria() 
 	{
 		fase="Fine gioco! ";
-		//setMessage("Vittoria! ");
 		ending();
 		frame.setEnd(new MenuController(frame), 1+frame.getID());
 		frame.playSound(4);
@@ -272,6 +271,8 @@ public class MyShipController extends MouseAdapter implements Controller
 	
 	/**
 	 * metodo per concludere in anticipo una partita
+	 * 
+	 * NON ANCORA IMPLEMENTATO
 	 */
 	public void errorExit() {
 		

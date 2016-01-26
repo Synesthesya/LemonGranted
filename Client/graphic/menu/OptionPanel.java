@@ -10,13 +10,11 @@ import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.MediaTracker;
 import java.awt.Toolkit;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import javax.swing.ImageIcon;
 import control.MenuController;
 
 /**
- * Classe che rappresenta graficamente il menï¿½ principale
+ * Classe che rappresenta graficamente il menù principale
  * 
  * @author Giorgio
  * @author Alex
@@ -28,6 +26,8 @@ public class OptionPanel extends JPanel {
 	 * il percorso delle immagini
 	 */
 	public static final String PATH = ".//bin//";
+	
+	public static String DEFAULTNAME = "Giocatore 1";
 	/**
 	 * 
 	 */
@@ -40,10 +40,7 @@ public class OptionPanel extends JPanel {
 	 * il nome modificato del giocatore
 	 */
 	private JTextArea risultato;
-	/**
-	 * 
-	 */
-	private JTextArea risBlock;
+
 	/**
 	 * 
 	 */
@@ -57,7 +54,7 @@ public class OptionPanel extends JPanel {
 		 * costruttore standard
 		 * @param mc TODO
 		 */
-	  @SuppressWarnings("deprecation")
+	
 	public OptionPanel(MenuController mc, int id) {
 		/*
 		 * Richiama il metodo che dipinge l'immagine di sfondo.
@@ -84,7 +81,7 @@ public class OptionPanel extends JPanel {
 		actual.setFont(new Font("Times New Roman", Font.BOLD, 16));
 		actual.setBackground(Color.BLACK);
 		actual.setForeground(Color.GRAY);
-		actual.enable(false);
+		actual.setEnabled(false);
 	    
 	    JLabel nomeAttuale = new JLabel("Nome attuale: ");
 	    nomeAttuale.setForeground(Color.GRAY);
@@ -126,13 +123,13 @@ public class OptionPanel extends JPanel {
 		rebels.setIcon(logoRibelli);
 		rebels.setBorderPainted(false);
 		
-		risultato = new JTextArea("Giocatore 1");
+		risultato = new JTextArea(DEFAULTNAME);
 		add(risultato);
 		risultato.setBackground(Color.BLACK);
 		risultato.setForeground(Color.GRAY);
-		risultato.enable(false);
+		risultato.setEnabled(false);
 		
-		//inputButton.addActionListener(this);
+
 		
 		/*
 		 * INIZIO PARTE BOUNDS
@@ -175,9 +172,10 @@ public class OptionPanel extends JPanel {
 				s=nuovo.getText();
 			}
 			catch(Exception e) {
-				System.out.println("porco dio");
+				System.err.println(e);
 			}
-			risultato.setText(s);	
+			risultato.setText(s);
+			DEFAULTNAME=s;
 			return s;
 		}
 		

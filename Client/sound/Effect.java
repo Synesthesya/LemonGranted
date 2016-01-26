@@ -30,7 +30,10 @@ public class Effect {
 	 */
 	@SuppressWarnings("restriction")
 	protected AudioStream audio;
-
+	
+	/**
+	 * costruttore standard
+	 */
 	public Effect() {
 		audio=null;
 	}
@@ -46,7 +49,7 @@ public class Effect {
 	
 	/**
 	 * metodo che carica un effetto sonoro e lo esegue
-	 * @param f la fazione dell'effetto: <b>2</b> come Ribelli o <b>1</b> come Impero
+	 * @param id la fazione dell'effetto: <b>2</b> come Ribelli o <b>1</b> come Impero, <b>0</b> per i suoni neutri
 	 * @param s il numero dell'effetto nell'elenco
 	 * @throws IOException
 	 */
@@ -69,7 +72,7 @@ public class Effect {
 			audio=new AudioStream(new FileInputStream(Start.PATH+OTHERS[s]+FORMAT));
 			break;
 		}
-		default: return; //CONTROLLO COERENZA STRINGA
+		default: return;
 		}
 		play();				
 	}

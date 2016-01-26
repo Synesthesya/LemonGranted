@@ -2,11 +2,9 @@ package graphic.menu;
 
 import java.awt.Dimension;
 import java.io.IOException;
-
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.WindowConstants;
 import sound.Effect;
 
 /**
@@ -41,25 +39,6 @@ public class ErrorPopUp extends JFrame {
 		error.setSize(DIM);
 		pack();
 		setVisible(true);
-		errorSound();
-	}
-	
-	/**
-	 * popup grafico
-	 */
-	public ErrorPopUp() {
-		
-		super("Errore!");
-		JLabel error=new JLabel();
-		add(error);
-		error.setSize(DIM);
-		setSize(400, 400);
-		setVisible(true);
-		
-		JLabel errore = new JLabel();
-		ImageIcon tornaMenu = new ImageIcon("/home/giorgio/Immagini/Img2/MainMenuButton3.jpg");
-		errore.setIcon(tornaMenu);
-		this.add(errore);
 		errorSound();
 	}
 	

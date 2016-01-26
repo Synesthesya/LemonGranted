@@ -4,11 +4,9 @@ import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.MediaTracker;
 import java.awt.Toolkit;
-
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JPanel;
-
 import control.MenuController;
 import launcher.Start;
 
@@ -33,10 +31,8 @@ public class EndGame extends JPanel {
 	public static final String MENUBUTTON = "MainMenuButton3.jpg";
 	
 	/**
-	 * immagine di sfondo
+	 * l'immagine di sfondo
 	 */
-	private int image;
-	
 	private Image background;
 	
 	
@@ -66,11 +62,11 @@ public class EndGame extends JPanel {
 		    } catch (InterruptedException e) {
 		      e.printStackTrace();
 		    }
-		  }
+	 }
 
-		  protected void paintComponent(Graphics g) {
-		    setOpaque(false);
-		    g.drawImage(background, 0, 0, null);
-		    super.paintComponent(g);
-		  }
+	  protected void paintComponent(Graphics g) {
+	    setOpaque(false);
+	    g.drawImage(background, 0, 0, null);
+	    super.paintComponent(g);
+	  }
 }

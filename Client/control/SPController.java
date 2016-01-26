@@ -1,11 +1,16 @@
 package control;
 
+import interfaces.Controller;
+
+import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.rmi.RemoteException;
 
 import core.Coordinate;
 import core.Player;
 import core.SPPlayer;
+import graphic.Frame;
+import graphic.Game;
 import graphic.Grid;
 import graphic.menu.ErrorPopUp;
 import server.Phase;
@@ -16,12 +21,27 @@ import server.Phase;
  * @author Synesthesy
  *
  */
-public class SPController extends MyShipController {
+public class SPController extends MouseAdapter implements Controller {
 	
 	/**
 	 * il giocatore controllato dal PC
 	 */
 	private SPPlayer enemy;
+	
+	private Player player;
+	
+	private Frame frame;
+	
+	private Grid left;
+	
+	private Grid right;
+	
+	private String fase="Schieramento! ";
+	
+	/**
+	 * testo
+	 */
+	private String testo2="";
 	
 	/**
 	 * costruttore standard
@@ -29,7 +49,7 @@ public class SPController extends MyShipController {
 	 */
 	public SPController(Player p) {
 		
-		super(p,null);
+		player=p;
 		enemy=new SPPlayer();
 		System.out.println("hello");
 		initialize();
@@ -45,11 +65,10 @@ public class SPController extends MyShipController {
 	@Override
 	public void mouseClicked(MouseEvent e) 
 	{
-		
 		Grid g=(Grid)e.getComponent();
 		
-		int x=e.getX()/50;
-		int y=e.getY()/50;
+		int x=e.getX()/graphic.Slot.CELLSIZE;
+		int y=e.getY()/graphic.Slot.CELLSIZE;
 		
 		Coordinate c=new Coordinate(x,y);
 		if(player.getPhase()==Phase.DEPLOYMENT && g.getName().equals("left") && player.deploySP(c)) 
@@ -64,8 +83,9 @@ public class SPController extends MyShipController {
 		}
 	}
 	
-	@Override	
+	
 	public void shot(Coordinate c) {
+		
 		boolean hit=enemy.reciveHit(c);
 		if(hit) {
 			frame.playSound(0);
@@ -76,7 +96,7 @@ public class SPController extends MyShipController {
 			right.setExplored(c);
 		}
 		try {
-			endGame(true);
+			ending(true);
 		} catch (InterruptedException e2) {
 			e2.printStackTrace();
 		}
@@ -93,7 +113,7 @@ public class SPController extends MyShipController {
 			frame.setMenu(new MenuController(frame));
 		}
 		try {
-			endGame(false);
+			ending(false);
 		} catch (InterruptedException e1) {
 			e1.printStackTrace();
 		}
@@ -104,9 +124,7 @@ public class SPController extends MyShipController {
 	 * @throws RemoteException ereditato dalla classe MyShipController che estende un oggetto remoto
 	 */
 	public void enemyTurn() throws RemoteException {
-		
-		System.out.println("entro nel turno avversario");
-		
+				
 		Coordinate c=enemy.hit();
 		
 		if(player.getStatus(c)) {
@@ -137,9 +155,7 @@ public class SPController extends MyShipController {
 	 * @param a <b>true</b> per controllare il player, <b>false</b> per controllare il computer
 	 * @throws InterruptedException causata dall'attesa che si ha per consentire ai file sonori di essere eseguiti prima di passare al Panel di fine gioco
 	 */
-	public void endGame(boolean a) throws InterruptedException {
-		
-		System.out.println("enemy: "+enemy.getAlive()+"\tplayer: "+player.getAlive());
+	public void ending(boolean a) throws InterruptedException {
 		
 		if(a && !enemy.isAlive()) {
 			Thread.sleep(1000);
@@ -155,5 +171,70 @@ public class SPController extends MyShipController {
 			frame.setEnd(new MenuController(frame), frame.getID()-1);
 			frame.playSound(2);
 		}		
+	}
+
+	@Override
+	public void checkDeployment() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setImage(boolean b, Coordinate c, String s) {
+		// TODO Auto-generated method stub
+		if(b)
+		  {
+		    right.getSlot(c).setImage(s);
+		  }
+		  else
+		  {
+		    left.getSlot(c).setImage(s);
+		  }
+	}
+
+	@Override
+	public void linkFrame(Frame f) {
+		frame=f;
+		left=((Game)(frame.getPanel())).getGrids().getLeft();
+		right=((Game)(frame.getPanel())).getGrids().getRight();
+		
+	}
+
+	@Override
+	public void sconfitta() {
+		// TODO Auto-generated method stub
+	}
+
+	@Override
+	public void vittoria() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void cambiaTurno(boolean t) {
+		// TODO Auto-generated method stub
+		if(t)
+			setMessage("è il tuo turno!");
+		else
+			setMessage("è il turno dell'avversario!");
+	}
+
+	@Override
+	public void setMessage(String s) {
+		// TODO Auto-generated method stub
+		((Game)(frame.getPanel())).getInfo().setStatus(fase + testo2 + s);
+	}
+
+	@Override
+	public void setFase(String string) {
+		// TODO Auto-generated method stub
+		fase=string;
+	}
+
+	@Override
+	public void setTesto2(String string) {
+		// TODO Auto-generated method stub
+		testo2=string;
 	}
 }

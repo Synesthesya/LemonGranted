@@ -56,7 +56,7 @@ public class SPPlayer {
 			Coordinate c=new Coordinate((int)(Math.random()*100));
 			System.out.println(c);
 			if(!right.getStatus(c)) {
-				right.hit(c);
+				right.deploy(c);
 				return c; 
 			}			
 		}		

@@ -3,18 +3,10 @@ package graphic;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.FlowLayout;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-
-import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
-import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-/*
- * WARNING: non è il massimo dell'estetica (il codice, non la grafica)
- */
 
 /**
  * 
@@ -49,7 +41,7 @@ public class Information extends JPanel {
 	/**
 	 * lo status delle navi del giocatore
 	 */
-	private final JLabel myShip1; // mettere JLabel
+	private final JLabel myShip1; 
 	private final JLabel myShip2;
 	private final JLabel myShip3;
 	private final JLabel myShip4;
@@ -57,7 +49,7 @@ public class Information extends JPanel {
 	/**
 	 * lo status delle navi dell'avversario
 	 */
-	private final JLabel enemyShip1; // mettere JLabel
+	private final JLabel enemyShip1; 
 	private final JLabel enemyShip2;
 	private final JLabel enemyShip3;
 	private final JLabel enemyShip4;
@@ -65,21 +57,17 @@ public class Information extends JPanel {
 	/**
 	 * lo status del turno
 	 */
-	private final JLabel status; // mettere JLabel
-	/**
-	 * il controllore che comunica tra i due giocatori
-	 */
-	//private final Controller control;
+	private final JLabel status; 
+
 	
 	/**
 	 * costruttore standard 
 	 * @param ID l'id del giocatore
-	 * @param name TODO
+	 * @param name il nick del giocatore
 	 */
 	public Information(int ID, String name) {
 		
 		super();
-		//control=c;
 		player=new JLabel();
 		ImageIcon icon = new ImageIcon(".//bin//lightsaber.png");
 		player.setIcon(icon);

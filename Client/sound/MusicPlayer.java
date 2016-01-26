@@ -4,7 +4,6 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
-
 import graphic.menu.ErrorPopUp;
 import launcher.Start;
 import sun.audio.*;
@@ -35,10 +34,10 @@ public class MusicPlayer extends Effect implements Runnable {
 			in = new FileInputStream(Start.PATH+MUSIC[0]+FORMAT);
 			audio=new AudioStream(in);
 		} catch (FileNotFoundException e) {
-			ErrorPopUp er=new ErrorPopUp("errore: impossibile inizializzare la musica");
+			new ErrorPopUp("errore: impossibile inizializzare la musica");
 		}
 		catch(IOException e1) {
-			ErrorPopUp er=new ErrorPopUp("errore: impossibile inizializzare la musica");
+			new ErrorPopUp("errore: impossibile inizializzare la musica");
 		}
 		run();
 	}
@@ -71,5 +70,4 @@ public class MusicPlayer extends Effect implements Runnable {
 		// TODO Auto-generated method stub
 		play();
 	}
-
 }

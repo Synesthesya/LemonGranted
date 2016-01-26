@@ -46,6 +46,12 @@ public class Player extends UnicastRemoteObject implements PlayerI
      * </p>
      */
 	private final int ID;
+	
+	/**
+	 * l'id della fazione <b>1</b> impero <b>2</b> ribelli
+	 */
+	private final int faction;
+	
 	/**
 	 * la griglia contenente le navi
 	 */
@@ -85,12 +91,12 @@ public class Player extends UnicastRemoteObject implements PlayerI
 	 * 
 	 * @param ID indica se impero/ribelli
 	 */
-	public Player(int ID) throws RemoteException
+	public Player(int ID, int f) throws RemoteException
 	{
 	    this.ID=ID;
+	    faction=f;
 		myShip=new GridCore();
 		enemyShip=new GridCore();
-		//fleet=new Ship[FLEETNUMBER];
 		alive=0;
 	}
 	
@@ -133,32 +139,6 @@ public class Player extends UnicastRemoteObject implements PlayerI
 		return alive>0;
 	}
 	
-	/**
-	 * metodo per il controllo delle caselle colpite: il metodo 
-	 * colpisce una casella, controlla lo stato delle navi e ritorna
-	 * 
-	 * @param c la coordinata colpita
-	 * @return <b>true</b> se è stata colpita una nave, <b>false</b> altrimenti
-	 */
-	/*public boolean hit(Coordinate c) {
-		
-		if(myShip.getStatus(c)) {
-			for(int i=0; i<alive; i++) {
-				if(fleet[i].isInside(c)) {
-					fleet[i].hit();
-					if(!fleet[i].isAlive()) {
-						Ship s=fleet[i];
-						fleet[i]=fleet[alive];
-						fleet[alive]=s;
-						alive--;
-					}
-					break;
-				}
-			}
-			return true;
-		}
-		else return false;		
-	}*/
 	/**
 	 * Controlla se a quelle coordinate c'è una nave
 	 */
@@ -277,19 +257,17 @@ public class Player extends UnicastRemoteObject implements PlayerI
 	 * @see interfaces.PlayerI#nemicoColpito(core.Coordinate)
 	 */
 	@Override
-	@Deprecated
 	public void nemicoColpito(Coordinate c) throws RemoteException 
 	{
 		controller.setTesto2("Nemico colpito! ");
 		enemyShip.setGridValue(true, c); //la coordinata è stata usata
-		if(ID==1)
+		if(faction==1)
 			controller.setImage(true,c,"XW_RED");
 		else
 			controller.setImage(true, c, "TF_RED");
 	}
 
 	@Override
-	@Deprecated
 	public void nemicoMancato(Coordinate c) throws RemoteException 
 	{
 		controller.setTesto2("Nemico mancato! ");
@@ -298,13 +276,12 @@ public class Player extends UnicastRemoteObject implements PlayerI
 	}
 
 	@Override
-	@Deprecated
 	public void colpoSubito(Coordinate c) throws RemoteException 
 	{
 		controller.setTesto2("Sei stato colpito! ");
 		myShip.setGridValue(false, c);
 		alive--;
-		if(ID==1)
+		if(faction==1)
 			controller.setImage(false, c, "TF_RED");
 		else
 			controller.setImage(false, c, "XW_RED");
@@ -330,6 +307,7 @@ public class Player extends UnicastRemoteObject implements PlayerI
 		controller.vittoria();
 	}
 	
+
 	public boolean getTurno()
 	{
 		return turno;

@@ -1,14 +1,9 @@
 package graphic;
 
 import interfaces.Controller;
-import launcher.Start;
-
-import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.awt.event.MouseAdapter;
-
 import javax.swing.JPanel;
-
 import core.Coordinate;
 
 
@@ -40,7 +35,7 @@ public class Grid extends JPanel {
 	public static final String FORMAT = ".png";
 
 	/**
-	 * non so a cosa serva ma a eclipse piace tanto non so dirgli di no #escile
+	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 	
@@ -48,6 +43,10 @@ public class Grid extends JPanel {
 	 * la rappresentazione grafica della griglia
 	 */
 	private final Slot[] grid;
+	
+	/**
+	 * il nome della griglia per distinguerle
+	 */
 	private String name;
 	
 	/**
@@ -55,7 +54,7 @@ public class Grid extends JPanel {
 	 * 
 	 * @param ID l'ID rappresentante la fazione
 	 * @param c il Controller
-	 * @param s 
+	 * @param s il nome della griglia (normalmente <b>LEFT</b> o <b>RIGHT</b>
 	 */
 	public Grid(int ID,Controller c, String s) {
 		
@@ -66,19 +65,26 @@ public class Grid extends JPanel {
 		grid= new Slot[size*size];
 		
 		for(int i=0; i<size*size; i++) {
-			grid[i]=new Slot(new Coordinate(i));
+			grid[i]=new Slot();
 			add(grid[i]);
 		}
-		
 		
 		this.addMouseListener((MouseAdapter)c);		
 	}
 	
+	/**
+	 * metodo per ottenere uno slot
+	 * @param c la coordinata
+	 * @return lo slot
+	 */
 	public Slot getSlot(Coordinate c) {
 		
 		return grid[c.toInteger()];		
 	}
 	
+	/**
+	 * metodo per ottenere il nome della griglia
+	 */
 	public String getName()
 	{
 	  return name;
@@ -111,8 +117,6 @@ public class Grid extends JPanel {
 	 */
 	public void setExplored(Coordinate c) {
 		grid[c.toInteger()].setExplored();
-	}
-	
-	
+	}	
 }
 

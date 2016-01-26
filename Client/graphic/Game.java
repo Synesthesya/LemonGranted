@@ -1,10 +1,8 @@
 package graphic;
 
 import interfaces.Controller;
-
 import java.awt.BorderLayout;
 import java.awt.Color;
-
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -24,6 +22,9 @@ public class Game extends JPanel {
 	 */
 	private static final long serialVersionUID = 1L;
 	
+	/**
+	 * il logo
+	 */
 	public static final String LOGO = ".//bin//logo1.png";
 	
 	/**
@@ -41,16 +42,16 @@ public class Game extends JPanel {
 	 * costruttore standard
 	 * 
 	 * @param ID id del giocatore 
-	 * @param name TODO
+	 * @param name il nome del giocatore
 	 * @param c MyShipController
 	 */
 	public Game(int ID, String name, Controller c) {
 		
 		super();
 		grids=new GridCouple(ID,c);
-		grids.setBackground(Color.black); // colore di prova
+		grids.setBackground(Color.black); 
 		info=new Information(ID, name);
-		info.setBackground(Color.black); // colore di prova
+		info.setBackground(Color.black); 
 		
 		
 		setLayout(new BorderLayout());

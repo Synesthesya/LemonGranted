@@ -2,7 +2,6 @@ package core;
 
 import java.io.Serializable;
 
-
 /**
  * 
  * <p>
@@ -18,7 +17,7 @@ public class Coordinate implements Serializable
 {
 	
 	/**
-	 * WARNING
+	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 
@@ -76,7 +75,7 @@ public class Coordinate implements Serializable
 	 * @param c la lettera della colonna
 	 * @return il numero della colonna
 	 */
-	public int getColumn(char c) {
+	public static int getColumn(char c) {
 		
 		for(int i=0; i<LETTERS.length; i++) {
 			if(LETTERS[i]==c) return LETTERS[i];
@@ -84,24 +83,13 @@ public class Coordinate implements Serializable
 		return -1;		
 	}
 	
+	/**
+	 * metodo per ottenere la colonna
+	 * @return
+	 */
 	public int getColumn() {
 		return column;
-	}
-	
-	/**
-	 * metodo per sapere se la coordinata c è più alta dell'attuale.
-	 * A parità di altezza, vince la coordinata più a destra.
-	 * 
-	 * Viene usato solo nella modalità con navi maggiori di 1
-	 * 
-	 * @param c
-	 */
-	public boolean isHigher(Coordinate c) {
-		
-		if(this.row>c.row) return true;
-		else if(this.row==c.row) return this.column>c.column;
-		else return false;		
-	}
+	}	
 	
 	/**
 	 * metodo per convertire l'oggetto in un intero

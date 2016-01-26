@@ -2,8 +2,6 @@ package server;
 
 import java.rmi.RemoteException;
 import java.util.Scanner;
-
-import core.Player;
 import interfaces.PlayerI;
 
 /**
@@ -21,7 +19,11 @@ public class Command implements Runnable {
 	 * il server su cui si eseguono i comandi
 	 */
 	private Server server;
-
+	
+	/**
+	 * costruttore standard
+	 * @param s
+	 */
 	public Command(Server s)  {
 		
 		server=s;		
@@ -45,7 +47,7 @@ public class Command implements Runnable {
 			}
 			case "exit": {
 				System.out.println("disconnessione del server in corso...");
-				//sc.close();
+				sc.close();
 				server.uscita();
 				break;
 			}

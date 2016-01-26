@@ -54,53 +54,9 @@ public class GridCore
 	public void deploy(Coordinate c) 
 	{
 	  grid[c.toInteger()]=true;
-		//deploy(c.toInteger());
-	}
-	
-	/**
-	 * metodo per settare le coordinate occupate da una Ship come usate
-	 * @param s un oggetto Ship valido
-	 */
-	public void deploy(Ship s) {
 		
-		int j=1;
-		int change=0, nochange;
-		
-		if(s.getDirection().equals("UP")) {
-			j=j*10;
-			nochange=s.getHead().getColumn();
-			change=s.getTail().getRow()*10;
-		}
-		else {
-			nochange=s.getHead().getRow()*10;
-			change=s.getTail().getColumn();
-		}
-		
-		for(int i=0; i<s.getLength(); i++) {
-			
-			int c=change+nochange;
-			grid[c]=true;
-			change=change+j;			
-		}		
 	}
 
-
-	/**
-	 * metodo per settare una casella come usata
-	 * @param d la coordinata della casella
-	 */
-	public void hit(int d) {
-		grid[d]=true;
-	}
-	
-	/**
-	 * metodo per settare una casella come usata
-	 * @param c la coordinata della casella
-	 */
-	public void hit(Coordinate c) {
-		//hit(c.toInteger());
-	  grid[c.toInteger()]=true;
-	}
 	
 	/**
 	 * metodo che ritorna il valore di una casella

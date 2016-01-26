@@ -2,7 +2,6 @@ package graphic;
 
 import java.awt.Dimension;
 import java.io.IOException;
-
 import graphic.menu.EndGame;
 import graphic.menu.ErrorPopUp;
 import graphic.menu.MainMenu;
@@ -10,11 +9,9 @@ import graphic.menu.OptionPanel;
 import interfaces.Controller;
 import sound.Effect;
 import sound.MusicPlayer;
-
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-
 import control.MenuController;
 
 
@@ -87,11 +84,6 @@ public class Frame extends JFrame {
 		super("Starship!");
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setVisible(true);
-		
-		/*
-		 * codice di mockup
-		 */
-		
 		panel=new Game(ID, null, c);
 		add(panel); 
 		this.setSize(1200, 800);
@@ -111,17 +103,11 @@ public class Frame extends JFrame {
 		music=new MusicPlayer();
 	}
 	
-	/*
-	//MOCKUP
+
 	/**
-	 * metodo che ritorna il panel sotto forma di Game
-	 * @return il caste del panel come Game
+	 * metodo per ottenere il pannello attualmente utilizzato
+	 * @return un oggetto JPanel
 	 */
-	@Deprecated
-	public Game getGamePanel() {
-		return (Game)panel;
-	}
-	
 	public JPanel getPanel() {
 		return panel;
 	}
