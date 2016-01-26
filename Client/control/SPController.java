@@ -87,6 +87,7 @@ public class SPController extends MouseAdapter implements Controller {
 	public void shot(Coordinate c) {
 		
 		boolean hit=enemy.reciveHit(c);
+		player.getEnemyShip().deploy(c);
 		if(hit) {
 			frame.playSound(0);
 			right.setHit(frame.getID(), c);
